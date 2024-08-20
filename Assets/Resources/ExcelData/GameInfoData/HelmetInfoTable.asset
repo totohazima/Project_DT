@@ -1,0 +1,95 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e949a6ca07793554ea38d811b5871a81, type: 3}
+  m_Name: HelmetInfoTable
+  m_EditorClassIdentifier: 
+  table:
+  - spriteCode: Helmet_1
+    code: Helmet1
+    name: "\uACBD\uB7C9\uD654 \uAC00\uC8FD \uD22C\uAD6C"
+    grade: 0
+    baseStatus:
+      statusType: 1
+      riseType: 0
+      baseValue: 1
+      riseValue: 1
+    maxLevel: 100
+  - spriteCode: Helmet_2
+    code: Helmet2
+    name: "\uAC00\uC8FD \uD22C\uAD6C"
+    grade: 0
+    baseStatus:
+      statusType: 1
+      riseType: 0
+      baseValue: 2
+      riseValue: 1
+    maxLevel: 100
+  - spriteCode: Helmet_3
+    code: Helmet3
+    name: "\uACBD\uB7C9\uD654 \uAD6C\uB9AC \uD22C\uAD6C"
+    grade: 1
+    baseStatus:
+      statusType: 1
+      riseType: 0
+      baseValue: 3
+      riseValue: 1
+    maxLevel: 100
+  - spriteCode: Helmet_4
+    code: Helmet4
+    name: "\uAD6C\uB9AC \uD22C\uAD6C"
+    grade: 1
+    baseStatus:
+      statusType: 1
+      riseType: 0
+      baseValue: 4
+      riseValue: 1
+    maxLevel: 100
+  - spriteCode: Helmet_5
+    code: Helmet5
+    name: "\uCCA0 \uD22C\uAD6C"
+    grade: 2
+    baseStatus:
+      statusType: 1
+      riseType: 0
+      baseValue: 5
+      riseValue: 1
+    maxLevel: 100
+  - spriteCode: Helmet_6
+    code: Helmet6
+    name: "\uAC15\uCCA0 \uD22C\uAD6C"
+    grade: 2
+    baseStatus:
+      statusType: 1
+      riseType: 0
+      baseValue: 6
+      riseValue: 1
+    maxLevel: 100
+  - spriteCode: Helmet_7
+    code: Helmet7
+    name: "\uACBD\uB7C9\uD654 \uC6B4\uCCA0 \uD22C\uAD6C"
+    grade: 3
+    baseStatus:
+      statusType: 1
+      riseType: 0
+      baseValue: 7
+      riseValue: 1
+    maxLevel: 100
+  - spriteCode: Helmet_8
+    code: Helmet8
+    name: "\uC6B4\uCCA0 \uD22C\uAD6C"
+    grade: 3
+    baseStatus:
+      statusType: 1
+      riseType: 0
+      baseValue: 8
+      riseValue: 1
+    maxLevel: 100

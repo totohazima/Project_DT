@@ -1,0 +1,2841 @@
+fileFormatVersion: 2
+guid: 33ec800d5e8669a4fa042d6e95b2dc24
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 4
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 1
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 0
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 451
+        width: 43
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f3013fe1246b424fb4964fc81a1eefb
+      internalID: -105535147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_1
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 488
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5791323448fd50a40a25773f7981a2e0
+      internalID: -983880950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_2
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 488
+        width: 27
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 486ea5533b9f26746b4a6390b491acbd
+      internalID: 1610851138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_3
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 473
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27b7cc9cb3d0fdb45a5aa0061dea725c
+      internalID: -2035037719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_4
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 473
+        width: 39
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f82c5fbfc2aadf24eb741fabb84b6863
+      internalID: -893461390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_5
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 485
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fb78b295a2f35d4b8f954270444a479
+      internalID: 1904652111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_6
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 479
+        width: 32
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c335fc96a22db241a4c579553522982
+      internalID: 1692657594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_7
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 468
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 569a673c637dada4c9ab8b55c1a6d044
+      internalID: -1724366889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_8
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 470
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: afa6f2db719bf624887c5779c39586ff
+      internalID: -88913943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_9
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 409
+        width: 27
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f7e50ceced04eb47a1e64c3ea5cbab4
+      internalID: 957959451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_10
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 447
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d35948a49cc40d346939068b1273dbcc
+      internalID: 1730210031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_11
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 443
+        width: 43
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5eb8121acf9e7145999d7764c11c4a5
+      internalID: -242738355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_12
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 432
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01128a335be7d804bb05dbea1601b610
+      internalID: -1123784909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_13
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 449
+        width: 27
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc7b07baea6f33f42a4f873d36de9fb7
+      internalID: 1906819852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_14
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 445
+        width: 33
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8558319ca502fd141b52c0dc38a6038b
+      internalID: 962963340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_15
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 443
+        width: 22
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ffa539b2dfa9cf448f536cb88073887
+      internalID: 63270992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_16
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 437
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57024c48a31dd4648b6a1d1b47c1217f
+      internalID: -1309365889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_17
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 406
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 041a7f8d9248bbd42a522f98e6fcadce
+      internalID: 212963557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_18
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 402
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbae4657c243ba04a984afad27cbaefa
+      internalID: -1873181440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_19
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 391
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b59c6007972fa7d43826721f44634cb9
+      internalID: -1746584051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_20
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 409
+        width: 37
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d09eebb7ab964a49968684bef423e25
+      internalID: -92690031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_21
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 410
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5ab1ac16885dc8498c2aefa1b2021a5
+      internalID: 1496650776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_22
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 403
+        width: 35
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 645a55256832f3542b2a714727e0e10a
+      internalID: 1903320160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_23
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 403
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4539fd47904ce884d9fd1dcaab424c76
+      internalID: -1419847202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_24
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 421
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77736766130122b408727666922a1ef5
+      internalID: 1899021667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 365
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 831e4c3a7024e2e49b45bba7021df283
+      internalID: -1440383166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_26
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 365
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0abc8d19562b3cf4a9a433b73d00874c
+      internalID: 431984268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_27
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 361
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cf4871599f72984e832396d54698b89
+      internalID: 1966742948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_28
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 372
+        width: 25
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 859fd53eac7f33a4c94e95968ee2bd9d
+      internalID: -1813287818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_29
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 369
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 192f93471bbb25140a98afaffe2a5237
+      internalID: 1392434371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_30
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 375
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 839c79d1217cf514a88345324778a8ea
+      internalID: 881653852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_31
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 397
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aa302fb5b8530042b085d7133f68550
+      internalID: -1445131762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_32
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 350
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42ef7c0e9baff7a4d8bb11c2c4ffc472
+      internalID: -895098632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_33
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 335
+        width: 36
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6956eae2f0b2534c921ac55b7bcfca6
+      internalID: 2026746151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_34
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 335
+        width: 33
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37699fae9e33e794f9d7e22d0f63deeb
+      internalID: -893657451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_35
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 351
+        width: 34
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9715f88d18994db47ac7e0b1d1f37d13
+      internalID: -1327729334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_36
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 351
+        width: 27
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1cddd36da99cca45b72e71fa00e5309
+      internalID: -1993501703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_37
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 365
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 885106d58161a364180653c1e1dde4e7
+      internalID: 109153891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_38
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 321
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d2f427127c7f8440993e2c0c9c1d340
+      internalID: 1951998797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_39
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 321
+        width: 43
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0284e8de0e2cb5b449457f3ccff99e5c
+      internalID: 1756887352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_40
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 320
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6562613c49b8e244b83567648294da25
+      internalID: -1940809571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_41
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 309
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ec300a1487889940936f00b745aac50
+      internalID: 2124776844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_42
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 320
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 918d963381487c848b9f6a82f7c86d73
+      internalID: -1506307342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_43
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 317
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a5168b60e5e1ac44b5010985fd0b1cc
+      internalID: 73639668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_44
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 337
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3a4e6ef8fca52d46b61fc4e28ca305f
+      internalID: 755649291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 276
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc36b929413e7d84daba3085acb0ea6a
+      internalID: 1622451588
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_46
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 276
+        width: 25
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70daa9054d148be4e8f366b20407dc68
+      internalID: 844108713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_47
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 294
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 239a3284f47b292429160466bcce4df8
+      internalID: 317900988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_48
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 288
+        width: 33
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c483a164196007a47a6f59846373122d
+      internalID: 971413568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_49
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 286
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cb98c0435e73da4d8dfc59a917ea43b
+      internalID: 696470882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_50
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 313
+        width: 27
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8ca1e7d33badf0449154ff808b06db8
+      internalID: -1228521202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_51
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 297
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5460f84e4ee490488caeb8efd6eb54d
+      internalID: -47481118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_52
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 268
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbe257a700295aa468075557be4e5bfc
+      internalID: 2245402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_53
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 253
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c077dc88e7605024d9a94d99b9860519
+      internalID: 1917487520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_54
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 248
+        width: 37
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a93a5c68fabed51448dcf698de9f8037
+      internalID: 1874439124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_55
+      rect:
+        serializedVersion: 2
+        x: 285
+        y: 279
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27112792b0ead884f923c8eb914e9898
+      internalID: 543809971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_56
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 269
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f9c4f07b764def428b69b9d737348c7
+      internalID: 1323552118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_57
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 228
+        width: 49
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24593afc518c6bb418872aeae5850de8
+      internalID: 1140067396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_58
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 224
+        width: 27
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc98a436805d4f2448391626e86771f8
+      internalID: 955817038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_59
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 212
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19f46759c67a8044b9f8dc339efcaa73
+      internalID: 1194726983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_60
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 239
+        width: 43
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd65e679fb48dc049b1c246e8d4a9e46
+      internalID: 506218781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_61
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 248
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5de76cfc71e8544458d03deebdcfa0dd
+      internalID: -966502188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_62
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 239
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eac2a9f229c21ac4b820cf7547a29632
+      internalID: -454960889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_63
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 251
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7ef8e537b1334b47b5d521776060d02
+      internalID: -25816177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_64
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 178
+        width: 49
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c2af6ba327c5a64bae968e6f1a11823
+      internalID: -1227187764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_65
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 193
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75fd9ab2196c7a1459643da5da66699e
+      internalID: -1645656490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_66
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 208
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b1c29db381f6d442a6d67f8f3ad4de1
+      internalID: -1221799622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_67
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 212
+        width: 41
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3320dd3d78f4b9c4586afdc2c7c175f6
+      internalID: -349493971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_68
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 208
+        width: 32
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab39f938d80d84a49805ce532230ebae
+      internalID: 264536720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_69
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 223
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b05b086adbdf014a815310782fda896
+      internalID: -1746212360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_70
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 209
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3efabe44ac799eb43b6b6f5b1814431f
+      internalID: -2097899757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_71
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 180
+        width: 43
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93f2ca26cfc091349a176ecf193002d7
+      internalID: 1147576685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_72
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 171
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81e56b1803d68084fabc95397b7841e8
+      internalID: -1876552148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_73
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 172
+        width: 39
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef2342f4d07ba5c41954c09daedc5cef
+      internalID: 1972504332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_74
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 168
+        width: 39
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3299cf6de5193364b98f237f9981fd51
+      internalID: -65480353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_75
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 193
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03b170a4f87d9c44783b7241869bd735
+      internalID: -879497972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_76
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 185
+        width: 27
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63e7830e200bfe14b8e251527927e294
+      internalID: 539998796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_77
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 181
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c422c940ace2f8d4e9d6e8fbeaf5297d
+      internalID: -1516175570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_78
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 127
+        width: 49
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a416bbc21a0266c42888ab8042c48411
+      internalID: -602277915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_79
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 127
+        width: 25
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b197d5dcd724ff409d85ab2c1fdcc2e
+      internalID: 1642186117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_80
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 152
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cf1bff0cf3d400489f719b8184b5e36
+      internalID: 792551295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_81
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 126
+        width: 42
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bf02fc25e7f2bf41aeb3d0a40035843
+      internalID: 1491380649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_82
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 164
+        width: 34
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c0a6c240b3ce554b8603630666dd74d
+      internalID: -1950901352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_83
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 151
+        width: 31
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80f92e195016de448a0c5b71ede6c9e2
+      internalID: 1109725811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_84
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 153
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 252a21135d69ee047a8407ca7110d0ab
+      internalID: 198981587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_85
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 111
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d258f2f612b07d64b9f2fa49f59abe10
+      internalID: -794256664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_86
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 126
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ebf26a12481bcc842a5974b0485dc151
+      internalID: 564674492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_87
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 126
+        width: 39
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5ede2d9f61320c45a54e2974ad3348a
+      internalID: -587534252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_88
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 122
+        width: 34
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aa9b64c4a278dc4796d96f4091f4c50
+      internalID: 121477738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_89
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 108
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28baef6fda6b78747a19344200e2335a
+      internalID: 1876840956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_90
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 129
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edfef78fc92eb6b4db025edf34b948ed
+      internalID: 1375650080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_91
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 61
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54edd743f7be6ca4383cc1abff0bd862
+      internalID: 83145182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_92
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 67
+        width: 25
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6273d436a9708c40ae0eaa9390f85d5
+      internalID: -1995454311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_93
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 85
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1fee81f11e2067468e80e3490400c93
+      internalID: 255889151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_94
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 85
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae712addc2ff8ff4f8e497e31ffd39fc
+      internalID: -945784108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_95
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 82
+        width: 42
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbd6f1877d11e8b48ac511034c118984
+      internalID: -751335480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_96
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 86
+        width: 39
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0950c42d64dd8445b965ad94c118010
+      internalID: -1927524134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_97
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 79
+        width: 34
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2c35ba6e7ccce04fa8450940277e3aa
+      internalID: 1264660699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_98
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 97
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ea5b282004127a4182086c624831aee
+      internalID: -1875116119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_99
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 86
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b59e74e1dc29d0a41a632fb0910a5c52
+      internalID: -913385450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_100
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 44
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c3df8fa24cc2f54fbe281b0dc70a2ce
+      internalID: -863551605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_101
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 41
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82e67a4b4e3ce604295d9e218f6ef14c
+      internalID: -1389857426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_102
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 41
+        width: 42
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51b994c8abe6c364084a02f45ec89423
+      internalID: 713509638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_103
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 47
+        width: 38
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e4f41fb06968fa458583b6167220790
+      internalID: 1388434717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_104
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 68
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff1f16a86714622488fe6dbe115c9dba
+      internalID: 1203973412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_105
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 62
+        width: 31
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b64f75a2da34ec94eb2e124bfd6bbf14
+      internalID: -944302773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_106
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 57
+        width: 27
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 795cb65a3dc59874285d1a76fbe9747e
+      internalID: 1113993453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_107
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 0
+        width: 57
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0111a6376f637bc419ce181aa5e9637c
+      internalID: -783666263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_108
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 45
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49c2419e78ca38c4bbde89445ac8ae1d
+      internalID: -84023351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_109
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 0
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a7ffd99071319147b0328d33f192fec
+      internalID: 1188482946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_110
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 0
+        width: 45
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5752d38a583ab374cb9511f17099a9ff
+      internalID: 68387327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_111
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 39
+        width: 34
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc1e3c5c535bb114db682cb886b1ba50
+      internalID: -116125152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_112
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 29
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32779e55fca9c76458fdea2ee11914a5
+      internalID: -1491440105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_113
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 29
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e267f3b412bb89418983cd7609bec90
+      internalID: 863919533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_114
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 32
+        width: 27
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ec71f9e5a145774283efd03f906fa3f
+      internalID: 1905686636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_115
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 4
+        width: 41
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 179eac388f9bcca4983008d90b9cd362
+      internalID: -301823784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_116
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 7
+        width: 38
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3a5e0400cfd3b3439b451321cedbff7
+      internalID: 799625816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_117
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 34
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 388b2418c5283434fad84ef3ba2735ee
+      internalID: 1116648571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_118
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 0
+        width: 28
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae776db3cfc8d004c8eac52e35108e27
+      internalID: 1110895057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_119
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 0
+        width: 27
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13e06aba048cac94bad3469386405564
+      internalID: 612125538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thumbnail_MoneyIcon_120
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 0
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30cdcf008f2f0234999ddff1d75a2c36
+      internalID: -2030962625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Thumbnail_MoneyIcon_0: -105535147
+      Thumbnail_MoneyIcon_1: -983880950
+      Thumbnail_MoneyIcon_10: 1730210031
+      Thumbnail_MoneyIcon_100: -863551605
+      Thumbnail_MoneyIcon_101: -1389857426
+      Thumbnail_MoneyIcon_102: 713509638
+      Thumbnail_MoneyIcon_103: 1388434717
+      Thumbnail_MoneyIcon_104: 1203973412
+      Thumbnail_MoneyIcon_105: -944302773
+      Thumbnail_MoneyIcon_106: 1113993453
+      Thumbnail_MoneyIcon_107: -783666263
+      Thumbnail_MoneyIcon_108: -84023351
+      Thumbnail_MoneyIcon_109: 1188482946
+      Thumbnail_MoneyIcon_11: -242738355
+      Thumbnail_MoneyIcon_110: 68387327
+      Thumbnail_MoneyIcon_111: -116125152
+      Thumbnail_MoneyIcon_112: -1491440105
+      Thumbnail_MoneyIcon_113: 863919533
+      Thumbnail_MoneyIcon_114: 1905686636
+      Thumbnail_MoneyIcon_115: -301823784
+      Thumbnail_MoneyIcon_116: 799625816
+      Thumbnail_MoneyIcon_117: 1116648571
+      Thumbnail_MoneyIcon_118: 1110895057
+      Thumbnail_MoneyIcon_119: 612125538
+      Thumbnail_MoneyIcon_12: -1123784909
+      Thumbnail_MoneyIcon_120: -2030962625
+      Thumbnail_MoneyIcon_13: 1906819852
+      Thumbnail_MoneyIcon_14: 962963340
+      Thumbnail_MoneyIcon_15: 63270992
+      Thumbnail_MoneyIcon_16: -1309365889
+      Thumbnail_MoneyIcon_17: 212963557
+      Thumbnail_MoneyIcon_18: -1873181440
+      Thumbnail_MoneyIcon_19: -1746584051
+      Thumbnail_MoneyIcon_2: 1610851138
+      Thumbnail_MoneyIcon_20: -92690031
+      Thumbnail_MoneyIcon_21: 1496650776
+      Thumbnail_MoneyIcon_22: 1903320160
+      Thumbnail_MoneyIcon_23: -1419847202
+      Thumbnail_MoneyIcon_24: 1899021667
+      Thumbnail_MoneyIcon_25: -1440383166
+      Thumbnail_MoneyIcon_26: 431984268
+      Thumbnail_MoneyIcon_27: 1966742948
+      Thumbnail_MoneyIcon_28: -1813287818
+      Thumbnail_MoneyIcon_29: 1392434371
+      Thumbnail_MoneyIcon_3: -2035037719
+      Thumbnail_MoneyIcon_30: 881653852
+      Thumbnail_MoneyIcon_31: -1445131762
+      Thumbnail_MoneyIcon_32: -895098632
+      Thumbnail_MoneyIcon_33: 2026746151
+      Thumbnail_MoneyIcon_34: -893657451
+      Thumbnail_MoneyIcon_35: -1327729334
+      Thumbnail_MoneyIcon_36: -1993501703
+      Thumbnail_MoneyIcon_37: 109153891
+      Thumbnail_MoneyIcon_38: 1951998797
+      Thumbnail_MoneyIcon_39: 1756887352
+      Thumbnail_MoneyIcon_4: -893461390
+      Thumbnail_MoneyIcon_40: -1940809571
+      Thumbnail_MoneyIcon_41: 2124776844
+      Thumbnail_MoneyIcon_42: -1506307342
+      Thumbnail_MoneyIcon_43: 73639668
+      Thumbnail_MoneyIcon_44: 755649291
+      Thumbnail_MoneyIcon_45: 1622451588
+      Thumbnail_MoneyIcon_46: 844108713
+      Thumbnail_MoneyIcon_47: 317900988
+      Thumbnail_MoneyIcon_48: 971413568
+      Thumbnail_MoneyIcon_49: 696470882
+      Thumbnail_MoneyIcon_5: 1904652111
+      Thumbnail_MoneyIcon_50: -1228521202
+      Thumbnail_MoneyIcon_51: -47481118
+      Thumbnail_MoneyIcon_52: 2245402
+      Thumbnail_MoneyIcon_53: 1917487520
+      Thumbnail_MoneyIcon_54: 1874439124
+      Thumbnail_MoneyIcon_55: 543809971
+      Thumbnail_MoneyIcon_56: 1323552118
+      Thumbnail_MoneyIcon_57: 1140067396
+      Thumbnail_MoneyIcon_58: 955817038
+      Thumbnail_MoneyIcon_59: 1194726983
+      Thumbnail_MoneyIcon_6: 1692657594
+      Thumbnail_MoneyIcon_60: 506218781
+      Thumbnail_MoneyIcon_61: -966502188
+      Thumbnail_MoneyIcon_62: -454960889
+      Thumbnail_MoneyIcon_63: -25816177
+      Thumbnail_MoneyIcon_64: -1227187764
+      Thumbnail_MoneyIcon_65: -1645656490
+      Thumbnail_MoneyIcon_66: -1221799622
+      Thumbnail_MoneyIcon_67: -349493971
+      Thumbnail_MoneyIcon_68: 264536720
+      Thumbnail_MoneyIcon_69: -1746212360
+      Thumbnail_MoneyIcon_7: -1724366889
+      Thumbnail_MoneyIcon_70: -2097899757
+      Thumbnail_MoneyIcon_71: 1147576685
+      Thumbnail_MoneyIcon_72: -1876552148
+      Thumbnail_MoneyIcon_73: 1972504332
+      Thumbnail_MoneyIcon_74: -65480353
+      Thumbnail_MoneyIcon_75: -879497972
+      Thumbnail_MoneyIcon_76: 539998796
+      Thumbnail_MoneyIcon_77: -1516175570
+      Thumbnail_MoneyIcon_78: -602277915
+      Thumbnail_MoneyIcon_79: 1642186117
+      Thumbnail_MoneyIcon_8: -88913943
+      Thumbnail_MoneyIcon_80: 792551295
+      Thumbnail_MoneyIcon_81: 1491380649
+      Thumbnail_MoneyIcon_82: -1950901352
+      Thumbnail_MoneyIcon_83: 1109725811
+      Thumbnail_MoneyIcon_84: 198981587
+      Thumbnail_MoneyIcon_85: -794256664
+      Thumbnail_MoneyIcon_86: 564674492
+      Thumbnail_MoneyIcon_87: -587534252
+      Thumbnail_MoneyIcon_88: 121477738
+      Thumbnail_MoneyIcon_89: 1876840956
+      Thumbnail_MoneyIcon_9: 957959451
+      Thumbnail_MoneyIcon_90: 1375650080
+      Thumbnail_MoneyIcon_91: 83145182
+      Thumbnail_MoneyIcon_92: -1995454311
+      Thumbnail_MoneyIcon_93: 255889151
+      Thumbnail_MoneyIcon_94: -945784108
+      Thumbnail_MoneyIcon_95: -751335480
+      Thumbnail_MoneyIcon_96: -1927524134
+      Thumbnail_MoneyIcon_97: 1264660699
+      Thumbnail_MoneyIcon_98: -1875116119
+      Thumbnail_MoneyIcon_99: -913385450
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

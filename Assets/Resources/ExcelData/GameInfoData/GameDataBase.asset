@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72e7b028a34f8924582347c8ff9c4946, type: 3}
+  m_Name: GameDataBase
+  m_EditorClassIdentifier: 
+  playerInfo: {fileID: 11400000, guid: 2b50c46d53e45c04889da1065a8488a7, type: 2}
+  weaponInfoTable: {fileID: 11400000, guid: ff5c1f7aa6aa3ae44abbe57af64bcc94, type: 2}
+  helmetInfoTable: {fileID: 11400000, guid: 21d1f86956b0e454a95ae29b8762b5da, type: 2}
+  weaponSpriteAtlas: {fileID: 4343727234628468602, guid: fcc8fa06474d3bb4584d40b085710022,
+    type: 2}
+  helmetSpriteAtlas: {fileID: 4343727234628468602, guid: 1135f3abac58d7c43ac687ac1431a951,
+    type: 2}
