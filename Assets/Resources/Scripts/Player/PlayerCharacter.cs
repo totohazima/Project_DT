@@ -24,7 +24,7 @@ public class PlayerCharacter : Character
                 Vector3 dir = new Vector3(joyStick.Horizontal, joyStick.Vertical, 0);
                 dir.Normalize();
                 MoveUnit(dir);
-                MoveAnimator(dir);
+                //AnimatonUpdate(dir);
             }
             else
             {
@@ -33,7 +33,7 @@ public class PlayerCharacter : Character
                 isMove = false;
                 Vector3 dir = new Vector3(joyStick.Horizontal, joyStick.Vertical, 0);
                 dir.Normalize();
-                MoveAnimator(dir);
+                //AnimatonUpdate(dir);
             }
         }
     }
@@ -80,39 +80,39 @@ public class PlayerCharacter : Character
     }
 
     
-    public override void MoveAnimator(Vector3 dir)
-    {
-        if (!isReadyToMove)
-            return;
+    //public override void AnimatonUpdate(Vector3 dir)
+    //{
+    //    if (!isReadyToMove)
+    //        return;
 
-        if (isMove)
-        {
-            anim.SetBool("Moving", true);
-        }
-        else
-        {
-            anim.SetBool("Moving", false);
-        }
+    //    if (isMove)
+    //    {
+    //        anim.SetBool("Moving", true);
+    //    }
+    //    else
+    //    {
+    //        anim.SetBool("Moving", false);
+    //    }
 
-        if (isMove)
-        {
-            if (dir.x > 0.95f || dir.x < -0.95f)
-            {
-                anim.SetInteger("Direction", 0);
-            }
-            else
-            {
-                //위
-                if (dir.y > 0)
-                {
-                    anim.SetInteger("Direction", 2);
-                }
-                //아래
-                else
-                {
-                    anim.SetInteger("Direction", 1);
-                }
-            }
-        }
-    }
+    //    if (isMove)
+    //    {
+    //        if (dir.x > 0.95f || dir.x < -0.95f)
+    //        {
+    //            anim.SetInteger("Direction", 0);
+    //        }
+    //        else
+    //        {
+    //            //위
+    //            if (dir.y > 0)
+    //            {
+    //                anim.SetInteger("Direction", 2);
+    //            }
+    //            //아래
+    //            else
+    //            {
+    //                anim.SetInteger("Direction", 1);
+    //            }
+    //        }
+    //    }
+    //}
 }

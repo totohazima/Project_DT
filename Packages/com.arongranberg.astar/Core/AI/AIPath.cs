@@ -98,7 +98,7 @@ namespace Pathfinding {
 		/// <tr><td>[Open online documentation to see videos]</td><td>\xmlonly <verbatim><span class="label label-danger">Too high</span><br/></verbatim>\endxmlonly A too high value will make the agent follow the path too loosely and may cause it to try to move through obstacles.</td></tr>
 		/// </table>
 		/// </summary>
-		public float pickNextWaypointDist = 2;
+		public float pickNextWaypointDist = 1f;
 
 		/// <summary>Draws detailed gizmos constantly in the scene view instead of only when the agent is selected and settings are being modified</summary>
 		public bool alwaysDrawGizmos;

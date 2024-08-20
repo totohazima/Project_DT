@@ -18,7 +18,7 @@ public class TestTargetSetter : VersionedMonoBehaviour
         var aiStars = setCharacter.aiPath;
         if (aiStars != null)
         {
-            setCharacter.aiPath.destination = transform.position;
+            setCharacter.targetUnit = transform;
         }
     }
 }

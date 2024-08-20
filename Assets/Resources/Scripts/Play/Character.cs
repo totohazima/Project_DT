@@ -12,6 +12,7 @@ public class Character : FieldObject
     [HideInInspector] public Transform getTransform;
     public WhiteFlash whiteFlash;
     public SpriteRenderer viewSprite;
+    public bool isDisable; //true일 경우 정지(모든 메서드)
     public bool isReadyToMove; //true일 경우 움직임
     public bool isReadyToAttack; //true일 경우 공격 가능
     public bool isMove;
@@ -46,7 +47,7 @@ public class Character : FieldObject
     public virtual void MoveUnit(Vector3 dir)
     {   
     }
-    public virtual void MoveAnimator(Vector3 dir)
+    public virtual void AnimatonUpdate()
     {
     }
 
@@ -112,7 +113,7 @@ public class Character : FieldObject
 
     void OnDrawGizmosSelected()
     {
-        if (drawWhenSelected)
+        if (drawWhenSelected && getTransform != null)
         {
             //탐지 시야
             Gizmos.color = Color.cyan;

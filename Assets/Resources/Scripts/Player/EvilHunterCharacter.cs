@@ -6,7 +6,9 @@ public class EvilHunterCharacter : Character
 {
     [Header("RandomMove_Info")]
     private float randomMoveRadius = 5f; //이 만큼의 거리내로 랜덤 이동
-    private float randomMoveTime = 3f; //이 시간 동안 타겟이 잡히지 않으면 일정 거리 내 위치로 랜덤 이동
+    private float randomMoveTime; //이 시간 동안 타겟이 잡히지 않으면 일정 거리 내 위치로 랜덤 이동
+    private float randomMoveTime_Max = 5f; 
+    private float randomMoveTime_Min = 1f;
     private float randomMoveTimer = 0f;
     [Header("ScanTime_Info")]
     private float scanDealay = 0.1f; //스캔이 재작동하는 시간
@@ -14,17 +16,28 @@ public class EvilHunterCharacter : Character
 
     public override void Update()
     {
+        if(isDisable)
+        {
+            return;
+        }
+
         scantimer += Time.deltaTime;
         if (scantimer > scanDealay)
         {
             ObjectScan();
         }
         RandomMoveLocation();
-        StatusUpdate(); 
+        StatusUpdate();
+        AnimatonUpdate();
     }
 
     private void RandomMoveLocation()
     {
+        if(randomMoveTime == 0f)
+        {
+            randomMoveTime = Random.Range(randomMoveTime_Min, randomMoveTime_Max);
+        }
+
         if(targetUnit == null)
         {
             randomMoveTimer += Time.deltaTime;
@@ -37,6 +50,7 @@ public class EvilHunterCharacter : Character
                 targetLocation = targetPos;
 
                 randomMoveTimer = 0f;
+                randomMoveTime = Random.Range(randomMoveTime_Min, randomMoveTime_Max);
             }
         }
         else
@@ -53,7 +67,7 @@ public class EvilHunterCharacter : Character
 
         foreach (Collider col in detectedColls)
         {
-            if (col == null)
+            if (col == null || col == myCollider)
             {
                 continue;
             }
@@ -106,6 +120,12 @@ public class EvilHunterCharacter : Character
         if (isMove)
         {
             aiPath.canMove = true;
+
+            //움직이는 중 목적지에 도달하거나 최대 경로에 도달한 경우
+            if (aiPath.reachedDestination || aiPath.reachedEndOfPath)
+            {
+                isMove = false;
+            }
         }
         else
         {
@@ -121,9 +141,25 @@ public class EvilHunterCharacter : Character
         aiPath.maxSpeed = (float)playStatus.MoveSpeed;
     }
 
-    public override void MoveAnimator(Vector3 dir)
+    public override void AnimatonUpdate()
     {
-        
+        if(isMove)
+        {
+            anim.SetBool("Run", true);
+
+            if(aiPath.destination.x < getTransform.position.x)
+            {
+                viewSprite.flipX = true;
+            }
+            else
+            {
+                viewSprite.flipX = false;
+            }
+        }
+        else
+        {
+            anim.SetBool("Run", false);
+        }
     }
     public override IEnumerator Death()
     {
