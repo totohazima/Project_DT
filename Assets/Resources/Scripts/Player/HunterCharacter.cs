@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HunterCharacter : Character
 {
     [Header("RandomMove_Info")]
-    private float randomMoveRadius = 5f; //이 만큼의 거리내로 랜덤 이동
+    private float randomMoveRadius = 2f; //이 만큼의 거리내로 랜덤 이동
     private float randomMoveTime; //이 시간 동안 타겟이 잡히지 않으면 일정 거리 내 위치로 랜덤 이동
     private float randomMoveTime_Max = 5f; 
     private float randomMoveTime_Min = 1f;
@@ -29,6 +30,22 @@ public class HunterCharacter : Character
         RandomMoveLocation();
         StatusUpdate();
         AnimatonUpdate();
+
+        // PC 환경에서 마우스 왼쪽 클릭 감지
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(ProcessClick(Input.mousePosition));
+        }
+
+        // 모바일 환경에서 터치 감지
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began)
+            {
+                StartCoroutine(ProcessClick(touch.position));
+            }
+        }
     }
 
     private void RandomMoveLocation()
@@ -166,4 +183,40 @@ public class HunterCharacter : Character
         anim.SetBool("Dead", true);
         return base.Death();
     }
+
+    /// <summary>
+    /// 캐릭터 클릭 시 추적
+    /// </summary>
+    public IEnumerator ProcessClick(Vector3 clickPosition)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(clickPosition);
+        RaycastHit hit;
+
+        FieldActivity.instance.cameraDrag.isCameraMove = false;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider == myCollider)
+            {
+                FieldActivity.instance.cameraDrag.trackingTarget = this;
+                Debug.Log("유닛 추적 활성화");
+            }
+            else
+            {
+                FieldActivity.instance.cameraDrag.trackingTarget = null;
+                Debug.Log("유닛 추적 비 활성화");
+            }
+        }
+        else
+        {
+            FieldActivity.instance.cameraDrag.trackingTarget = null;
+            Debug.Log("유닛 추적 비 활성화");
+        }
+
+        //딜레이를 주지 않으면 CameraDrag 스크립트에서 카메라를 움직여버림
+        yield return new WaitForSeconds(0.5f);
+
+        FieldActivity.instance.cameraDrag.isCameraMove = true;
+    }
+  
 }

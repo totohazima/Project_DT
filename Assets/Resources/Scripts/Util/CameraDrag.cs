@@ -10,6 +10,7 @@ using UnityEngine.UIElements;
 public class CameraDrag : MonoBehaviour
 {
     public Tilemap tilemap;
+    public HunterCharacter trackingTarget;
     private new Camera camera;
     private Transform cameraTransform;
     private const float DirectionForceReduceRate = 0.935f; // 감속비율
@@ -20,6 +21,7 @@ public class CameraDrag : MonoBehaviour
     public bool isCameraMove; // 현재 조작을 하고있는지 확인을 위한 변수
     public bool isDontMove; //UI가 떠 있을 때 움직이지 않게
     public bool isCrossLimitLine; //true일때 카메라가 맵 바깥으로 움직일 수 있음
+    public bool isTrackingTarget; //true일때 클릭한 유닛을 따라감
     
     private void Awake()
     {
@@ -28,6 +30,8 @@ public class CameraDrag : MonoBehaviour
     }
     private void Update()
     {
+        StatusUpdate();
+
         if (isDontMove == false)
         {
             // 카메라 포지션 이동
@@ -49,6 +53,19 @@ public class CameraDrag : MonoBehaviour
             CameraMoveLimit();
         }
         
+    }
+    protected void StatusUpdate()
+    {
+        if (trackingTarget != null)
+        {
+            isTrackingTarget = true;
+            Camera.main.orthographicSize = 2f;
+        }
+        else
+        {
+            isTrackingTarget = false;
+            Camera.main.orthographicSize = 3f;
+        }
     }
     private void LimitPositionSet()
     {
@@ -74,19 +91,30 @@ public class CameraDrag : MonoBehaviour
             return;
         }
 #endif
-        Vector3 mouseWorldPosition = camera.ScreenToWorldPoint(Input.mousePosition);
-        
-        if (Input.GetMouseButtonDown(0))
+        if (isTrackingTarget)
         {
-            CameraPositionMoveStart(mouseWorldPosition);
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            CameraPositionMoveProgress(mouseWorldPosition);
+            Vector3 pos = trackingTarget.getTransform.position;
+            cameraTransform.position = new Vector3(pos.x, pos.y, cameraTransform.position.z);
         }
         else
         {
-            CameraPositionMoveEnd();
+            if (isCameraMove)
+            {
+                Vector3 mouseWorldPosition = camera.ScreenToWorldPoint(Input.mousePosition);
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    CameraPositionMoveStart(mouseWorldPosition);
+                }
+                else if (Input.GetMouseButton(0))
+                {
+                    CameraPositionMoveProgress(mouseWorldPosition);
+                }
+                else
+                {
+                    CameraPositionMoveEnd();
+                }
+            }
         }
     }
     private void CameraPositionMoveStart(Vector3 startPosition)
