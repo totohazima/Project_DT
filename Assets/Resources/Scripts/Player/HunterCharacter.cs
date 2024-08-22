@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EvilHunterCharacter : Character
+public class HunterCharacter : Character
 {
     [Header("RandomMove_Info")]
     private float randomMoveRadius = 5f; //이 만큼의 거리내로 랜덤 이동
@@ -11,7 +11,7 @@ public class EvilHunterCharacter : Character
     private float randomMoveTime_Min = 1f;
     private float randomMoveTimer = 0f;
     [Header("ScanTime_Info")]
-    private float scanDealay = 0.1f; //스캔이 재작동하는 시간
+    private float scanDelay = 0.1f; //스캔이 재작동하는 시간
     private float scantimer = 0;
 
     public override void Update()
@@ -22,7 +22,7 @@ public class EvilHunterCharacter : Character
         }
 
         scantimer += Time.deltaTime;
-        if (scantimer > scanDealay)
+        if (scantimer > scanDelay)
         {
             ObjectScan();
         }
@@ -147,7 +147,7 @@ public class EvilHunterCharacter : Character
         {
             anim.SetBool("Run", true);
 
-            if(aiPath.destination.x < getTransform.position.x)
+            if(aiPath.steeringTarget.x < getTransform.position.x)
             {
                 viewSprite.flipX = true;
             }

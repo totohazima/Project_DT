@@ -8,6 +8,7 @@ using UnityEngine.Tilemaps;
 public class FieldActivity : MonoBehaviour
 {
     public static FieldActivity instance;
+    public CameraDrag cameraDrag;
     public Tilemap tilemap;
     [HideInInspector] public float xMin, xMax, yMin, yMax;
 

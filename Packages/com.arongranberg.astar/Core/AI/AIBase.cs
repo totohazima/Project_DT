@@ -21,7 +21,6 @@ namespace Pathfinding {
     /// </summary>
     [RequireComponent(typeof(Seeker))]
 	public abstract class AIBase : VersionedMonoBehaviour {
-		public Vector3 nextNodePosition;
 		/// <summary>\copydocref{IAstarAI.radius}</summary>
 		public float radius = 0.5f;
 
@@ -506,7 +505,7 @@ namespace Pathfinding {
 
 			if (canMove) {
 				MovementUpdate(dt, out var nextPosition, out var nextRotation);
-				UnityEngine.Profiling.Profiler.BeginSample("Finalize");
+                UnityEngine.Profiling.Profiler.BeginSample("Finalize");
 				FinalizeMovement(nextPosition, nextRotation);
 				UnityEngine.Profiling.Profiler.EndSample();
 			}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Tilemaps;
@@ -66,13 +67,14 @@ public class CameraDrag : MonoBehaviour
 
     private void ControlCameraPosition()
     {
+#if UNITY_EDITOR
         //에디터에서 Scene, Simulator으로 볼 경우 에러메시지 대응용
-        if (Input.mousePosition.x == -Mathf.Infinity || Input.mousePosition.x == Mathf.Infinity)
+        if(EditorWindow.focusedWindow == null || EditorWindow.focusedWindow.titleContent.text != "Game" && EditorWindow.focusedWindow.titleContent.text != "Simulator")
         {
             return;
         }
-
-        var mouseWorldPosition = camera.ScreenToWorldPoint(Input.mousePosition);
+#endif
+        Vector3 mouseWorldPosition = camera.ScreenToWorldPoint(Input.mousePosition);
         
         if (Input.GetMouseButtonDown(0))
         {
