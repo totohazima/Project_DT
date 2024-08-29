@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 577964275733452468}
   - component: {fileID: 8387200454294307992}
   - component: {fileID: 1588406089824039737}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: ViewObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7645730106646982769}
@@ -93,15 +93,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1200325431
-  m_SortingLayer: 0
+  m_SortingLayerID: -1098100429
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 4723107735738678597, guid: c1cdd26cc09ad224884556bc4d8296ae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5, y: 1.5}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2944072392764820377}
   - component: {fileID: 7976856175895887476}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: UnitCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,10 +172,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.34
-  m_Height: 1.2
+  m_Radius: 0.14868793
+  m_Height: 0.29737586
   m_Direction: 1
-  m_Center: {x: 0, y: 0.13, z: 0}
+  m_Center: {x: 0, y: -0.013292104, z: 0}
 --- !u!1 &3957360899108518360
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,10 +186,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7645730106646982769}
   - component: {fileID: 7438327095424273110}
+  - component: {fileID: 2159807894096485525}
   - component: {fileID: 4833772912834614865}
   - component: {fileID: 264472267980042728}
   - component: {fileID: 3752204610022689327}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Hunter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,6 +241,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2159807894096485525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957360899108518360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8932f5a2abf92e8489888414665d96a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
+  player: {fileID: 7645730106646982769}
+  currentTilePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4833772912834614865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +274,7 @@ MonoBehaviour:
   getTransform: {fileID: 0}
   whiteFlash: {fileID: 1588406089824039737}
   viewSprite: {fileID: 8387200454294307992}
-  isDisable: 0
+  isDisable: 1
   isReadyToMove: 0
   isReadyToAttack: 0
   isMove: 0
@@ -317,8 +333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1073741824
-  radius: 0.34
-  height: 1.2
+  radius: 0.01
+  height: 0.01
   canMove: 1
   maxSpeed: 1
   gravity: {x: 0, y: 0, z: 0}
@@ -339,7 +355,7 @@ MonoBehaviour:
   orientation: 1
   enableRotation: 0
   autoRepath:
-    mode: 2
+    mode: 1
     period: 0.5
     sensitivity: 10
     maximumPeriod: 2
@@ -362,7 +378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2576766439761401811}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: Unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -32,7 +32,7 @@ public class CameraDrag : MonoBehaviour
     {
         StatusUpdate();
 
-        if (isDontMove == false)
+        if (!isDontMove)
         {
             // 카메라 포지션 이동
             ControlCameraPosition();
@@ -98,22 +98,19 @@ public class CameraDrag : MonoBehaviour
         }
         else
         {
-            if (isCameraMove)
-            {
-                Vector3 mouseWorldPosition = camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseWorldPosition = camera.ScreenToWorldPoint(Input.mousePosition);
 
-                if (Input.GetMouseButtonDown(0))
-                {
-                    CameraPositionMoveStart(mouseWorldPosition);
-                }
-                else if (Input.GetMouseButton(0))
-                {
-                    CameraPositionMoveProgress(mouseWorldPosition);
-                }
-                else
-                {
-                    CameraPositionMoveEnd();
-                }
+            if (Input.GetMouseButtonDown(0))
+            {
+                CameraPositionMoveStart(mouseWorldPosition);
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                CameraPositionMoveProgress(mouseWorldPosition);
+            }
+            else
+            {
+                CameraPositionMoveEnd();
             }
         }
     }

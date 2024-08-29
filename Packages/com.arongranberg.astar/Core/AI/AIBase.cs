@@ -9,17 +9,16 @@ namespace Pathfinding {
 	using Pathfinding.Jobs;
 	using Pathfinding.Drawing;
 	using UnityEngine.Jobs;
-    using UnityEngine.TextCore.Text;
 
-    /// <summary>
-    /// Base class for AIPath and RichAI.
-    /// This class holds various methods and fields that are common to both AIPath and RichAI.
-    ///
-    /// See: <see cref="Pathfinding.AIPath"/>
-    /// See: <see cref="Pathfinding.RichAI"/>
-    /// See: <see cref="Pathfinding.IAstarAI"/> (all movement scripts implement this interface)
-    /// </summary>
-    [RequireComponent(typeof(Seeker))]
+	/// <summary>
+	/// Base class for AIPath and RichAI.
+	/// This class holds various methods and fields that are common to both AIPath and RichAI.
+	///
+	/// See: <see cref="Pathfinding.AIPath"/>
+	/// See: <see cref="Pathfinding.RichAI"/>
+	/// See: <see cref="Pathfinding.IAstarAI"/> (all movement scripts implement this interface)
+	/// </summary>
+	[RequireComponent(typeof(Seeker))]
 	public abstract class AIBase : VersionedMonoBehaviour {
 		/// <summary>\copydocref{IAstarAI.radius}</summary>
 		public float radius = 0.5f;
@@ -505,7 +504,7 @@ namespace Pathfinding {
 
 			if (canMove) {
 				MovementUpdate(dt, out var nextPosition, out var nextRotation);
-                UnityEngine.Profiling.Profiler.BeginSample("Finalize");
+				UnityEngine.Profiling.Profiler.BeginSample("Finalize");
 				FinalizeMovement(nextPosition, nextRotation);
 				UnityEngine.Profiling.Profiler.EndSample();
 			}
