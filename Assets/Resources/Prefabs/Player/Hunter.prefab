@@ -186,10 +186,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7645730106646982769}
   - component: {fileID: 7438327095424273110}
-  - component: {fileID: 2159807894096485525}
   - component: {fileID: 4833772912834614865}
-  - component: {fileID: 264472267980042728}
-  - component: {fileID: 3752204610022689327}
+  - component: {fileID: 3754870173671991051}
+  - component: {fileID: 3293013588170366071}
+  - component: {fileID: 2930441355988347650}
   m_Layer: 6
   m_Name: Hunter
   m_TagString: Untagged
@@ -241,21 +241,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2159807894096485525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3957360899108518360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8932f5a2abf92e8489888414665d96a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
-  player: {fileID: 7645730106646982769}
-  currentTilePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &4833772912834614865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,12 +254,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewObject: {fileID: 8007757348282142988}
-  rigid: {fileID: 7438327095424273110}
+  rigid: {fileID: 0}
   myCollider: {fileID: 7976856175895887476}
   getTransform: {fileID: 0}
   whiteFlash: {fileID: 1588406089824039737}
   viewSprite: {fileID: 8387200454294307992}
-  isDisable: 1
+  isDisable: 0
   isReadyToMove: 0
   isReadyToAttack: 0
   isMove: 0
@@ -292,7 +277,7 @@ MonoBehaviour:
   aiPath: {fileID: 0}
   targetUnit: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
---- !u!114 &264472267980042728
+--- !u!114 &3754870173671991051
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -306,7 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1073741824
   drawGizmos: 1
-  detailedGizmos: 1
+  detailedGizmos: 0
   startEndModifier:
     addPoints: 0
     exactStartPoint: 3
@@ -320,7 +305,7 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!114 &3752204610022689327
+--- !u!114 &3293013588170366071
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -329,46 +314,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 3957360899108518360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
+  m_Script: {fileID: 11500000, guid: 847a14d4dc9cc43679ab34fc78e0182f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1073741824
-  radius: 0.01
-  height: 0.01
-  canMove: 1
-  maxSpeed: 1
-  gravity: {x: 0, y: 0, z: 0}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  endReachedDistance: 0.2
-  whenCloseToDestination: 0
-  rvoDensityBehavior:
-    enabled: 1
-    densityThreshold: 0.5
-    returnAfterBeingPushedAway: 0
-    progressAverage: 0
-    lastJobDensityResult: 0
-  centerOffsetCompatibility: NaN
-  repathRateCompatibility: NaN
-  canSearchCompability: 0
-  orientation: 1
-  enableRotation: 0
   autoRepath:
-    mode: 1
+    mode: 2
     period: 0.5
     sensitivity: 10
     maximumPeriod: 2
     visualizeSensitivity: 0
+  canMove: 1
+  speed: 3
+  orientation: 1
+  enableRotation: 0
+  rotationSpeed: 10
+  interpolatePathSwitches: 1
+  switchPathInterpolationSpeed: 5
   targetCompatibility: {fileID: 0}
-  maxAcceleration: -2.5
-  rotationSpeed: 360
-  slowdownDistance: 0.6
-  pickNextWaypointDist: 2
-  alwaysDrawGizmos: 0
-  slowWhenNotFacingTarget: 1
-  preventMovingBackwards: 0
-  constrainInsideGraph: 0
+  repathRateCompatibility: NaN
+  canSearchCompability: 0
+--- !u!114 &2930441355988347650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957360899108518360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1073741824
+  smoothType: 0
+  subdivisions: 2
+  iterations: 5
+  strength: 0.5
+  uniformLength: 1
+  maxSegmentLength: 0.5
+  bezierTangentLength: 0.4
+  offset: 0.2
+  factor: 0.1
 --- !u!1 &4170199615112307712
 GameObject:
   m_ObjectHideFlags: 0

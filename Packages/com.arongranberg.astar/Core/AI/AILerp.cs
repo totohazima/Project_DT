@@ -291,7 +291,7 @@ namespace Pathfinding {
 		}
 
 		/// <summary>\copydoc Pathfinding::IAstarAI::steeringTarget</summary>
-		Vector3 IAstarAI.steeringTarget {
+		public Vector3 steeringTarget {
 			get {
 				// AILerp doesn't use steering at all, so we will just return a point ahead of the agent in the direction it is moving.
 				return interpolator.valid ? interpolator.position + interpolator.tangent : simulatedPosition;

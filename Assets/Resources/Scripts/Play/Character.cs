@@ -22,7 +22,7 @@ public class Character : FieldObject
     public StatusInfo statusInfo;
     public PlayStatus playStatus;
     public Animator anim;
-    public AIPath aiPath;
+    public AILerp aiPath;
     [Header("TargetInfo")]
     public Transform targetUnit;  //Å¸°ÙÀ¸·Î ÀâÈù À¯´Ö
     public Vector3 targetLocation;  //ÀÌµ¿ÇØ¾ß ÇÒ ÁÂÇ¥(À§Ä¡)
@@ -30,7 +30,7 @@ public class Character : FieldObject
     public virtual void Start()
     {
         getTransform = transform;
-        aiPath = GetComponent<AIPath>();
+        aiPath = GetComponent<AILerp>();
     }
 
     public void OnEnable()

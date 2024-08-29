@@ -159,7 +159,7 @@ public class HunterCharacter : Character
         }
 
         //스탯
-        aiPath.maxSpeed = (float)playStatus.MoveSpeed;
+        aiPath.speed = (float)playStatus.MoveSpeed;
     }
 
     public override void AnimatonUpdate()
@@ -197,7 +197,8 @@ public class HunterCharacter : Character
         RaycastHit hit;
 
         onClickProcess = true;
-        FieldActivity.instance.cameraDrag.isDontMove = true;
+
+        
 
         if (Physics.Raycast(ray, out hit))
         {
@@ -206,20 +207,21 @@ public class HunterCharacter : Character
                 FieldActivity.instance.cameraDrag.trackingTarget = this;
                 Debug.Log("유닛 추적 활성화");
             }
-            else
-            {
-                FieldActivity.instance.cameraDrag.trackingTarget = null;
-                Debug.Log("유닛 추적 비 활성화");
-            }
         }
         else
         {
+            if (FieldActivity.instance.cameraDrag.trackingTarget != null)
+            {
+                FieldActivity.instance.cameraDrag.isDontMove = true;
+            }
+
             FieldActivity.instance.cameraDrag.trackingTarget = null;
             Debug.Log("유닛 추적 비 활성화");
+            
         }
 
         //딜레이를 주지 않으면 CameraDrag 스크립트에서 카메라를 움직여버림
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
         onClickProcess = false;
         FieldActivity.instance.cameraDrag.isDontMove = false;
