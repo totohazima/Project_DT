@@ -15,8 +15,7 @@ public class TestTargetSetter : VersionedMonoBehaviour
 
     public void UpdateTargetPosition()
     {
-        var aiStars = setCharacter.aiPath;
-        if (aiStars != null)
+        if (setCharacter.targetUnit != transform)
         {
             setCharacter.targetUnit = transform;
         }

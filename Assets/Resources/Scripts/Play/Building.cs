@@ -40,11 +40,11 @@ public class Building : FieldObject, IPointerDownHandler, IPointerUpHandler, IDr
 
         if (isLongClicked)
         {
-            FieldActivity.instance.cameraDrag.isDontMove = true;
+            FieldManager.instance.cameraDrag.isDontMove = true;
         }
         else
         {
-            FieldActivity.instance.cameraDrag.isDontMove = false;
+            FieldManager.instance.cameraDrag.isDontMove = false;
         }
     }
 

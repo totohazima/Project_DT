@@ -20,6 +20,13 @@ namespace StatusHelper
         VIEW_RANGE = 5,
     }
 
+    public enum DESIRE_STATUS : int
+    {
+        HUNGER = 0,
+        SLEEP = 1,
+        STRESS = 2,
+    }
+
     [System.Serializable]
     public class Status
     {
@@ -38,6 +45,21 @@ namespace StatusHelper
             maxHealth = 0;
             moveSpeed = 0;
             viewRange = 0;
+        }
+    }
+
+    [System.Serializable]
+    public class Desire
+    {
+        [Range(0f, 100f)] public double hunger = 100;
+        [Range(0f, 100f)] public double sleep = 100;
+        [Range(0f, 100f)] public double stress = 100;
+
+        public void Reset()
+        {
+            hunger = 100;
+            sleep = 100;
+            stress = 100;
         }
     }
 }

@@ -3,40 +3,38 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using StatusHelper;
+using FieldHelper;
 using GameSystem;
 using Pathfinding;
 using System;
 
 public class Character : FieldObject
 {
-    [HideInInspector] public Transform getTransform;
     public WhiteFlash whiteFlash;
-    public SpriteRenderer viewSprite;
-    public bool isDisable; //true일 경우 정지(모든 메서드)
+    public bool isInvincible; //true일 경우 무적
+    public bool isDisable; //true일 경우 정지
     public bool isReadyToMove; //true일 경우 움직임
     public bool isReadyToAttack; //true일 경우 공격 가능
     public bool isMove;
     public bool isDead;
     private float attackTimer;
     [Header("StatusInfo")]
-    public StatusInfo statusInfo;
+    //public StatusInfo statusInfo;
+    public FieldMap.Field myField;
     public PlayStatus playStatus;
+    public DesirePlayStatus desirePlayStatus;
     public Animator anim;
     public AILerp aiPath;
     [Header("TargetInfo")]
     public Transform targetUnit;  //타겟으로 잡힌 유닛
     public Vector3 targetLocation;  //이동해야 할 좌표(위치)
 
-    public virtual void Start()
-    {
-        getTransform = transform;
-        aiPath = GetComponent<AILerp>();
-    }
 
     public void OnEnable()
     {
         playStatus.CurHealth = playStatus.MaxHealth;
         isReadyToMove = true;
+        isReadyToAttack = true;
     }
 
     public virtual void Update()
@@ -70,6 +68,11 @@ public class Character : FieldObject
     /// </summary>
     public virtual void DamageCalc(double damage)
     {
+        if (isInvincible)
+        {
+            damage = 0f;
+        }
+
         playStatus.CurHealth -= damage;
 
 
@@ -90,8 +93,9 @@ public class Character : FieldObject
     /// <summary>
     /// ViewRange 내에 오브젝트 탐지
     /// </summary>
-    public virtual void ObjectScan()
-    { 
+    public virtual IEnumerator ObjectScan(float scanDelay)
+    {
+        yield return null;
     }
 
     public virtual IEnumerator Death()
@@ -113,15 +117,15 @@ public class Character : FieldObject
 
     void OnDrawGizmosSelected()
     {
-        if (drawWhenSelected && getTransform != null)
+        if (drawWhenSelected && myObject != null)
         {
             //탐지 시야
             Gizmos.color = Color.cyan;
-            DrawHollowCircle(getTransform.position, (float)playStatus.viewRange, segments);
+            DrawHollowCircle(myObject.position, (float)playStatus.viewRange, segments);
 
             //공격 사거리
             Gizmos.color = Color.red;
-            DrawHollowCircle(getTransform.position, (float)playStatus.attackRange, segments);
+            DrawHollowCircle(myObject.position, (float)playStatus.attackRange, segments);
         }
     }
 

@@ -47,4 +47,26 @@ namespace StatusHelper
         }
 
     }
+
+    [System.Serializable]
+    public class DesirePlayStatus : Desire
+    {
+        public double Hunger
+        {
+            get { return hunger; }
+            set { hunger = value; }
+        }
+
+        public double Sleep
+        {
+            get { return sleep; }
+            set { sleep = value; }
+        }
+
+        public double Stress
+        {
+            get { return stress; }
+            set { stress = value; }
+        }
+    }
 }

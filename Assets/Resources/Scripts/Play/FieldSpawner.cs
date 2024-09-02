@@ -2,27 +2,19 @@ using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FieldHelper;
 public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 {
+    public Transform getTransform;
+    public FieldMap.Field controlField;
+    public bool isSpawn = false; //true일 경우 리스폰
     public int spawnUnitCount;
-    public float spawnTimer = 0f;
-    private float spawnTime = 3f;
     private GameObject unitPrefab;
+    
 
     void Start()
     {
         unitPrefab = Resources.Load<GameObject>("Prefabs/Enemy/Enemy");
-
-        List<GameObject> prefabs = new List<GameObject>();
-        List<Vector3> pos = new List<Vector3>();
-
-        for(int i = 0; i < spawnUnitCount; i++)
-        {
-            prefabs.Add(unitPrefab);
-        }
-        pos = SpawnPositionSet(spawnUnitCount);
-        UnitSpawn(prefabs, spawnUnitCount, pos);
     }
     void OnEnable()
     {
@@ -35,9 +27,25 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-
+        if (isSpawn)
+        {
+            SpawnSetting();
+            isSpawn = false;
+        }
     }
 
+    protected void SpawnSetting()
+    {
+        List<GameObject> prefabs = new List<GameObject>();
+        List<Vector3> pos = new List<Vector3>();
+
+        for (int i = 0; i < spawnUnitCount; i++)
+        {
+            prefabs.Add(unitPrefab);
+        }
+        pos = SpawnPositionSet(spawnUnitCount);
+        UnitSpawn(prefabs, spawnUnitCount, pos);
+    }
     protected void UnitSpawn(List<GameObject> prefab, int count, List<Vector3> spawnPos)
     {
         for(int i = 0; i < count; i++)
@@ -74,16 +82,25 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     private (bool, Vector3) GenerateUniquePosition(HashSet<Vector3> existingPositions, int maxAttempts)
     {
         int attempts = 0;
-        Vector3 newPosition;
+        Vector3 newPosition = Vector3.zero;
 
+        //Vector3 originPostion = fieldBoundaryCollider.transform.position;
         do
         {
-            float x = Random.Range(FieldActivity.instance.xMin, FieldActivity.instance.xMax);
-            float y = Random.Range(FieldActivity.instance.yMin, FieldActivity.instance.yMax);
-            newPosition = new Vector3(x, y, 0);
+            //float range_X = fieldBoundaryCollider.bounds.size.x;
+            //float range_Y = fieldBoundaryCollider.bounds.size.y;
+
+            //range_X = Random.Range((range_X / 2) * -1, range_X / 2);
+            //range_Y = Random.Range((range_Y / 2) * -1, range_Y / 2);
+            //newPosition = new Vector3(range_X, range_Y, 0);
+            //newPosition = newPosition + originPostion;
 
             attempts++;
-        } while (existingPositions.Contains(newPosition) && attempts < maxAttempts);
+        } 
+        while 
+        (
+            existingPositions.Contains(newPosition) && attempts < maxAttempts
+        );
 
         // Return a tuple containing a success flag and the new position
         bool success = attempts < maxAttempts;

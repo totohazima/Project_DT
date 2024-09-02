@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class EnemyCharacter : Character
 {
-    public SpriteRenderer viewSprite;
-
-
     public override void Update()
     {
-
         if(isDead)
         {
             StartCoroutine(Death());

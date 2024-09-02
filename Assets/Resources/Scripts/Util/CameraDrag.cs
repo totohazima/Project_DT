@@ -93,7 +93,7 @@ public class CameraDrag : MonoBehaviour
 #endif
         if (isTrackingTarget)
         {
-            Vector3 pos = trackingTarget.getTransform.position;
+            Vector3 pos = trackingTarget.myObject.position;
             cameraTransform.position = new Vector3(pos.x, pos.y, cameraTransform.position.z);
         }
         else

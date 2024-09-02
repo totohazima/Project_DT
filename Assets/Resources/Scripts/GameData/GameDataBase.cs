@@ -9,10 +9,9 @@ namespace GDBA
     {
         public static GameDataBase instance = null;
         public PlayerInfo playerInfo = null;
-        public void InitInstance()//GameDataBase gameDataBase)
+        public void InitInstance()
         {
             instance = this;
-            //instance = gameDataBase;
         }
 
 

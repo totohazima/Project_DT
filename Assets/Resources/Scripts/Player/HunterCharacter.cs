@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class HunterCharacter : Character
 {
+    public bool isFieldEnter = false;
     [Header("RandomMove_Info")]
     private float randomMoveRadius = 2f; //이 만큼의 거리내로 랜덤 이동
     private float randomMoveTime; //이 시간 동안 타겟이 잡히지 않으면 일정 거리 내 위치로 랜덤 이동
@@ -14,7 +15,7 @@ public class HunterCharacter : Character
     private float randomMoveTimer = 0f;
     [Header("ScanTime_Info")]
     private float scanDelay = 0.1f; //스캔이 재작동하는 시간
-    private float scantimer = 0;
+    private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
     protected bool onClickProcess; //유닛 클릭 여부 체크 (연속 클릭 방지용)
     public override void Update()
     {
@@ -23,12 +24,11 @@ public class HunterCharacter : Character
             return;
         }
 
-        scantimer += Time.deltaTime;
-        if (scantimer > scanDelay)
+        if (!isScanning)
         {
-            ObjectScan();
+            StartCoroutine(ObjectScan(scanDelay));
         }
-        RandomMoveLocation();
+        //RandomMoveLocation();
         StatusUpdate();
         AnimatonUpdate();
 
@@ -67,7 +67,7 @@ public class HunterCharacter : Character
                 Vector3 randomLocation = Random.insideUnitCircle * randomMoveRadius;
                 randomLocation.z = 0;
 
-                Vector3 targetPos = getTransform.position + randomLocation;
+                Vector3 targetPos = myObject.position + randomLocation;
                 targetLocation = targetPos;
 
                 randomMoveTimer = 0f;
@@ -80,9 +80,13 @@ public class HunterCharacter : Character
             targetLocation = Vector3.zero;
         }
     }
-    public override void ObjectScan()
+    public override IEnumerator ObjectScan(float scanDelay)
     {
-        Collider[] detectedColls = Physics.OverlapSphere(getTransform.position, (float)playStatus.viewRange, 1 << 6);
+        isScanning = true;
+
+        yield return new WaitForSeconds(scanDelay);
+
+        Collider[] detectedColls = Physics.OverlapSphere(myObject.position, (float)playStatus.viewRange, 1 << 6);
         float shortestDistance = Mathf.Infinity;
         Transform nearestTarget = null;
 
@@ -94,7 +98,7 @@ public class HunterCharacter : Character
             }
 
             Transform target = col.transform;
-            float dis = Vector3.Distance(getTransform.position, target.position);
+            float dis = Vector3.Distance(myObject.position, target.position);
 
             if(dis < shortestDistance)
             {
@@ -113,7 +117,6 @@ public class HunterCharacter : Character
             targetUnit = null;
         }
 
-        scantimer = 0f;
     }
 
     public override void StatusUpdate()
@@ -166,25 +169,31 @@ public class HunterCharacter : Character
     {
         if(isMove)
         {
-            anim.SetBool("Run", true);
-
-            if(aiPath.steeringTarget.x < getTransform.position.x)
+            if (anim.GetBool("Move") == false)
             {
-                viewSprite.flipX = true;
+                anim.SetBool("Move", true);
             }
-            else
+
+            if(aiPath.steeringTarget.x < myObject.position.x) //왼쪽
             {
-                viewSprite.flipX = false;
+                
+            }
+            else //오른쪽
+            {
+                
             }
         }
         else
         {
-            anim.SetBool("Run", false);
+            if (anim.GetBool("Move") == true)
+            {
+                anim.SetBool("Move", false);
+            }
         }
     }
     public override IEnumerator Death()
     {
-        anim.SetBool("Dead", true);
+        anim.SetBool("Death", true);
         return base.Death();
     }
 
@@ -198,33 +207,33 @@ public class HunterCharacter : Character
 
         onClickProcess = true;
 
-        
+
 
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.collider == myCollider)
             {
-                FieldActivity.instance.cameraDrag.trackingTarget = this;
+                FieldManager.instance.cameraDrag.trackingTarget = this;
                 Debug.Log("유닛 추적 활성화");
             }
         }
         else
         {
-            if (FieldActivity.instance.cameraDrag.trackingTarget != null)
+            if (FieldManager.instance.cameraDrag.trackingTarget != null)
             {
-                FieldActivity.instance.cameraDrag.isDontMove = true;
+                FieldManager.instance.cameraDrag.isDontMove = true;
             }
 
-            FieldActivity.instance.cameraDrag.trackingTarget = null;
+            FieldManager.instance.cameraDrag.trackingTarget = null;
             Debug.Log("유닛 추적 비 활성화");
-            
+
         }
 
         //딜레이를 주지 않으면 CameraDrag 스크립트에서 카메라를 움직여버림
         yield return new WaitForSeconds(0.3f);
 
         onClickProcess = false;
-        FieldActivity.instance.cameraDrag.isDontMove = false;
+        FieldManager.instance.cameraDrag.isDontMove = false;
     }
-  
+
 }
