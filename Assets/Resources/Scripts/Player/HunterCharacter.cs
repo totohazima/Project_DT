@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class HunterCharacter : Character
+public class HunterCharacter : Character, IPointerClickHandler
 {
     public bool isFieldEnter = false;
     [Header("RandomMove_Info")]
@@ -17,6 +17,8 @@ public class HunterCharacter : Character
     private float scanDelay = 0.1f; //스캔이 재작동하는 시간
     private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
     protected bool onClickProcess; //유닛 클릭 여부 체크 (연속 클릭 방지용)
+
+
     public override void Update()
     {
         if(isDisable)
@@ -30,25 +32,14 @@ public class HunterCharacter : Character
         }
         //RandomMoveLocation();
         StatusUpdate();
-        AnimatonUpdate();
+        AnimatonUpdate(); 
+    }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
         if (!onClickProcess)
         {
-            // PC 환경에서 마우스 왼쪽 클릭 감지
-            if (Input.GetMouseButtonDown(0))
-            {
-                StartCoroutine(ProcessClick(Input.mousePosition));
-            }
-
-            // 모바일 환경에서 터치 감지
-            if (Input.touchCount > 0)
-            {
-                Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Began)
-                {
-                    StartCoroutine(ProcessClick(touch.position));
-                }
-            }
+            StartCoroutine(ProcessClick(eventData.position));
         }
     }
 
@@ -176,11 +167,11 @@ public class HunterCharacter : Character
 
             if(aiPath.steeringTarget.x < myObject.position.x) //왼쪽
             {
-                
+                viewObject.rotation = Quaternion.Euler(0, 180, 0); 
             }
             else //오른쪽
             {
-                
+                viewObject.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
         else
@@ -205,9 +196,6 @@ public class HunterCharacter : Character
         Ray ray = Camera.main.ScreenPointToRay(clickPosition);
         RaycastHit hit;
 
-        onClickProcess = true;
-
-
 
         if (Physics.Raycast(ray, out hit))
         {
@@ -217,23 +205,8 @@ public class HunterCharacter : Character
                 Debug.Log("유닛 추적 활성화");
             }
         }
-        else
-        {
-            if (FieldManager.instance.cameraDrag.trackingTarget != null)
-            {
-                FieldManager.instance.cameraDrag.isDontMove = true;
-            }
 
-            FieldManager.instance.cameraDrag.trackingTarget = null;
-            Debug.Log("유닛 추적 비 활성화");
-
-        }
-
-        //딜레이를 주지 않으면 CameraDrag 스크립트에서 카메라를 움직여버림
-        yield return new WaitForSeconds(0.3f);
-
-        onClickProcess = false;
-        FieldManager.instance.cameraDrag.isDontMove = false;
+        yield return 0;
     }
 
 }

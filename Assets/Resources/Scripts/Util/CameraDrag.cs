@@ -22,6 +22,7 @@ public class CameraDrag : MonoBehaviour
     public bool isDontMove; //UI가 떠 있을 때 움직이지 않게
     public bool isCrossLimitLine; //true일때 카메라가 맵 바깥으로 움직일 수 있음
     public bool isTrackingTarget; //true일때 클릭한 유닛을 따라감
+    private bool onStopTracking = false;
     
     private void Awake()
     {
@@ -95,6 +96,12 @@ public class CameraDrag : MonoBehaviour
         {
             Vector3 pos = trackingTarget.myObject.position;
             cameraTransform.position = new Vector3(pos.x, pos.y, cameraTransform.position.z);
+
+            Vector3 mouseWorldPosition = camera.ScreenToWorldPoint(Input.mousePosition);
+            if (Input.GetMouseButtonDown(0) && !onStopTracking)
+            {
+                StartCoroutine(StopTracking(mouseWorldPosition));
+            }
         }
         else
         {
@@ -114,6 +121,29 @@ public class CameraDrag : MonoBehaviour
             }
         }
     }
+    private IEnumerator StopTracking(Vector3 clickPosition)
+    {
+        onStopTracking = true;
+
+        Ray ray = Camera.main.ScreenPointToRay(clickPosition);
+        RaycastHit hit;
+        isDontMove = true;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            yield return 0;
+        }
+        else if(trackingTarget != null) 
+        {
+            trackingTarget = null;
+        }
+
+        //딜레이를 주지 않으면 CameraDrag 스크립트에서 카메라를 움직여버림
+        yield return new WaitForSeconds(0.3f);
+        isDontMove = false;
+        onStopTracking = false;
+    }
+
     private void CameraPositionMoveStart(Vector3 startPosition)
     {
         isCameraMove = true;

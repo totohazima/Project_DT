@@ -3,14 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FieldHelper;
+using StatusHelper;
 public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 {
     public Transform getTransform;
     public FieldMap.Field controlField;
     public bool isSpawn = false; //true일 경우 리스폰
     public int spawnUnitCount;
+    public List<Transform> spawnTargets = new List<Transform>();
+
+    public List<HunterCharacter> inCharacters = new List<HunterCharacter>();
+    public LayerMask scanLayer;
     private GameObject unitPrefab;
-    
+    private bool onScanning = false;
+    public Vector3 boxSize = new Vector3(1f, 1f, 1f);
 
     void Start()
     {
@@ -31,6 +37,43 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         {
             SpawnSetting();
             isSpawn = false;
+        }
+
+        if(!onScanning)
+        {
+            StartCoroutine(ScanCharacter());
+        }
+
+    }
+
+    protected IEnumerator ScanCharacter()
+    {
+        onScanning = true;
+
+        inCharacters.Clear();
+
+        Collider[] hitColliders = Physics.OverlapBox(getTransform.position, boxSize / 2, Quaternion.identity, scanLayer);
+
+        // 겹친 콜라이더에 대해 처리
+        foreach (Collider hitCollider in hitColliders)
+        {
+            HunterCharacter hunter = hitCollider.transform.parent.GetComponentInParent<HunterCharacter>();
+            if (hunter != null)
+            {
+                inCharacters.Add(hunter);
+                CharacterFieldSetting(hunter);
+            }
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        onScanning = false;
+    }
+    protected void CharacterFieldSetting(HunterCharacter character)
+    {
+        if(character.myField != controlField)
+        {
+            character.myField = controlField;
+            character.isFieldEnter = true;
         }
     }
 
@@ -84,16 +127,10 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         int attempts = 0;
         Vector3 newPosition = Vector3.zero;
 
-        //Vector3 originPostion = fieldBoundaryCollider.transform.position;
+
         do
         {
-            //float range_X = fieldBoundaryCollider.bounds.size.x;
-            //float range_Y = fieldBoundaryCollider.bounds.size.y;
 
-            //range_X = Random.Range((range_X / 2) * -1, range_X / 2);
-            //range_Y = Random.Range((range_Y / 2) * -1, range_Y / 2);
-            //newPosition = new Vector3(range_X, range_Y, 0);
-            //newPosition = newPosition + originPostion;
 
             attempts++;
         } 
@@ -106,4 +143,21 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         bool success = attempts < maxAttempts;
         return (success, newPosition);
     }
+
+#if UNITY_EDITOR
+    int segments = 100;
+    bool drawWhenSelected = true;
+
+    void OnDrawGizmosSelected()
+    {
+        if (drawWhenSelected)
+        {
+            //탐지 시야
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(getTransform.position, boxSize);
+        }
+    }
+
+   
+#endif
 }
