@@ -212,6 +212,6 @@ public class InventoryUI : MonoBehaviour, ICustomUpdateMono
 
     public void CloseButton()
     { 
-        PoolManager.instance.FalsedPrefab(gameObject, gameObject.name);
+        //PoolManager.instance.FalsedPrefab(gameObject, gameObject.name);
     }
 }

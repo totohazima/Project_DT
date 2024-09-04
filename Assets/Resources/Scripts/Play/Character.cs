@@ -7,6 +7,7 @@ using FieldHelper;
 using GameSystem;
 using Pathfinding;
 using System;
+using Util;
 
 public class Character : FieldObject
 {
@@ -16,8 +17,9 @@ public class Character : FieldObject
     public bool isReadyToMove; //true일 경우 움직임
     public bool isReadyToAttack; //true일 경우 공격 가능
     public bool isMove;
+    public bool isAttacking;
     public bool isDead;
-    private float attackTimer;
+    [HideInInspector] public float attackTimer = Mathf.Infinity;
     [Header("StatusInfo")]
     //public StatusInfo statusInfo;
     public FieldMap.Field myField;
@@ -26,6 +28,7 @@ public class Character : FieldObject
     public Animator anim;
     public AILerp aiPath;
     [Header("TargetInfo")]
+    public Transform targetField; //내가 가야 할 필드
     public Transform targetUnit;  //타겟으로 잡힌 유닛
     public Vector3 targetLocation;  //이동해야 할 좌표(위치)
 
@@ -34,7 +37,6 @@ public class Character : FieldObject
     {
         playStatus.CurHealth = playStatus.MaxHealth;
         isReadyToMove = true;
-        isReadyToAttack = true;
     }
 
     public virtual void Update()
@@ -45,9 +47,6 @@ public class Character : FieldObject
     public virtual void MoveUnit(Vector3 dir)
     {   
     }
-    public virtual void AnimatonUpdate()
-    {
-    }
 
     /// <summary>
     /// 현재 스테이터스(상태, 스탯) 매 업데이트마다 설정
@@ -55,6 +54,10 @@ public class Character : FieldObject
     public virtual void StatusUpdate()
     {
     }
+    public virtual void AnimationUpdate()
+    {
+    }
+
     /// <summary>
     /// 공격이 들어오는지 체크하는 함수
     /// </summary>
@@ -79,7 +82,6 @@ public class Character : FieldObject
         if (playStatus.CurHealth <= 0)
         {
             isDead = true;
-            StartCoroutine(Death());
         }
         else
         {
@@ -103,12 +105,14 @@ public class Character : FieldObject
         myCollider.enabled = false;
         attackTimer = 0f;
         isReadyToMove = false;
-        isReadyToAttack = false;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
 
         myCollider.enabled = true;
-        PoolManager.instance.FalsedPrefab(gameObject, gameObject.name);
+        if (gameObject.layer == LayerMask.NameToLayer(Layers.Enemy))
+        {
+            PoolManager.instance.Release(gameObject);
+        }
     }
 
 #if UNITY_EDITOR

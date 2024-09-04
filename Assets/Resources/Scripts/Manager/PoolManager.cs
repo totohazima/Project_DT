@@ -75,6 +75,7 @@ namespace GameSystem
                 pool = backBuffer[prefabName];
                 clone = pool.Dequeue();
                 playBuffer.Add(clone, pool);
+
                 if (parent != null)
                 {
                     clone.transform.parent = parent;
@@ -86,7 +87,7 @@ namespace GameSystem
             }
             catch (Exception e)
             {
-                Debug.LogError("PoolManager 예외발생" + "\n예외의 종류: " + e.GetType() + "\n스택 추적: " + e.StackTrace);
+                Debug.LogError(e.ToString());
                 return null;
             }
 
@@ -112,16 +113,36 @@ namespace GameSystem
         /// <summary>
         /// 풀링으로 생성한 오브젝트들을 꺼둔 다음 backBuffer에 대기시킴
         /// </summary>
-        public void FalsedPrefab(GameObject falsedPrefab, string dictionaryName)
-        {
-            string deleteString = "(Clone)";
-            string dicName = dictionaryName;
-            dicName = dicName.Replace(deleteString, "");
+        //public void FalsedPrefab(GameObject falsedPrefab, string dictionaryName)
+        //{
+        //    string deleteString = "(Clone)";
+        //    string dicName = dictionaryName;
+        //    dicName = dicName.Replace(deleteString, "");
 
-            playBuffer.Remove(falsedPrefab);
-            backBuffer[dicName].Enqueue(falsedPrefab);
-            falsedPrefab.transform.SetParent(bufferRoot);
-            falsedPrefab.SetActive(false);
+        //    playBuffer.Remove(falsedPrefab);
+        //    backBuffer[dicName].Enqueue(falsedPrefab);
+        //    falsedPrefab.transform.SetParent(bufferRoot);
+        //    falsedPrefab.SetActive(false);
+        //}
+
+        /// <summary>
+        /// 오브젝트를 Pool에 반환한다
+        /// </summary>
+        /// <param name="clone"></param>
+        public void Release(GameObject clone)
+        {
+            if (clone == null)
+                return;
+            clone.SetActive(false);
+
+            if (playBuffer.ContainsKey(clone) == false)
+            {
+                Debug.LogWarning("No pool contains the object: " + clone.name);
+                return;
+            }
+            if (bufferRoot != null) clone.transform.parent = bufferRoot;
+            playBuffer[clone].Enqueue(clone);
+            playBuffer.Remove(clone);
         }
     }
 }

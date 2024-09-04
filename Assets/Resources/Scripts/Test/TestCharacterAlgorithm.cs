@@ -11,6 +11,7 @@ public class TestCharacterAlgorithm : MonoBehaviour
 
     private void Start()
     {
+        FieldManager.instance.AllFieldSpawn();
         GoField(FieldMap.Field.DESERT);   
     }
 
@@ -31,11 +32,10 @@ public class TestCharacterAlgorithm : MonoBehaviour
                 StartCoroutine(WaitForField(10f, FieldMap.Field.SNOW));
             }
         }
-
     }
     protected void GoField(FieldMap.Field field)
     {
-        character.targetLocation = FieldManager.instance.fieldList[(int)field].position;
+        character.targetField = FieldManager.instance.fieldList[(int)field];
     }
 
     protected IEnumerator WaitForField(float waitTime, FieldMap.Field nextField)

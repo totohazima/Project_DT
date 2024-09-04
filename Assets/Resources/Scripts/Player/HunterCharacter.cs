@@ -8,11 +8,11 @@ public class HunterCharacter : Character, IPointerClickHandler
 {
     public bool isFieldEnter = false;
     [Header("RandomMove_Info")]
+    public bool onRandomMove = false;
     private float randomMoveRadius = 2f; //이 만큼의 거리내로 랜덤 이동
     private float randomMoveTime; //이 시간 동안 타겟이 잡히지 않으면 일정 거리 내 위치로 랜덤 이동
-    private float randomMoveTime_Max = 5f; 
-    private float randomMoveTime_Min = 1f;
-    private float randomMoveTimer = 0f;
+    private float randomMoveTime_Max = 10f; 
+    private float randomMoveTime_Min = 3f;
     [Header("ScanTime_Info")]
     private float scanDelay = 0.1f; //스캔이 재작동하는 시간
     private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
@@ -26,13 +26,10 @@ public class HunterCharacter : Character, IPointerClickHandler
             return;
         }
 
-        if (!isScanning)
-        {
-            StartCoroutine(ObjectScan(scanDelay));
-        }
-        //RandomMoveLocation();
+        StartCoroutine(ObjectScan(scanDelay));
+        StartCoroutine(RandomMoveLocation());
         StatusUpdate();
-        AnimatonUpdate(); 
+        AnimationUpdate(); 
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -43,80 +40,99 @@ public class HunterCharacter : Character, IPointerClickHandler
         }
     }
 
-    private void RandomMoveLocation()
+    private IEnumerator RandomMoveLocation()
     {
-        if(randomMoveTime == 0f)
+        if (!onRandomMove)
         {
+            onRandomMove = true;
             randomMoveTime = Random.Range(randomMoveTime_Min, randomMoveTime_Max);
-        }
 
-        if(targetUnit == null)
-        {
-            randomMoveTimer += Time.deltaTime;
-            if(randomMoveTimer > randomMoveTime)
-            {
-                Vector3 randomLocation = Random.insideUnitCircle * randomMoveRadius;
-                randomLocation.z = 0;
+            yield return new WaitForSeconds(randomMoveTime);
 
-                Vector3 targetPos = myObject.position + randomLocation;
-                targetLocation = targetPos;
+            Vector3 boxSize = FieldManager.instance.fields[(int)myField].boxSize;
+            // 오버랩 박스 내에서 무작위 위치 생성
+            Vector3 randomPositionWithinBox = new Vector3(
+                Random.Range(-boxSize.x / 2, boxSize.x / 2),
+                Random.Range(-boxSize.y / 2, boxSize.y / 2),
+                Random.Range(-boxSize.z / 2, boxSize.z / 2)
+            );
 
-                randomMoveTimer = 0f;
-                randomMoveTime = Random.Range(randomMoveTime_Min, randomMoveTime_Max);
-            }
-        }
-        else
-        {
-            randomMoveTimer = 0f;
-            targetLocation = Vector3.zero;
+            // 현재 위치에 대해 상대적인 위치를 적용하여 이동
+            FieldActivity controlField = FieldManager.instance.fields[(int)myField];
+            targetLocation = controlField.getTransform.position + randomPositionWithinBox;
+
+            onRandomMove = false;  // 이동 종료
+
         }
     }
     public override IEnumerator ObjectScan(float scanDelay)
     {
-        isScanning = true;
-
-        yield return new WaitForSeconds(scanDelay);
-
-        Collider[] detectedColls = Physics.OverlapSphere(myObject.position, (float)playStatus.viewRange, 1 << 6);
-        float shortestDistance = Mathf.Infinity;
-        Transform nearestTarget = null;
-
-        foreach (Collider col in detectedColls)
+        if (!isScanning)
         {
-            if (col == null || col == myCollider)
+            isScanning = true;
+
+            Collider[] detectedColls = Physics.OverlapSphere(myObject.position, (float)playStatus.viewRange, 1 << 7);
+            float shortestDistance = Mathf.Infinity;
+            Transform nearestTarget = null;
+
+            foreach (Collider col in detectedColls)
             {
-                continue;
+                if (col == null || col == myCollider)
+                {
+                    continue;
+                }
+
+                Transform target = col.transform;
+                float dis = Vector3.Distance(myObject.position, target.position);
+
+                if (dis < shortestDistance)
+                {
+                    shortestDistance = dis;
+                    nearestTarget = target;
+                }
             }
 
-            Transform target = col.transform;
-            float dis = Vector3.Distance(myObject.position, target.position);
-
-            if(dis < shortestDistance)
+            if (nearestTarget != null)
             {
-                shortestDistance = dis;
-                nearestTarget = target;
+                targetUnit = nearestTarget;
+                AttackRangeScan();
             }
+            else
+            {
+                targetUnit = null;
+            }
+
+
+            yield return new WaitForSeconds(scanDelay);
+            isScanning = false;
         }
+    }
+    private void AttackRangeScan()
+    {
+        float distance = Vector3.Distance(myObject.position, targetUnit.position);
 
-        if(nearestTarget != null)
+        if(distance <= playStatus.attackRange)
         {
-            targetUnit = nearestTarget;
-
+            isReadyToAttack = true;
         }
         else
         {
-            targetUnit = null;
+            isReadyToAttack = false;
         }
-
     }
 
     public override void StatusUpdate()
     {
-        //상태
+        ///타겟 상태
         if (targetUnit != null)
         {
             isMove = true;
             aiPath.destination = targetUnit.position;
+        }
+        else if (targetField != null)
+        {
+            isMove = true;
+            aiPath.destination = targetField.position;
         }
         else
         {
@@ -132,9 +148,25 @@ public class HunterCharacter : Character, IPointerClickHandler
             }
         }
 
+        ///공격 상태
+        if (isReadyToAttack)
+        {
+            isMove = false;
+        }
+        else
+        {
+            isMove = true;
+        }
+         
+        ///이동 상태
         if (isMove)
         {
             aiPath.canMove = true;
+
+            if(targetField != null && myObject.position == targetField.position || targetUnit != null)
+            {
+                targetField = null;
+            }
 
             //움직이는 중 목적지에 도달하거나 최대 경로에 도달한 경우
             if (aiPath.reachedDestination || aiPath.reachedEndOfPath)
@@ -147,6 +179,7 @@ public class HunterCharacter : Character, IPointerClickHandler
             aiPath.canMove = false;
         }
 
+        ///사망 상태
         if (isDead)
         {
             StartCoroutine(Death());
@@ -156,11 +189,12 @@ public class HunterCharacter : Character, IPointerClickHandler
         aiPath.speed = (float)playStatus.MoveSpeed;
     }
 
-    public override void AnimatonUpdate()
+    public override void AnimationUpdate()
     {
-        if(isMove)
+        ///이동 애니메이션
+        if (isMove)  
         {
-            if (anim.GetBool("Move") == false)
+            if (!anim.GetBool("Move"))
             {
                 anim.SetBool("Move", true);
             }
@@ -176,12 +210,31 @@ public class HunterCharacter : Character, IPointerClickHandler
         }
         else
         {
-            if (anim.GetBool("Move") == true)
+            if (anim.GetBool("Move"))
             {
                 anim.SetBool("Move", false);
             }
         }
+
+        ///공격 애니메이션
+        attackTimer += Time.deltaTime;
+        if (isReadyToAttack && attackTimer >= playStatus.attackSpeed) 
+        {
+            if(!anim.GetBool("DevilAttack_01"))
+            {
+                anim.SetBool("DevilAttack_01", true);
+                attackTimer = 0f;
+            }
+        }
+        else
+        {
+            if (anim.GetBool("DevilAttack_01"))
+            {
+                anim.SetBool("DevilAttack_01", false);
+            }
+        }
     }
+
     public override IEnumerator Death()
     {
         anim.SetBool("Death", true);
