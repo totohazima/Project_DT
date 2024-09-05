@@ -23,5 +23,30 @@ public class GameManager : MonoBehaviour
         gameDataBase.InitInstance();
         PoolManager.InitInstance();    
     }
+
+    /// <summary>
+    /// 랜덤 기능 함수
+    /// </summary>
+    public int Judgment(float[] rando)
+    {
+        int count = rando.Length;
+        float max = 0;
+        for (int i = 0; i < count; i++)
+            max += rando[i];
+
+        float range = UnityEngine.Random.Range(0f, (float)max);
+        //0.1, 0.2, 30, 40
+        double chance = 0;
+        for (int i = 0; i < count; i++)
+        {
+            chance += rando[i];
+            if (range > chance)
+                continue;
+
+            return i;
+        }
+
+        return -1;
+    }
 }
     

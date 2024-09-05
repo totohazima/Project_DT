@@ -1,4 +1,4 @@
-using Sirenix.OdinInspector;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +7,7 @@ public class ColliderDisableTime : MonoBehaviour
 {
     [SerializeField]
     float disableTime = 0F;
-    [SerializeField, ReadOnly]
+    [SerializeField]
     float playDisableTime = 0F;
     public float PlayDisableTime { get { return playDisableTime; } }
     [SerializeField]

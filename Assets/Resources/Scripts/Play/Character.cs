@@ -19,7 +19,7 @@ public class Character : FieldObject
     public bool isMove;
     public bool isAttacking;
     public bool isDead;
-    [HideInInspector] public float attackTimer = Mathf.Infinity;
+    [HideInInspector] public float attackTimer;
     [Header("StatusInfo")]
     //public StatusInfo statusInfo;
     public FieldMap.Field myField;
@@ -37,6 +37,7 @@ public class Character : FieldObject
     {
         playStatus.CurHealth = playStatus.MaxHealth;
         isReadyToMove = true;
+        attackTimer = 1000000f;
     }
 
     public virtual void Update()
@@ -102,17 +103,7 @@ public class Character : FieldObject
 
     public virtual IEnumerator Death()
     {
-        myCollider.enabled = false;
-        attackTimer = 0f;
-        isReadyToMove = false;
-
-        yield return new WaitForSeconds(0.2f);
-
-        myCollider.enabled = true;
-        if(gameObject.layer == LayerMask.NameToLayer(Layers.Enemy))
-        {
-            PoolManager.instance.Release(gameObject);
-        }
+        yield return 0;
     }
     public void Push(Vector3 vector, bool ignoreKinematic = false)
     {

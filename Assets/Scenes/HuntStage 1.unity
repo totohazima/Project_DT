@@ -338,7 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldActivity: {fileID: 1084253516}
   isSpawn: 0
-  spawnUnitCount: 1
+  spawnUnitCount: 0
   spawnPointGroup: {fileID: 113130366}
   spawnPools: {fileID: 487663658}
   spawnPoints: []
@@ -14407,7 +14407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldActivity: {fileID: 1079546952}
   isSpawn: 0
-  spawnUnitCount: 1
+  spawnUnitCount: 0
   spawnPointGroup: {fileID: 883476618}
   spawnPools: {fileID: 1615085700}
   spawnPoints: []
@@ -63646,6 +63646,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2498304257802359613, guid: 9d47046ebb7c2ff4f97923870bfc56e5, type: 3}
+      propertyPath: isReadyToAttack
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3180573088566432487, guid: 9d47046ebb7c2ff4f97923870bfc56e5, type: 3}
       propertyPath: m_Name
       value: Hero

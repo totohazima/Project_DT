@@ -1,6 +1,7 @@
 using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class EnemyCharacter : Character
@@ -142,6 +143,29 @@ public class EnemyCharacter : Character
             anim.SetBool("Dead", true);
         }
 
-        return base.Death();
+        myCollider.enabled = false;
+        attackTimer = 0f;
+        isReadyToMove = false;
+
+        yield return new WaitForSeconds(0.2f);
+
+        myCollider.enabled = true;
+        ItemDrop();
+        Disappear();
+    }
+
+    private void ItemDrop()
+    {
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/DropItem");
+        DropItem dropItem = prefab.GetComponent<DropItem>();
+        dropItem.moneyType = GameMoney.GameMoneyType.RUBY;
+        dropItem.dropCount = 1;
+
+        GameObject itemObject = PoolManager.instance.Spawn(dropItem.gameObject, myObject.position, Vector3.one, Quaternion.identity, true, myObject.parent);
+    }
+
+    private void Disappear()
+    {
+        PoolManager.instance.Release(gameObject);
     }
 }

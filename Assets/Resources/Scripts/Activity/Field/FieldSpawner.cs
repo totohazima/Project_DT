@@ -1,6 +1,8 @@
 using GameSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
@@ -69,9 +71,17 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     {
         List<Vector3> pos = new List<Vector3>();
 
-        for(int i = 0; i < count; i++)
+        float[] chanceList = new float[spawnPoints.Count];
+
+        for (int i = 0; i < chanceList.Length; i++)
         {
-            int index = Random.Range(0, spawnPoints.Count);
+            chanceList[i] = 1f / chanceList.Length; // 각 스폰 포인트의 확률을 동일하게 설정
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            int index = GameManager.instance.Judgment(chanceList);
+
             Vector3 randPos = spawnPoints[index].position;
             pos.Add(randPos);
         }

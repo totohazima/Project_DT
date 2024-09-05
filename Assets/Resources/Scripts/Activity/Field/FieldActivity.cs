@@ -42,7 +42,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         // 겹친 콜라이더에 대해 처리
         foreach (Collider hitCollider in hitColliders)
         {
-            HunterCharacter hunter = hitCollider.transform.parent.GetComponentInParent<HunterCharacter>();
+            HunterCharacter hunter = hitCollider.transform.GetComponentInParent<HunterCharacter>();
             if (hunter != null)
             {
                 inCharacters.Add(hunter);

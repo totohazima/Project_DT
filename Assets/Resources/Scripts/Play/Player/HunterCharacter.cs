@@ -1,3 +1,4 @@
+using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -232,9 +233,20 @@ public class HunterCharacter : Character, IPointerClickHandler
 
     public override IEnumerator Death()
     {
-        anim.SetBool("Death", true);
+        if(!anim.GetBool("Dead"))
+        {
+            anim.SetBool("Dead", true);
+        }
 
-        return base.Death();
+        myCollider.enabled = false;
+        attackTimer = 0f;
+        isReadyToMove = false;
+
+        yield return new WaitForSeconds(0.2f);
+
+        myCollider.enabled = true;
+
+        PoolManager.instance.Release(gameObject);
     }
 
     /// <summary>
