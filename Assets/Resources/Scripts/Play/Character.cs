@@ -81,7 +81,7 @@ public class Character : FieldObject
 
         if (playStatus.CurHealth <= 0)
         {
-            isDead = true;
+            StartCoroutine(Death());
         }
         else
         {
@@ -100,7 +100,7 @@ public class Character : FieldObject
         yield return null;
     }
 
-    public virtual IEnumerator Death(Character character)
+    public virtual IEnumerator Death()
     {
         myCollider.enabled = false;
         attackTimer = 0f;
@@ -109,6 +109,10 @@ public class Character : FieldObject
         yield return new WaitForSeconds(0.2f);
 
         myCollider.enabled = true;
+        if(gameObject.layer == LayerMask.NameToLayer(Layers.Enemy))
+        {
+            PoolManager.instance.Release(gameObject);
+        }
     }
     public void Push(Vector3 vector, bool ignoreKinematic = false)
     {

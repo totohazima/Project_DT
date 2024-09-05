@@ -135,14 +135,13 @@ public class EnemyCharacter : Character
         }
     }
 
-    public override IEnumerator Death(Character character)
+    public override IEnumerator Death()
     {
         if (!anim.GetBool("Dead"))
         {
             anim.SetBool("Dead", true);
         }
-        PoolManager.instance.Release(gameObject);
 
-        return base.Death(character);
+        return base.Death();
     }
 }

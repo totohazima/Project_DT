@@ -27,7 +27,7 @@ public class HunterCharacter : Character, IPointerClickHandler
         }
 
         StartCoroutine(ObjectScan(scanDelay));
-        StartCoroutine(RandomMoveLocation());
+        //StartCoroutine(RandomMoveLocation());
         StatusUpdate();
         AnimationUpdate(); 
     }
@@ -100,6 +100,7 @@ public class HunterCharacter : Character, IPointerClickHandler
             else
             {
                 targetUnit = null;
+                isReadyToAttack = false;
             }
 
 
@@ -229,11 +230,11 @@ public class HunterCharacter : Character, IPointerClickHandler
         }
     }
 
-    public override IEnumerator Death(Character character)
+    public override IEnumerator Death()
     {
         anim.SetBool("Death", true);
 
-        return base.Death(character);
+        return base.Death();
     }
 
     /// <summary>

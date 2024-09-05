@@ -129,7 +129,7 @@ public class AttackCollider : MonoBehaviour
         if (isSurelyDeath == true)
         {
             // 일반 몬스터가 아닌 몬스터는 제외
-            StartCoroutine(onHItCharacter.Death(owner));
+            StartCoroutine(onHItCharacter.Death());
         }
         double damage = owner.playStatus.attackPower + status.attackPower;
         onHItCharacter.OnHit(damage);
