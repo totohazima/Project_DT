@@ -179,12 +179,6 @@ public class HunterCharacter : Character, IPointerClickHandler
             aiPath.canMove = false;
         }
 
-        ///»ç¸Á »óÅÂ
-        if (isDead)
-        {
-            StartCoroutine(Death());
-        }
-
         //½ºÅÈ
         aiPath.speed = (float)playStatus.MoveSpeed;
     }
@@ -235,10 +229,11 @@ public class HunterCharacter : Character, IPointerClickHandler
         }
     }
 
-    public override IEnumerator Death()
+    public override IEnumerator Death(Character character)
     {
         anim.SetBool("Death", true);
-        return base.Death();
+
+        return base.Death(character);
     }
 
     /// <summary>

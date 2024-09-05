@@ -38,7 +38,7 @@ namespace GameEvent
             Character target = null;
             if (character.targetUnit != null)
             {
-                target = character.targetUnit.GetComponent<Character>();
+                target = character.targetUnit.GetComponentInParent<Character>();
             }
 
             attackObject.Recycle(character, target);

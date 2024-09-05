@@ -1,3 +1,4 @@
+using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -103,11 +104,6 @@ public class EnemyCharacter : Character
             aiPath.canMove = false;
         }
 
-        if (isDead)
-        {
-            StartCoroutine(Death());
-        }
-
         //Ω∫≈»
         aiPath.speed = (float)playStatus.MoveSpeed;
     }
@@ -139,12 +135,14 @@ public class EnemyCharacter : Character
         }
     }
 
-    public override IEnumerator Death()
+    public override IEnumerator Death(Character character)
     {
         if (!anim.GetBool("Dead"))
         {
             anim.SetBool("Dead", true);
         }
-        return base.Death();
+        PoolManager.instance.Release(gameObject);
+
+        return base.Death(character);
     }
 }

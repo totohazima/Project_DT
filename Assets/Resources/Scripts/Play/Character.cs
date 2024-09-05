@@ -100,7 +100,7 @@ public class Character : FieldObject
         yield return null;
     }
 
-    public virtual IEnumerator Death()
+    public virtual IEnumerator Death(Character character)
     {
         myCollider.enabled = false;
         attackTimer = 0f;
@@ -109,10 +109,13 @@ public class Character : FieldObject
         yield return new WaitForSeconds(0.2f);
 
         myCollider.enabled = true;
-        if (gameObject.layer == LayerMask.NameToLayer(Layers.Enemy))
-        {
-            PoolManager.instance.Release(gameObject);
-        }
+    }
+    public void Push(Vector3 vector, bool ignoreKinematic = false)
+    {
+        rigid.isKinematic = ignoreKinematic;
+        rigid.AddForce(vector, ForceMode.Impulse);
+
+        rigid.isKinematic = true;
     }
 
 #if UNITY_EDITOR

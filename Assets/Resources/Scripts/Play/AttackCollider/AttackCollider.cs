@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using Util;
+using GameSystem;
 
 public class AttackCollider : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class AttackCollider : MonoBehaviour
     public bool isSurelyDeath = false;
 
     [Header("추가 스탯")]
+    public double attackDamage;
     public PlayStatus status;
 
     public float lookAtDir;
@@ -97,15 +99,63 @@ public class AttackCollider : MonoBehaviour
         {
             return;
         }
+
         OnHit(onHitCharacter);
+
     }
 
     public virtual void OnHit(Character onHItCharacter)
     {
+        if (onHItCharacter == null || onHItCharacter.isDead == true)
+            return;
+        if (runHitCount <= 0 && HitCount != -1)
+            return;
+
+        // 단일 히트이지만, 대상이 아니다
+        if (isSingleHit == true && target != null && target.Equals(onHItCharacter) == false)
+            return;
+
+        if (false == (onHItCharacter is HunterCharacter))
+            //SoundManager.Instance.SFXPlay(SFXPack);
+
+        if (isSurelyDeath == false)
+        {
+            //OnHitAction(hittedCharacter);
+        }
+
+        if (usePush == true)
+            onHItCharacter.Push(pushVector * lookAtDir);
+
+        if (isSurelyDeath == true)
+        {
+            // 일반 몬스터가 아닌 몬스터는 제외
+            StartCoroutine(onHItCharacter.Death(owner));
+        }
         double damage = owner.playStatus.attackPower + status.attackPower;
         onHItCharacter.OnHit(damage);
+
+        if (HitCount != -1)
+            runHitCount--;
+        if (runHitCount <= 0 && HitCount != -1)
+            Disappear();
     }
 
+    protected virtual void OnHitAction(Character hittedCharacter)
+    {
+        DamageCalculate(hittedCharacter);
+
+        hittedCharacter.OnHit(attackDamage);
+    }
+
+    protected void DamageCalculate(Character hittedCharacter)
+    {
+        if(hittedCharacter == null)
+        {
+            return;
+        }
+
+        attackDamage = owner.playStatus.attackPower + status.attackPower;
+    }
     public void LookAt(Vector3 target)
     {
         if(target.x - transform.position.x > 0.0f)
@@ -133,5 +183,19 @@ public class AttackCollider : MonoBehaviour
             lookAtDir = -1F;
             transform.eulerAngles = new Vector3(0.0f, 180, 0.0f);
         }
+    }
+
+    public virtual void Disappear()
+    {
+        enabled = false;
+        if (coManyHit != null) StopCoroutine(coManyHit);
+        coManyHit = null;
+
+        owner = null;
+        target = null;
+
+        if (attackCollider != null)
+            attackCollider.enabled = true;
+        PoolManager.instance.Release(gameObject);
     }
 }
