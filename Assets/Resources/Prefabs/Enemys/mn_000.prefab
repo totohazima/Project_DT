@@ -99,6 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1472991038}
+  - component: {fileID: 2085495512249751346}
   m_Layer: 7
   m_Name: StateController
   m_TagString: Untagged
@@ -121,6 +122,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 185537554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2085495512249751346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472991037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bcb6c0d53d64c240b3e97c70928787a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 2085008434351557534}
+  animator: {fileID: 7880283088654874363}
+  defaultMoveSpeed: 1
+  moveSpeed: 1
+  defaultAttackSpeed: 1
+  attackSpeed: 1
+  attackDelay: 1
 --- !u!1 &42263460339358623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1856,19 +1876,22 @@ MonoBehaviour:
   rigid: {fileID: 7622356118674132421}
   myCollider: {fileID: 1169640046}
   whiteFlash: {fileID: 8149681236871064764}
+  stateController: {fileID: 2085495512249751346}
   isInvincible: 0
   isDisable: 0
   isReadyToMove: 0
   isReadyToAttack: 0
   isMove: 0
+  isAttacking: 0
   isDead: 0
+  attackTimer: 0
   myField: 0
   playStatus:
     attackPower: 1
     attackRange: 1
-    attackSpeed: 2
+    attackSpeedPercent: 0
     maxHealth: 5
-    moveSpeed: 2
+    moveSpeedPercent: 0
     viewRange: 2
     curHealth: 0
   desirePlayStatus:
@@ -1877,8 +1900,11 @@ MonoBehaviour:
     stress: 100
   anim: {fileID: 7880283088654874363}
   aiPath: {fileID: 454615847765364440}
+  dropRange: {x: 0.7, y: 0.7, z: 0.7}
+  targetField: {fileID: 0}
   targetUnit: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
+  dropItemCount: 3
 --- !u!114 &7111881440493040907
 MonoBehaviour:
   m_ObjectHideFlags: 0

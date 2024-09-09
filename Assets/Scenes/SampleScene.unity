@@ -301,6 +301,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1560424668}
     m_Modifications:
+    - target: {fileID: 2085008434351557534, guid: e3535a30b8e6f114ba48403fdbddc55a, type: 3}
+      propertyPath: dropItemCount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2085008434351557534, guid: e3535a30b8e6f114ba48403fdbddc55a, type: 3}
+      propertyPath: dropTypes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2085008434351557534, guid: e3535a30b8e6f114ba48403fdbddc55a, type: 3}
+      propertyPath: dropTypes.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5765980316008229016, guid: e3535a30b8e6f114ba48403fdbddc55a, type: 3}
       propertyPath: m_Name
       value: mn_000
@@ -544,10 +556,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1560424668}
     m_Modifications:
-    - target: {fileID: 2498304257802359613, guid: 9d47046ebb7c2ff4f97923870bfc56e5, type: 3}
-      propertyPath: targetUnit
-      value: 
-      objectReference: {fileID: 592521642}
     - target: {fileID: 3180573088566432487, guid: 9d47046ebb7c2ff4f97923870bfc56e5, type: 3}
       propertyPath: m_Name
       value: Hero

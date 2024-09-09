@@ -338,7 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldActivity: {fileID: 1084253516}
   isSpawn: 0
-  spawnUnitCount: 0
+  spawnUnitCount: 5
   spawnPointGroup: {fileID: 113130366}
   spawnPools: {fileID: 487663658}
   spawnPoints: []
@@ -14407,7 +14407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldActivity: {fileID: 1079546952}
   isSpawn: 0
-  spawnUnitCount: 0
+  spawnUnitCount: 5
   spawnPointGroup: {fileID: 883476618}
   spawnPools: {fileID: 1615085700}
   spawnPoints: []
@@ -63647,8 +63647,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2498304257802359613, guid: 9d47046ebb7c2ff4f97923870bfc56e5, type: 3}
-      propertyPath: isReadyToAttack
-      value: 0
+      propertyPath: playStatus.attackRange
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 3180573088566432487, guid: 9d47046ebb7c2ff4f97923870bfc56e5, type: 3}
       propertyPath: m_Name
@@ -64481,7 +64481,7 @@ Transform:
   m_GameObject: {fileID: 2108869294}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.06, y: -0.08, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -9,12 +9,15 @@ using GameSystem;
 public class FloatingText : MonoBehaviour
 {
     public new Transform transform;
-    public Transform parentTransform;
     public TextMeshPro text;
+    void Awake()
+    {
+        transform = GetComponent<Transform>();  
+    }
+
     public virtual void OnEnable()
     {
-        transform = GetComponent<Transform>();
-        StartCoroutine(Text_Animation());    
+        StartCoroutine(Text_Animation());
     }
     
     public virtual IEnumerator Text_Animation()

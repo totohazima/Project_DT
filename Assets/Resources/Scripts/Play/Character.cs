@@ -12,6 +12,7 @@ using Util;
 public class Character : FieldObject
 {
     public WhiteFlash whiteFlash;
+    public StateController stateController;
     public bool isInvincible; //true일 경우 무적
     public bool isDisable; //true일 경우 정지
     public bool isReadyToMove; //true일 경우 움직임
@@ -19,7 +20,6 @@ public class Character : FieldObject
     public bool isMove;
     public bool isAttacking;
     public bool isDead;
-    [HideInInspector] public float attackTimer;
     [Header("StatusInfo")]
     //public StatusInfo statusInfo;
     public FieldMap.Field myField;
@@ -27,6 +27,7 @@ public class Character : FieldObject
     public DesirePlayStatus desirePlayStatus;
     public Animator anim;
     public AILerp aiPath;
+    public Vector3 dropRange = new Vector3(1f, 1f, 1f);
     [Header("TargetInfo")]
     public Transform targetField; //내가 가야 할 필드
     public Transform targetUnit;  //타겟으로 잡힌 유닛
@@ -37,7 +38,6 @@ public class Character : FieldObject
     {
         playStatus.CurHealth = playStatus.MaxHealth;
         isReadyToMove = true;
-        attackTimer = 1000000f;
     }
 
     public virtual void Update()
@@ -93,6 +93,18 @@ public class Character : FieldObject
         }
     }
 
+    public virtual void StatCalculate()
+    {
+        if(stateController == null)
+        {
+            return;
+        }
+        
+        stateController.SetMoveSpeedPercent(playStatus.moveSpeedPercent);
+        stateController.SetAttackSpeedPercent(playStatus.attackSpeedPercent);
+
+    }
+
     /// <summary>
     /// ViewRange 내에 오브젝트 탐지
     /// </summary>
@@ -128,6 +140,10 @@ public class Character : FieldObject
             //공격 사거리
             Gizmos.color = Color.red;
             DrawHollowCircle(myObject.position, (float)playStatus.attackRange, segments);
+
+            //아이템 드랍 범위
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(myObject.position, dropRange);
         }
     }
 

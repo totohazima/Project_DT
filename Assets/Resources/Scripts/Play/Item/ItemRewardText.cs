@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class ItemRewardText : FloatingText
 {
-    public override void OnEnable()
-    {
-        base.OnEnable();
-    }
+    //public override void OnEnable()
+    //{
+    //    base.OnEnable();
+    //}
 
     public void TextSetting(GameMoney.GameMoneyType type, int count)
     {
@@ -25,14 +25,17 @@ public class ItemRewardText : FloatingText
 
         string applyText = typeTxt + " +" + count;
         text.text = applyText;
+
+        StartCoroutine(Text_Animation());
     }
 
     public override IEnumerator Text_Animation()
     {
-        Vector3 destination = new Vector3(parentTransform.position.x, parentTransform.position.y + 0.2f, parentTransform.position.z);
+
+        Vector3 destination = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
 
         LeanTween.value(text.gameObject, 1, 0, 1f).setOnUpdate(UpdateTextAlpha);
-        LeanTween.move(gameObject, destination, 1f).setEase(LeanTweenType.easeOutSine).setFrom(parentTransform.position);
+        LeanTween.move(gameObject, destination, 1f).setEase(LeanTweenType.easeOutSine);
 
         yield return new WaitForSeconds(1f);
 

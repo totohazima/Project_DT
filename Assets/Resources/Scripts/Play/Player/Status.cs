@@ -14,9 +14,9 @@ namespace StatusHelper
     {
         ATTACK_POWER = 0,
         ATTACK_RANGE = 1,
-        ATTACK_SPEED = 2,
+        ATTACK_SPEED_PERCENT = 2,
         MAX_HEALTH = 3,
-        MOVE_SPEED = 4,
+        MOVE_SPEED_PERCENT = 4,
         VIEW_RANGE = 5,
     }
 
@@ -32,18 +32,18 @@ namespace StatusHelper
     {
         public double attackPower = 0;
         public double attackRange = 0;
-        public double attackSpeed = 0;
+        public float attackSpeedPercent = 0;
         public double maxHealth = 0;
-        public double moveSpeed = 0;
+        public float moveSpeedPercent = 0;
         public double viewRange = 0;
 
         public void Reset()
         {
             attackPower = 0;
             attackRange = 0;
-            attackSpeed = 0;
+            attackSpeedPercent = 0;
             maxHealth = 0;
-            moveSpeed = 0;
+            moveSpeedPercent = 0;
             viewRange = 0;
         }
     }

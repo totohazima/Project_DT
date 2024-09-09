@@ -29,6 +29,7 @@ public class HunterCharacter : Character, IPointerClickHandler
 
         StartCoroutine(ObjectScan(scanDelay));
         //StartCoroutine(RandomMoveLocation());
+        StatCalculate();
         StatusUpdate();
         AnimationUpdate(); 
     }
@@ -182,7 +183,7 @@ public class HunterCharacter : Character, IPointerClickHandler
         }
 
         //스탯
-        aiPath.speed = (float)playStatus.MoveSpeed;
+        aiPath.speed = stateController.moveSpeed;
     }
 
     public override void AnimationUpdate()
@@ -190,9 +191,9 @@ public class HunterCharacter : Character, IPointerClickHandler
         ///이동 애니메이션
         if (isMove)  
         {
-            if (!anim.GetBool("Move"))
+            if (!anim.GetBool(AnimatorParams.MOVE))
             {
-                anim.SetBool("Move", true);
+                anim.SetBool(AnimatorParams.MOVE, true);
             }
 
             if(aiPath.steeringTarget.x < myObject.position.x) //왼쪽
@@ -206,40 +207,37 @@ public class HunterCharacter : Character, IPointerClickHandler
         }
         else
         {
-            if (anim.GetBool("Move"))
+            if (anim.GetBool(AnimatorParams.MOVE))
             {
-                anim.SetBool("Move", false);
+                anim.SetBool(AnimatorParams.MOVE, false);
             }
         }
 
         ///공격 애니메이션
-        attackTimer += Time.deltaTime;
-        if (isReadyToAttack && attackTimer >= playStatus.attackSpeed) 
+        if (isReadyToAttack) 
         {
-            if(!anim.GetBool("DevilAttack_01"))
+            if(!anim.GetBool(AnimatorParams.DEVILATTACK_1))
             {
-                anim.SetBool("DevilAttack_01", true);
-                attackTimer = 0f;
+                anim.SetBool(AnimatorParams.DEVILATTACK_1, true);
             }
         }
         else
         {
-            if (anim.GetBool("DevilAttack_01"))
+            if (anim.GetBool(AnimatorParams.DEVILATTACK_1))
             {
-                anim.SetBool("DevilAttack_01", false);
+                anim.SetBool(AnimatorParams.DEVILATTACK_1, false);
             }
         }
     }
 
     public override IEnumerator Death()
     {
-        if(!anim.GetBool("Dead"))
+        if(!anim.GetBool(AnimatorParams.DEATH))
         {
-            anim.SetBool("Dead", true);
+            anim.SetBool(AnimatorParams.DEATH, true);
         }
 
         myCollider.enabled = false;
-        attackTimer = 0f;
         isReadyToMove = false;
 
         yield return new WaitForSeconds(0.2f);

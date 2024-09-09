@@ -14,6 +14,8 @@ public class EnemyCharacter : Character
     [Header("ScanTime_Info")]
     private float scanDelay = 0.1f; //스캔이 재작동하는 시간
     private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
+    [Header("ItemDrop_Info")]
+    public int dropItemCount = 1; //아이템 총 드랍 개수
 
     public override void Update()
     {
@@ -106,16 +108,16 @@ public class EnemyCharacter : Character
         }
 
         //스탯
-        aiPath.speed = (float)playStatus.MoveSpeed;
+        aiPath.speed = (float)playStatus.MoveSpeedPercent;
     }
 
     public override void AnimationUpdate()
     {
         if (isMove)
         {
-            if (anim.GetBool("Move") == false)
+            if (anim.GetBool(AnimatorParams.MOVE) == false)
             {
-                anim.SetBool("Move", true);
+                anim.SetBool(AnimatorParams.MOVE, true);
             }
 
             if (aiPath.steeringTarget.x < myObject.position.x) //왼쪽
@@ -129,23 +131,25 @@ public class EnemyCharacter : Character
         }
         else
         {
-            if (anim.GetBool("Move") == true)
+            if (anim.GetBool(AnimatorParams.MOVE) == true)
             {
-                anim.SetBool("Move", false);
+                anim.SetBool(AnimatorParams.MOVE, false);
             }
         }
     }
 
     public override IEnumerator Death()
     {
-        if (!anim.GetBool("Dead"))
+        if (!anim.GetBool(AnimatorParams.DEATH))
         {
-            anim.SetBool("Dead", true);
+            anim.SetBool(AnimatorParams.DEATH, true);
         }
 
         myCollider.enabled = false;
-        attackTimer = 0f;
         isReadyToMove = false;
+
+        FieldActivity field = FieldManager.instance.fields[(int)myField];
+        field.monsters.Remove(this);
 
         yield return new WaitForSeconds(0.2f);
 
@@ -156,14 +160,27 @@ public class EnemyCharacter : Character
 
     private void ItemDrop()
     {
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/DropItem");
-        DropItem dropItem = prefab.GetComponent<DropItem>();
-        dropItem.moneyType = GameMoney.GameMoneyType.RUBY;
-        dropItem.dropCount = 1;
+        for (int i = 0; i < dropItemCount; i++)
+        {
+            GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/DropItem");
+            DropItem dropItem = prefab.GetComponent<DropItem>();
 
-        GameObject itemObject = PoolManager.instance.Spawn(dropItem.gameObject, myObject.position, Vector3.one, Quaternion.identity, true, myObject.parent);
+            dropItem.moneyType = GameMoney.GameMoneyType.RUBY;
+            dropItem.dropCount = 1;
+
+            Vector3 dropPos = GetRandomPositionInBox(myObject.position, dropRange);
+
+            GameObject itemObject = PoolManager.instance.Spawn(dropItem.gameObject, dropPos, Vector3.one, Quaternion.identity, true, myObject.parent);
+        }
     }
 
+    Vector3 GetRandomPositionInBox(Vector3 center, Vector3 range)
+    {
+        float randomX = Random.Range(center.x - range.x / 2f, center.x + range.x / 2f);
+        float randomY = Random.Range(center.y - range.y / 2f, center.y + range.y / 2f);
+
+        return new Vector3(randomX, randomY, center.z);
+    }
     private void Disappear()
     {
         PoolManager.instance.Release(gameObject);

@@ -16,7 +16,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     public GameObject joyStick;
     public GameObject stick;
     public bool isMove;
-    public List<PlayerCharacter> characterList = new List<PlayerCharacter>();
+    //public List<PlayerCharacter> characterList = new List<PlayerCharacter>();
     [SerializeField] private float radius = 1;
     [SerializeField] private RectTransform stickRect;
     private RectTransform joyTrans;

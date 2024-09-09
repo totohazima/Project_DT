@@ -63,7 +63,9 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
             prefab[i].myField = fieldActivity.controlField;
             GameObject monster = PoolManager.instance.Spawn(prefab[i].gameObject, spawnPos[i], Vector3.one, Quaternion.identity, true, spawnPools);
             monster.transform.position = spawnPos[i];
-            fieldActivity.monsters.Add(prefab[i]);
+
+            EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
+            fieldActivity.monsters.Add(monsterCharacter);
         }
     }
 

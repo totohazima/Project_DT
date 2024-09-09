@@ -11,6 +11,10 @@ public class DropItem : FieldObject, IPointerClickHandler
     public GameMoney.GameMoneyType moneyType;
     public int dropCount = 1;
 
+    void OnEnable()
+    {
+        Debug.Log("»ý¼º");
+    }
     public void OnPointerClick(PointerEventData eventData)
     {
         GetItem();    
@@ -31,19 +35,15 @@ public class DropItem : FieldObject, IPointerClickHandler
         }
 
         ShowFloatingText();
-        
-        Debug.Log(moneyType.ToString() + dropCount + "Reward");
         Disappear();
     }
 
     protected void ShowFloatingText()
     {
         GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/ItemRewardTxt");
-        ItemRewardText floatText = prefab.GetComponent<ItemRewardText>();
-        floatText.parentTransform = myObject;
+        GameObject text = PoolManager.instance.Spawn(prefab, myObject.position, Vector3.one, Quaternion.identity, true, myObject.parent);
+        ItemRewardText floatText = text.GetComponent<ItemRewardText>();
         floatText.TextSetting(moneyType, dropCount);
-
-        GameObject text = PoolManager.instance.Spawn(floatText.gameObject, myObject.position, Vector3.one, Quaternion.identity, true, myObject.parent);
     }
     protected void Disappear()
     {

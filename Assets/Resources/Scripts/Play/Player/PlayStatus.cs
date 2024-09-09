@@ -19,10 +19,10 @@ namespace StatusHelper
             get { return attackRange; }
             set { attackRange = value; }
         }
-        public double AttackSpeed
+        public float AttackSpeedPercent
         {
-            get { return attackSpeed; }
-            set { attackSpeed = value; }
+            get { return attackSpeedPercent; }
+            set { attackSpeedPercent = value; }
         }
         public double MaxHealth
         {
@@ -34,10 +34,10 @@ namespace StatusHelper
             get { return curHealth; }
             set { curHealth = value; }
         }
-        public double MoveSpeed
+        public float MoveSpeedPercent
         {
-            get { return moveSpeed; }
-            set { moveSpeed = value; }
+            get { return moveSpeedPercent; }
+            set { moveSpeedPercent = value; }
         }
 
         public double VIewRange
