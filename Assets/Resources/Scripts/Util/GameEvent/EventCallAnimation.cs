@@ -25,10 +25,10 @@ namespace GameEvent
             //    customEvent.Invoke();
             //}
             //gameEvent.Raise(myKey);
-            StartCoroutine(AttackObject_Create());
+            AttackObject_Create();
         }
 
-        private IEnumerator AttackObject_Create()
+        private void AttackObject_Create()
         {
             //GameObject Prefab = Resources.Load<GameObject>("Prefabs/AttackObject/Hero_Attack_Devil");
 
@@ -43,10 +43,6 @@ namespace GameEvent
             }
 
             attackObject.Recycle(character, target);
-
-            yield return new WaitForSeconds(0.5f);
-
-            PoolManager.instance.Release(attackPrefab.gameObject);
         }
     }
 }

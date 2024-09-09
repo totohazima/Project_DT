@@ -120,7 +120,7 @@ public class AttackCollider : MonoBehaviour
 
         if (isSurelyDeath == false)
         {
-            //OnHitAction(hittedCharacter);
+            OnHitAction(onHItCharacter);
         }
 
         if (usePush == true)
@@ -131,12 +131,14 @@ public class AttackCollider : MonoBehaviour
             // 일반 몬스터가 아닌 몬스터는 제외
             StartCoroutine(onHItCharacter.Death());
         }
-        double damage = owner.playStatus.attackPower + status.attackPower;
+        double damage = attackDamage;
         onHItCharacter.OnHit(damage);
 
         if (HitCount != -1)
             runHitCount--;
         if (runHitCount <= 0 && HitCount != -1)
+            Disappear();
+        if (isSingleHit && HitCount == -1)
             Disappear();
     }
 
@@ -144,7 +146,6 @@ public class AttackCollider : MonoBehaviour
     {
         DamageCalculate(hittedCharacter);
 
-        hittedCharacter.OnHit(attackDamage);
     }
 
     protected void DamageCalculate(Character hittedCharacter)
