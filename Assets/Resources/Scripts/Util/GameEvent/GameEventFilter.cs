@@ -22,11 +22,11 @@ namespace GameEvent
          * *
          */
 
-        public void Raise(GameObject _instance)
-        {
-            int myKey = _instance.GetInstanceID();
-            Raise(myKey);
-        }
+        //public void Raise(GameObject _instance)
+        //{
+        //    int myKey = _instance.GetInstanceID();
+        //    Raise(myKey);
+        //}
 
         public void Raise(int _instanceID)
         {

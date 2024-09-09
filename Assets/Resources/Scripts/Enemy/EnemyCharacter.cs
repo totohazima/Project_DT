@@ -1,8 +1,10 @@
+using GameEvent;
 using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyCharacter : Character
 {
@@ -16,6 +18,11 @@ public class EnemyCharacter : Character
     private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
     [Header("ItemDrop_Info")]
     public int dropItemCount = 1; //아이템 총 드랍 개수
+    [Header("GameEvent")]
+    public EventCallAnimation eventCallAnimation = null;
+    public GameObject attackPrefab;
+    public GameEventFilter attackEvent = null;
+    UnityEvent eventListener = null;
 
     public override void Update()
     {
@@ -23,6 +30,13 @@ public class EnemyCharacter : Character
         StartCoroutine(ObjectScan(scanDelay));
         StatusUpdate();
         AnimationUpdate();
+
+        if (attackEvent != null)
+        {
+            eventListener = new UnityEvent();
+            attackEvent.RegisterListener(gameObject, eventListener);
+            eventCallAnimation.callPrefab = attackPrefab;
+        }
     }
     private void RandomMoveLocation()
     {
@@ -36,7 +50,7 @@ public class EnemyCharacter : Character
 
             yield return new WaitForSeconds(scanDelay);
 
-            Collider[] detectedColls = Physics.OverlapSphere(myObject.position, (float)playStatus.viewRange, 1 << 6);
+            Collider[] detectedColls = Physics.OverlapSphere(myObject.position, (float)playStatus.viewRange, 1 << 8);
             float shortestDistance = Mathf.Infinity;
             Transform nearestTarget = null;
 
@@ -60,7 +74,7 @@ public class EnemyCharacter : Character
             if (nearestTarget != null)
             {
                 targetUnit = nearestTarget;
-
+                AttackRangeScan();
             }
             else
             {
@@ -70,6 +84,21 @@ public class EnemyCharacter : Character
             isScanning = false;
         }
     }
+
+    private void AttackRangeScan()
+    {
+        float distance = Vector3.Distance(myObject.position, targetUnit.position);
+
+        if (distance <= playStatus.attackRange)
+        {
+            isReadyToAttack = true;
+        }
+        else
+        {
+            isReadyToAttack = false;
+        }
+    }
+
     public override void StatusUpdate()
     {
         //상태
@@ -92,6 +121,16 @@ public class EnemyCharacter : Character
             }
         }
 
+        ///공격 상태
+        if (isReadyToAttack)
+        {
+            isMove = false;
+        }
+        else
+        {
+            isMove = true;
+        }
+
         if (isMove)
         {
             aiPath.canMove = true;
@@ -108,7 +147,7 @@ public class EnemyCharacter : Character
         }
 
         //스탯
-        aiPath.speed = (float)playStatus.MoveSpeedPercent;
+        aiPath.speed = stateController.moveSpeed;
     }
 
     public override void AnimationUpdate()
@@ -134,6 +173,22 @@ public class EnemyCharacter : Character
             if (anim.GetBool(AnimatorParams.MOVE) == true)
             {
                 anim.SetBool(AnimatorParams.MOVE, false);
+            }
+        }
+
+        ///공격 애니메이션
+        if (isReadyToAttack)
+        {
+            if (!anim.GetBool(AnimatorParams.ATTACK_1))
+            {
+                anim.SetBool(AnimatorParams.ATTACK_1, true);
+            }
+        }
+        else
+        {
+            if (anim.GetBool(AnimatorParams.ATTACK_1))
+            {
+                anim.SetBool(AnimatorParams.ATTACK_1, false);
             }
         }
     }

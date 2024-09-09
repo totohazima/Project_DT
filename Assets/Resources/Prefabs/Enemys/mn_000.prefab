@@ -140,7 +140,6 @@ MonoBehaviour:
   moveSpeed: 1
   defaultAttackSpeed: 1
   attackSpeed: 1
-  attackDelay: 1
 --- !u!1 &42263460339358623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,10 +1802,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5768949269878608820}
   - component: {fileID: 7622356118674132421}
-  - component: {fileID: 2085008434351557534}
   - component: {fileID: 7111881440493040907}
   - component: {fileID: 454615847765364440}
   - component: {fileID: 162608275134673331}
+  - component: {fileID: 2085008434351557534}
   m_Layer: 7
   m_Name: mn_000
   m_TagString: Player
@@ -1859,52 +1858,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2085008434351557534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5765980316008229016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 477b2648ad59b7148be8e4a5df6c8a24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myObject: {fileID: 5768949269878608820}
-  viewObject: {fileID: 5769107067978104286}
-  rigid: {fileID: 7622356118674132421}
-  myCollider: {fileID: 1169640046}
-  whiteFlash: {fileID: 8149681236871064764}
-  stateController: {fileID: 2085495512249751346}
-  isInvincible: 0
-  isDisable: 0
-  isReadyToMove: 0
-  isReadyToAttack: 0
-  isMove: 0
-  isAttacking: 0
-  isDead: 0
-  attackTimer: 0
-  myField: 0
-  playStatus:
-    attackPower: 1
-    attackRange: 1
-    attackSpeedPercent: 0
-    maxHealth: 5
-    moveSpeedPercent: 0
-    viewRange: 2
-    curHealth: 0
-  desirePlayStatus:
-    hunger: 100
-    sleep: 100
-    stress: 100
-  anim: {fileID: 7880283088654874363}
-  aiPath: {fileID: 454615847765364440}
-  dropRange: {x: 0.7, y: 0.7, z: 0.7}
-  targetField: {fileID: 0}
-  targetUnit: {fileID: 0}
-  targetLocation: {x: 0, y: 0, z: 0}
-  dropItemCount: 3
 --- !u!114 &7111881440493040907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1984,6 +1937,54 @@ MonoBehaviour:
   bezierTangentLength: 0.4
   offset: 0.2
   factor: 0.1
+--- !u!114 &2085008434351557534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5765980316008229016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 477b2648ad59b7148be8e4a5df6c8a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myObject: {fileID: 5768949269878608820}
+  viewObject: {fileID: 5769107067978104286}
+  rigid: {fileID: 7622356118674132421}
+  myCollider: {fileID: 1169640046}
+  whiteFlash: {fileID: 8149681236871064764}
+  stateController: {fileID: 2085495512249751346}
+  isInvincible: 0
+  isDisable: 0
+  isReadyToMove: 0
+  isReadyToAttack: 0
+  isMove: 0
+  isAttacking: 0
+  isDead: 0
+  myField: 2
+  playStatus:
+    attackPower: 1
+    attackRange: 0.45
+    attackSpeedPercent: 1
+    maxHealth: 5
+    moveSpeedPercent: 1
+    viewRange: 2
+    curHealth: 0
+  desirePlayStatus:
+    hunger: 100
+    sleep: 100
+    stress: 100
+  anim: {fileID: 7880283088654874363}
+  aiPath: {fileID: 454615847765364440}
+  dropRange: {x: 0.7, y: 0.7, z: 0.7}
+  targetField: {fileID: 0}
+  targetUnit: {fileID: 0}
+  targetLocation: {x: 0, y: 0, z: 0}
+  dropItemCount: 3
+  eventCallAnimation: {fileID: 3744511214837868610}
+  attackPrefab: {fileID: 1916831241361388, guid: cb7928c1d8694d74588ebb28f5c7e60f, type: 3}
+  attackEvent: {fileID: 11400000, guid: 58680498672b6a44c826a3d8b999b500, type: 2}
 --- !u!1 &5766147238978970386
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,6 +1996,7 @@ GameObject:
   - component: {fileID: 5769107067978104286}
   - component: {fileID: 7880283088654874363}
   - component: {fileID: 5975064817047661008}
+  - component: {fileID: 3744511214837868610}
   m_Layer: 7
   m_Name: Object
   m_TagString: Untagged
@@ -2053,6 +2055,25 @@ SortingGroup:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &3744511214837868610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5766147238978970386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1b702c32740ea4990078783181aa96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 2085008434351557534}
+  callPrefab: {fileID: 0}
+  keyObject: {fileID: 5766147238978970386}
+  customEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  firePosition: {fileID: 1443793873707475919}
 --- !u!1 &5766283027536022878
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ namespace GameEvent
     public class EventCallAnimation : MonoBehaviour
     {
         public Character character;
+        public GameObject callPrefab;
         public GameObject keyObject = null;
         public UnityEvent customEvent;
         public Transform firePosition;
@@ -26,12 +27,12 @@ namespace GameEvent
             //gameEvent.Raise(myKey);
             StartCoroutine(AttackObject_Create());
         }
-                                                                                                                  
+
         private IEnumerator AttackObject_Create()
         {
-            GameObject Prefab = Resources.Load<GameObject>("Prefabs/AttackObject/Hero_Attack_Devil");
+            //GameObject Prefab = Resources.Load<GameObject>("Prefabs/AttackObject/Hero_Attack_Devil");
 
-            GameObject attackPrefab = PoolManager.instance.Spawn(Prefab, firePosition.position, Vector3.one, Quaternion.identity, true, firePosition);
+            GameObject attackPrefab = PoolManager.instance.Spawn(callPrefab, firePosition.position, Vector3.one, Quaternion.identity, true, firePosition);
             attackPrefab.transform.position = firePosition.position;
 
             AttackObject attackObject = attackPrefab.GetComponent<AttackObject>();

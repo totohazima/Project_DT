@@ -1,8 +1,10 @@
+using GameEvent;
 using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class HunterCharacter : Character, IPointerClickHandler
@@ -18,8 +20,11 @@ public class HunterCharacter : Character, IPointerClickHandler
     private float scanDelay = 0.1f; //스캔이 재작동하는 시간
     private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
     protected bool onClickProcess; //유닛 클릭 여부 체크 (연속 클릭 방지용)
-
-
+    [Header("GameEvent")]
+    public EventCallAnimation eventCallAnimation = null;
+    public GameObject attackPrefab;
+    public GameEventFilter attackEvent = null;
+    UnityEvent eventListener = null;
     public override void Update()
     {
         if(isDisable)
@@ -31,7 +36,14 @@ public class HunterCharacter : Character, IPointerClickHandler
         //StartCoroutine(RandomMoveLocation());
         StatCalculate();
         StatusUpdate();
-        AnimationUpdate(); 
+        AnimationUpdate();
+        
+        if(attackEvent != null)
+        {
+            eventListener = new UnityEvent();
+            attackEvent.RegisterListener(gameObject, eventListener);
+            eventCallAnimation.callPrefab = attackPrefab;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
