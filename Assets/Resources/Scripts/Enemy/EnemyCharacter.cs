@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
+using static Pathfinding.Examples.Interactable.TeleportAgentOnLinkAction;
 
 public class EnemyCharacter : Character
 {
     [Header("RandomMove_Info")]
+    private bool onRandomMove = false;
     //private float randomMoveRadius = 2f; //이 만큼의 거리내로 랜덤 이동
     private float randomMoveTime; //이 시간 동안 타겟이 잡히지 않으면 일정 거리 내 위치로 랜덤 이동
     private float randomMoveTime_Max = 5f;
@@ -24,10 +26,26 @@ public class EnemyCharacter : Character
     public GameEventFilter attackEvent = null;
     UnityEvent eventListener = null;
 
+    public override void ReCycle()
+    {
+        isReadyToAttack = false;
+        isAttacking = false;
+        isReadyToMove = false;
+        isMove = false;
+        onRandomMove = false;
+        isScanning = false;
+
+        targetField = null;
+        targetUnit = null;
+        targetLocation = Vector3.zero;
+
+        StopAllCoroutines();
+    }
     public override void Update()
     {
-        RandomMoveLocation();
+        StartCoroutine(RandomMoveLocation());
         StartCoroutine(ObjectScan(scanDelay));
+        StatCalculate();
         StatusUpdate();
         AnimationUpdate();
 
@@ -38,9 +56,30 @@ public class EnemyCharacter : Character
             eventCallAnimation.callPrefab = attackPrefab;
         }
     }
-    private void RandomMoveLocation()
+    private IEnumerator RandomMoveLocation()
     {
-        
+        if (!onRandomMove)
+        {
+            onRandomMove = true;
+            randomMoveTime = Random.Range(randomMoveTime_Min, randomMoveTime_Max);
+
+            yield return new WaitForSeconds(randomMoveTime);
+
+            Vector3 boxSize = FieldManager.instance.fields[(int)myField].boxSize;
+            // 오버랩 박스 내에서 무작위 위치 생성
+            Vector3 randomPositionWithinBox = new Vector3(
+                Random.Range(-boxSize.x / 2, boxSize.x / 2),
+                Random.Range(-boxSize.y / 2, boxSize.y / 2),
+                Random.Range(-boxSize.z / 2, boxSize.z / 2)
+            );
+
+            // 현재 위치에 대해 상대적인 위치를 적용하여 이동
+            FieldActivity controlField = FieldManager.instance.fields[(int)myField];
+            targetLocation = controlField.getTransform.position + randomPositionWithinBox;
+
+            onRandomMove = false;  // 이동 종료
+
+        }
     }
     public override IEnumerator ObjectScan(float scanDelay)
     {
@@ -126,10 +165,6 @@ public class EnemyCharacter : Character
         {
             isMove = false;
         }
-        else
-        {
-            isMove = true;
-        }
 
         if (isMove)
         {
@@ -201,7 +236,6 @@ public class EnemyCharacter : Character
         }
 
         myCollider.enabled = false;
-        isReadyToMove = false;
 
         FieldActivity field = FieldManager.instance.fields[(int)myField];
         field.monsters.Remove(this);
@@ -209,25 +243,31 @@ public class EnemyCharacter : Character
         yield return new WaitForSeconds(0.2f);
 
         myCollider.enabled = true;
+
         ItemDrop();
+        ReCycle();
         Disappear();
     }
 
-    private void ItemDrop()
+    protected void ItemDrop()
     {
         for (int i = 0; i < dropItemCount; i++)
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/DropItem");
-            DropItem dropItem = prefab.GetComponent<DropItem>();
+           
+            GameObject itemObject = PoolManager.instance.Spawn(prefab, myObject.position, Vector3.one, Quaternion.identity, true, myObject.parent);
+
+            DropItem dropItem = itemObject.GetComponent<DropItem>();
 
             dropItem.moneyType = GameMoney.GameMoneyType.RUBY;
             dropItem.dropCount = 1;
 
             Vector3 dropPos = GetRandomPositionInBox(myObject.position, dropRange);
+            dropItem.Drop_Animation(dropPos);
 
-            GameObject itemObject = PoolManager.instance.Spawn(dropItem.gameObject, dropPos, Vector3.one, Quaternion.identity, true, myObject.parent);
         }
     }
+
 
     Vector3 GetRandomPositionInBox(Vector3 center, Vector3 range)
     {

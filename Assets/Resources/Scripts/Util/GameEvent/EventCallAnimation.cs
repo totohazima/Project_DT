@@ -27,6 +27,10 @@ namespace GameEvent
             //gameEvent.Raise(myKey);
             AttackObject_Create();
         }
+        public void SoundFxPlay(GameEventFilter gameEvent)
+        {
+            
+        }
 
         private void AttackObject_Create()
         {

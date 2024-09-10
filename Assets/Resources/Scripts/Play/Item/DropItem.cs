@@ -10,14 +10,24 @@ public class DropItem : FieldObject, IPointerClickHandler
     [Header("ItemInfo")]
     public GameMoney.GameMoneyType moneyType;
     public int dropCount = 1;
+    private bool isGetItem = false; //true인 경우 습득 가능
 
-    void OnEnable()
+    public void Drop_Animation(Vector3 dropPos)
     {
-        Debug.Log("생성");
+        LTDescr tween = LeanTween.move(gameObject, dropPos, 0.3f).setEase(LeanTweenType.easeInSine);
+        tween.setOnComplete(End_Animation);
+    }
+
+    void End_Animation()
+    {
+        isGetItem = true;
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        GetItem();    
+        if (isGetItem)
+        {
+            GetItem();
+        }
     }
 
     protected void GetItem()
@@ -47,6 +57,7 @@ public class DropItem : FieldObject, IPointerClickHandler
     }
     protected void Disappear()
     {
+        isGetItem = false;
         PoolManager.instance.Release(gameObject);    
     }
 }

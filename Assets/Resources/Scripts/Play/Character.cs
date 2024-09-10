@@ -39,7 +39,9 @@ public class Character : FieldObject
         playStatus.CurHealth = playStatus.MaxHealth;
         isReadyToMove = true;
     }
-
+    public virtual void ReCycle()
+    {
+    }
     public virtual void Update()
     {       
     }
@@ -102,7 +104,6 @@ public class Character : FieldObject
         
         stateController.SetMoveSpeedPercent(playStatus.moveSpeedPercent);
         stateController.SetAttackSpeedPercent(playStatus.attackSpeedPercent);
-
     }
 
     /// <summary>

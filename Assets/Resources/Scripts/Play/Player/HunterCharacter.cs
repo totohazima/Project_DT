@@ -25,6 +25,23 @@ public class HunterCharacter : Character, IPointerClickHandler
     public GameObject attackPrefab;
     public GameEventFilter attackEvent = null;
     UnityEvent eventListener = null;
+
+    public override void ReCycle()
+    {
+        isReadyToAttack = false;
+        isAttacking = false;
+        isReadyToMove = false;
+        isMove = false;
+        onRandomMove = false;
+        isFieldEnter = false;
+        isScanning = false;
+
+        targetField = null;
+        targetUnit = null;
+        targetLocation = Vector3.zero;
+
+        StopAllCoroutines();
+    }
     public override void Update()
     {
         if(isDisable)
@@ -168,10 +185,6 @@ public class HunterCharacter : Character, IPointerClickHandler
         {
             isMove = false;
         }
-        else
-        {
-            isMove = true;
-        }
          
         ///이동 상태
         if (isMove)
@@ -256,7 +269,7 @@ public class HunterCharacter : Character, IPointerClickHandler
 
         myCollider.enabled = true;
 
-        PoolManager.instance.Release(gameObject);
+        //PoolManager.instance.Release(gameObject);
     }
 
     /// <summary>

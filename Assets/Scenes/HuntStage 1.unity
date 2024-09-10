@@ -63646,6 +63646,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2498304257802359613, guid: 9d47046ebb7c2ff4f97923870bfc56e5, type: 3}
+      propertyPath: isInvincible
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3180573088566432487, guid: 9d47046ebb7c2ff4f97923870bfc56e5, type: 3}
       propertyPath: m_Name
       value: Hero
@@ -63689,6 +63693,10 @@ PrefabInstance:
     - target: {fileID: 3181835023773264331, guid: 9d47046ebb7c2ff4f97923870bfc56e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8722014925320892153, guid: 9d47046ebb7c2ff4f97923870bfc56e5, type: 3}
+      propertyPath: waitSecond
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
