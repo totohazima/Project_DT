@@ -5,13 +5,9 @@ using FieldHelper;
 using Unity.VisualScripting;
 public class TestCharacterAlgorithm_Step2 : MonoBehaviour
 {
-    public HunterCharacter character;
+    public HeroCharacter character;
     public float waitSecond = 30f;
     [SerializeField] List<EnemyCharacter> enemies = new List<EnemyCharacter>();
-    private void Awake()
-    {
-        character = GetComponent<HunterCharacter>();
-    }
 
     private void Start()
     {
@@ -122,9 +118,8 @@ public class TestCharacterAlgorithm_Step2 : MonoBehaviour
         {
             if (character.myField == FieldMap.Field.VILLAGE)
             {
-                FieldManager.instance.AllFieldSpawn();
-
                 yield return new WaitForSeconds(waitSecond);
+                FieldManager.instance.AllFieldSpawn();
                 StartCoroutine(Step1_GoDesert());
                 yield break;
             }

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bcb6c0d53d64c240b3e97c70928787a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 2498304257802359613}
+  character: {fileID: 4209376665973604264}
   animator: {fileID: 3180159873120409964}
   defaultMoveSpeed: 1
   moveSpeed: 1
@@ -79442,7 +79442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1b702c32740ea4990078783181aa96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 2498304257802359613}
+  character: {fileID: 4209376665973604264}
   callPrefab: {fileID: 0}
   keyObject: {fileID: 3180573088566432487}
   customEvent:
@@ -79515,7 +79515,7 @@ GameObject:
   - component: {fileID: 6153731941899227343}
   - component: {fileID: 1991811962535137311}
   - component: {fileID: 2329373645779255952}
-  - component: {fileID: 2498304257802359613}
+  - component: {fileID: 4209376665973604264}
   - component: {fileID: 8722014925320892153}
   m_Layer: 8
   m_Name: Hero
@@ -79648,7 +79648,7 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   repathRateCompatibility: NaN
   canSearchCompability: 0
---- !u!114 &2498304257802359613
+--- !u!114 &4209376665973604264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79657,7 +79657,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3180573088566432487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec01f7c159c2bd144a45534c93d2afac, type: 3}
+  m_Script: {fileID: 11500000, guid: 46b601950d167794398068ce6d52ac4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myObject: {fileID: 3181835023773264331}
@@ -79666,7 +79666,7 @@ MonoBehaviour:
   myCollider: {fileID: 1145035902}
   whiteFlash: {fileID: 0}
   stateController: {fileID: 2260746178445977647}
-  isInvincible: 0
+  isInvincible: 1
   isDisable: 0
   isReadyToMove: 0
   isReadyToAttack: 0
@@ -79679,7 +79679,7 @@ MonoBehaviour:
     attackRange: 0.45
     attackSpeedPercent: 1
     maxHealth: 50
-    moveSpeedPercent: 2
+    moveSpeedPercent: 1.5
     viewRange: 5
     curHealth: 0
   desirePlayStatus:
@@ -79687,7 +79687,7 @@ MonoBehaviour:
     sleep: 100
     stress: 100
   anim: {fileID: 3180159873120409964}
-  aiPath: {fileID: 2329373645779255952}
+  aiLerp: {fileID: 2329373645779255952}
   dropRange: {x: 1, y: 1, z: 1}
   targetField: {fileID: 0}
   targetUnit: {fileID: 0}
@@ -79696,7 +79696,7 @@ MonoBehaviour:
   onRandomMove: 0
   eventCallAnimation: {fileID: 1203327867357678589}
   attackPrefab: {fileID: 1916831241361388, guid: 11063ed69985f27448f832ee1123eaad, type: 3}
-  attackEvent: {fileID: 11400000, guid: 8b3b8950b4ff4434785f35230a74454f, type: 2}
+  attackEvent: {fileID: 11400000, guid: 58680498672b6a44c826a3d8b999b500, type: 2}
 --- !u!114 &8722014925320892153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79709,7 +79709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db79603ae6557d249947683ed0684c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: {fileID: 0}
+  character: {fileID: 4209376665973604264}
   waitSecond: 30
   enemies: []
 --- !u!1 &3180633415963608375
@@ -85572,7 +85572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   getTransform: {fileID: 0}
-  character: {fileID: 2498304257802359613}
+  character: {fileID: 4209376665973604264}
   hpBar: {fileID: 152157823623445539}
   shieldBar: {fileID: 0}
 --- !u!210 &7353579511539117581

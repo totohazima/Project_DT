@@ -115,7 +115,7 @@ public class AttackCollider : MonoBehaviour
         if (isSingleHit == true && target != null && target.Equals(onHItCharacter) == false)
             return;
 
-        if (false == (onHItCharacter is HunterCharacter))
+        if (false == (onHItCharacter is HeroCharacter))
             //SoundManager.Instance.SFXPlay(SFXPack);
 
         if (isSurelyDeath == false)

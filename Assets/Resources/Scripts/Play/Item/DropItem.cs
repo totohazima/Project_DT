@@ -14,14 +14,24 @@ public class DropItem : FieldObject, IPointerClickHandler
 
     public void Drop_Animation(Vector3 dropPos)
     {
-        LTDescr tween = LeanTween.move(gameObject, dropPos, 0.3f).setEase(LeanTweenType.easeInSine);
-        tween.setOnComplete(End_Animation);
+        float delay = 0.2f;
+        Vector3 bouncePos = new Vector3(dropPos.x, dropPos.y + 0.3f, dropPos.z);
+
+        LTDescr tween = LeanTween.move(gameObject, bouncePos, delay / 2).setEase(LeanTweenType.easeOutQuart);
+        tween.setOnComplete(DropDown_Animation);
+
+        void DropDown_Animation()
+        {
+            LTDescr tween = LeanTween.move(gameObject, dropPos, delay).setEase(LeanTweenType.easeInSine).setFrom(bouncePos);
+            tween.setOnComplete(End_Animation);
+        }
+        void End_Animation()
+        {
+            isGetItem = true;
+        }
     }
 
-    void End_Animation()
-    {
-        isGetItem = true;
-    }
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         if (isGetItem)
@@ -52,6 +62,7 @@ public class DropItem : FieldObject, IPointerClickHandler
     {
         GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/ItemRewardTxt");
         GameObject text = PoolManager.instance.Spawn(prefab, myObject.position, Vector3.one, Quaternion.identity, true, myObject.parent);
+
         ItemRewardText floatText = text.GetComponent<ItemRewardText>();
         floatText.TextSetting(moneyType, dropCount);
     }

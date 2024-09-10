@@ -8,7 +8,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 {
     public Transform getTransform;
     public FieldMap.Field controlField;
-    public List<HunterCharacter> inCharacters = new List<HunterCharacter>();
+    public List<HeroCharacter> inCharacters = new List<HeroCharacter>();
     public LayerMask scanLayer;
     private bool onScanning = false;
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);
@@ -42,7 +42,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         // 겹친 콜라이더에 대해 처리
         foreach (Collider hitCollider in hitColliders)
         {
-            HunterCharacter hunter = hitCollider.transform.GetComponentInParent<HunterCharacter>();
+            HeroCharacter hunter = hitCollider.transform.GetComponentInParent<HeroCharacter>();
             if (hunter != null)
             {
                 inCharacters.Add(hunter);
@@ -53,7 +53,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         yield return new WaitForSeconds(0.5f);
         onScanning = false;
     }
-    protected void CharacterFieldSetting(HunterCharacter character)
+    protected void CharacterFieldSetting(HeroCharacter character)
     {
         if(character.myField != controlField)
         {

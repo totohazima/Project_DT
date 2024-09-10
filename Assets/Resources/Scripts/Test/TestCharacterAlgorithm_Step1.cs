@@ -4,7 +4,7 @@ using UnityEngine;
 using FieldHelper;
 public class TestCharacterAlgorithm_Step1 : MonoBehaviour
 {
-    public HunterCharacter character;
+    public HeroCharacter character;
 
     public bool isDesert_End = false;
     public bool isSnow_End = false;

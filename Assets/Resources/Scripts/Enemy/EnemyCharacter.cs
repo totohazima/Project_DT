@@ -144,7 +144,7 @@ public class EnemyCharacter : Character
         if (targetUnit != null)
         {
             isMove = true;
-            aiPath.destination = targetUnit.position;
+            aiLerp.destination = targetUnit.position;
         }
         else
         {
@@ -152,7 +152,7 @@ public class EnemyCharacter : Character
             if (targetLocation != Vector3.zero)
             {
                 isMove = true;
-                aiPath.destination = targetLocation;
+                aiLerp.destination = targetLocation;
             }
             else
             {
@@ -168,21 +168,21 @@ public class EnemyCharacter : Character
 
         if (isMove)
         {
-            aiPath.canMove = true;
+            aiLerp.canMove = true;
 
             //움직이는 중 목적지에 도달하거나 최대 경로에 도달한 경우
-            if (aiPath.reachedDestination || aiPath.reachedEndOfPath)
+            if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath)
             {
                 isMove = false;
             }
         }
         else
         {
-            aiPath.canMove = false;
+            aiLerp.canMove = false;
         }
 
         //스탯
-        aiPath.speed = stateController.moveSpeed;
+        aiLerp.speed = stateController.moveSpeed;
     }
 
     public override void AnimationUpdate()
@@ -194,7 +194,7 @@ public class EnemyCharacter : Character
                 anim.SetBool(AnimatorParams.MOVE, true);
             }
 
-            if (aiPath.steeringTarget.x < myObject.position.x) //왼쪽
+            if (aiLerp.steeringTarget.x < myObject.position.x) //왼쪽
             {
                 viewObject.rotation = Quaternion.Euler(0, 180, 0);
             }

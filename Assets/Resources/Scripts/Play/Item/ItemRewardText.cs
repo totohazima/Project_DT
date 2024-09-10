@@ -16,16 +16,16 @@ public class ItemRewardText : FloatingText
         switch(type)
         {
             case GameMoney.GameMoneyType.GOLD:
-                typeTxt = "°ñµå";
+                typeTxt = TextParams.GOLD;
                 break;
             case GameMoney.GameMoneyType.RUBY:
-                typeTxt = "·çºñ";
+                typeTxt = TextParams.RUBY;
                 break;
         }
 
         string applyText = typeTxt + " +" + count;
         text.text = applyText;
-
+        
         StartCoroutine(Text_Animation());
     }
 
@@ -33,9 +33,10 @@ public class ItemRewardText : FloatingText
     {
 
         Vector3 destination = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
+        Vector3 fromPos = new Vector3(destination.x, destination.y - 0.2f, destination.z);
 
         LeanTween.value(text.gameObject, 1, 0, 1f).setOnUpdate(UpdateTextAlpha);
-        LeanTween.move(gameObject, destination, 1f).setEase(LeanTweenType.easeOutSine);
+        LeanTween.move(gameObject, destination, 1f).setEase(LeanTweenType.easeOutSine).setFrom(fromPos);
 
         yield return new WaitForSeconds(1f);
 

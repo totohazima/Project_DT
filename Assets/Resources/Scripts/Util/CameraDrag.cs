@@ -1,35 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 public class CameraDrag : MonoBehaviour
 {
-    public Tilemap tilemap;
-    public HunterCharacter trackingTarget;
+    public HeroCharacter trackingTarget;
+
+    public bool isCameraMove; // 현재 조작을 하고있는지 확인을 위한 변수
+    public bool isDontMove; //UI가 떠 있을 때 움직이지 않게
+    public bool isCrossLimitLine; //true일때 카메라가 맵 바깥으로 움직일 수 있음
+    public bool isTrackingTarget; //true일때 클릭한 유닛을 따라감
+    [SerializeField] private bool onStopTracking = false;
+
     private new Camera camera;
     private Transform cameraTransform;
     private const float DirectionForceReduceRate = 0.935f; // 감속비율
     private const float DirectionForceMin = 0.001f; // 설정치 이하일 경우 움직임을 멈춤
     private Vector3 startPosition;  // 입력 시작 위치를 기억
     private Vector3 directionForce; // 조작을 멈췄을때 서서히 감속하면서 이동 시키기
+
+    [Header("CameraViewBox")]
+    public Vector3 boxSize = new Vector3(1f, 1f, 1f);
     private float xMin, xMax, yMin, yMax; //카메라 이동을 제한하는 4방향 좌표
-    public bool isCameraMove; // 현재 조작을 하고있는지 확인을 위한 변수
-    public bool isDontMove; //UI가 떠 있을 때 움직이지 않게
-    public bool isCrossLimitLine; //true일때 카메라가 맵 바깥으로 움직일 수 있음
-    public bool isTrackingTarget; //true일때 클릭한 유닛을 따라감
-    private bool onStopTracking = false;
+    [SerializeField] private float viewSize_Default = 0f;
+    [SerializeField] private float viewSize_Tracking = 0f;
     
-    private void Awake()
+    void Awake()
     {
         camera = Camera.main;
         cameraTransform = camera.transform;
     }
-    private void Update()
+    void Update()
     {
         StatusUpdate();
 
@@ -60,30 +62,23 @@ public class CameraDrag : MonoBehaviour
         if (trackingTarget != null)
         {
             isTrackingTarget = true;
-            Camera.main.orthographicSize = 2f;
+            Camera.main.orthographicSize = viewSize_Tracking;
         }
         else
         {
             isTrackingTarget = false;
-            Camera.main.orthographicSize = 3f;
+            Camera.main.orthographicSize = viewSize_Default;
         }
     }
-    private void LimitPositionSet()
+    protected void LimitPositionSet()
     {
-        if(tilemap == null)
-        {
-            return;
-        }
-
-        BoundsInt bounds = tilemap.cellBounds;
-
-        xMin = bounds.xMin;
-        xMax = bounds.xMax;
-        yMin = bounds.yMin;
-        yMax = bounds.yMax;
+        xMin = -boxSize.x / 2;
+        xMax = boxSize.x / 2;
+        yMin = -boxSize.y / 2;
+        yMax = boxSize.y / 2;
     }
 
-    private void ControlCameraPosition()
+    protected void ControlCameraPosition()
     {
 #if UNITY_EDITOR
         //에디터에서 Scene, Simulator으로 볼 경우 에러메시지 대응용
@@ -121,7 +116,7 @@ public class CameraDrag : MonoBehaviour
             }
         }
     }
-    private IEnumerator StopTracking(Vector3 clickPosition)
+    protected IEnumerator StopTracking(Vector3 clickPosition)
     {
         onStopTracking = true;
 
@@ -144,13 +139,13 @@ public class CameraDrag : MonoBehaviour
         onStopTracking = false;
     }
 
-    private void CameraPositionMoveStart(Vector3 startPosition)
+    protected void CameraPositionMoveStart(Vector3 startPosition)
     {
         isCameraMove = true;
         this.startPosition = startPosition;
         directionForce = Vector2.zero;
     }
-    private void CameraPositionMoveProgress(Vector3 targetPosition)
+    protected void CameraPositionMoveProgress(Vector3 targetPosition)
     {
         if (isCameraMove == false)
         {
@@ -160,11 +155,11 @@ public class CameraDrag : MonoBehaviour
 
         directionForce = startPosition - targetPosition;
     }
-    private void CameraPositionMoveEnd()
+    protected void CameraPositionMoveEnd()
     {
         isCameraMove = false;
     }
-    private void ReduceDirectionForce()
+    protected void ReduceDirectionForce()
     {
         // 조작 중일때는 아무것도 안함
         if (isCameraMove == true)
@@ -181,7 +176,7 @@ public class CameraDrag : MonoBehaviour
             directionForce = Vector3.zero;
         }
     }
-    private void UpdateCameraPosition()
+    protected void UpdateCameraPosition()
     {
         // 이동 수치가 없으면 아무것도 안함
         if (directionForce == Vector3.zero)
@@ -194,7 +189,7 @@ public class CameraDrag : MonoBehaviour
         transform.position = Vector3.Lerp(currentPosition, targetPosition, 0.5f);
     }
 
-    private void CameraMoveLimit()
+    protected void CameraMoveLimit()
     {
         Vector3 CameraPos = cameraTransform.position;
         
@@ -235,5 +230,22 @@ public class CameraDrag : MonoBehaviour
 
         transform.position = CameraPos;
     }
-    
+
+#if UNITY_EDITOR
+    int segments = 100;
+    bool drawWhenSelected = true;
+
+    void OnDrawGizmosSelected()
+    {
+        if (drawWhenSelected)
+        {
+            //탐지 시야
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireCube(transform.position, boxSize);
+        }
+    }
+
+
+#endif
+
 }

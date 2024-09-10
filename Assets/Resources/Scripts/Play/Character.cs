@@ -26,7 +26,7 @@ public class Character : FieldObject
     public PlayStatus playStatus;
     public DesirePlayStatus desirePlayStatus;
     public Animator anim;
-    public AILerp aiPath;
+    public AILerp aiLerp;
     public Vector3 dropRange = new Vector3(1f, 1f, 1f);
     [Header("TargetInfo")]
     public Transform targetField; //내가 가야 할 필드
