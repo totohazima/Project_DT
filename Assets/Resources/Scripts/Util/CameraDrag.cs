@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class CameraDrag : MonoBehaviour
+public class CameraDrag : MonoBehaviour, ICustomUpdateMono
 {
     public HeroCharacter trackingTarget;
 
-    public bool isCameraMove; // 현재 조작을 하고있는지 확인을 위한 변수
+    [Header("Bool_Variable")]
     public bool isDontMove; //UI가 떠 있을 때 움직이지 않게
     public bool isCrossLimitLine; //true일때 카메라가 맵 바깥으로 움직일 수 있음
-    public bool isTrackingTarget; //true일때 클릭한 유닛을 따라감
+    [HideInInspector] public bool isCameraMove; // 현재 조작을 하고있는지 확인을 위한 변수
+    [HideInInspector] public bool isTrackingTarget; //true일때 클릭한 유닛을 따라감
     [SerializeField] private bool onStopTracking = false;
 
     private new Camera camera;
@@ -25,13 +26,22 @@ public class CameraDrag : MonoBehaviour
     private float xMin, xMax, yMin, yMax; //카메라 이동을 제한하는 4방향 좌표
     [SerializeField] private float viewSize_Default = 0f;
     [SerializeField] private float viewSize_Tracking = 0f;
-    
+
     void Awake()
     {
         camera = Camera.main;
         cameraTransform = camera.transform;
     }
-    void Update()
+    private void OnEnable()
+    {
+        CustomUpdateManager.customUpdateMonos.Add(this);
+    }
+    private void OnDisable()
+    {
+        CustomUpdateManager.customUpdateMonos.Remove(this);
+    }
+
+    public void CustomUpdate()
     {
         StatusUpdate();
 
@@ -55,21 +65,22 @@ public class CameraDrag : MonoBehaviour
             //카메라가 맵 밖을 비추지 못하게 이동
             CameraMoveLimit();
         }
-        
     }
+
     protected void StatusUpdate()
     {
         if (trackingTarget != null)
         {
             isTrackingTarget = true;
-            Camera.main.orthographicSize = viewSize_Tracking;
+            camera.orthographicSize = viewSize_Tracking;
         }
         else
         {
             isTrackingTarget = false;
-            Camera.main.orthographicSize = viewSize_Default;
+            camera.orthographicSize = viewSize_Default;
         }
     }
+
     protected void LimitPositionSet()
     {
         xMin = -boxSize.x / 2;
@@ -82,31 +93,33 @@ public class CameraDrag : MonoBehaviour
     {
 #if UNITY_EDITOR
         //에디터에서 Scene, Simulator으로 볼 경우 에러메시지 대응용
-        if(EditorWindow.focusedWindow == null || EditorWindow.focusedWindow.titleContent.text != "Game" && EditorWindow.focusedWindow.titleContent.text != "Simulator")
+        if (EditorWindow.focusedWindow == null || EditorWindow.focusedWindow.titleContent.text != "Game" && EditorWindow.focusedWindow.titleContent.text != "Simulator")
         {
             return;
         }
 #endif
+
         if (isTrackingTarget)
         {
             Vector3 pos = trackingTarget.myObject.position;
             cameraTransform.position = new Vector3(pos.x, pos.y, cameraTransform.position.z);
 
-            Vector3 mouseWorldPosition = camera.ScreenToWorldPoint(Input.mousePosition);
-            if (Input.GetMouseButtonDown(0) && !onStopTracking)
+            // 모바일 터치 또는 PC 클릭
+            if (IsTouchOrClick())
             {
-                StartCoroutine(StopTracking(mouseWorldPosition));
+                Vector3 clickPosition = GetTouchOrMouseWorldPosition();
+                StartCoroutine(StopTracking(clickPosition));
             }
         }
         else
         {
-            Vector3 mouseWorldPosition = camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseWorldPosition = GetTouchOrMouseWorldPosition();
 
-            if (Input.GetMouseButtonDown(0))
+            if (IsTouchOrClick())
             {
                 CameraPositionMoveStart(mouseWorldPosition);
             }
-            else if (Input.GetMouseButton(0))
+            else if (IsTouchHeld())
             {
                 CameraPositionMoveProgress(mouseWorldPosition);
             }
@@ -116,53 +129,59 @@ public class CameraDrag : MonoBehaviour
             }
         }
     }
+
     protected IEnumerator StopTracking(Vector3 clickPosition)
     {
         onStopTracking = true;
-
-        Ray ray = Camera.main.ScreenPointToRay(clickPosition);
-        RaycastHit hit;
         isDontMove = true;
+
+        Ray ray = camera.ScreenPointToRay(clickPosition); // Camera.main 대신 camera 사용
+        RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
         {
-            yield return 0;
+            // 필요한 경우에만 처리
+            yield return null;
         }
-        else if(trackingTarget != null) 
+        else if (trackingTarget != null)
         {
             trackingTarget = null;
         }
 
-        //딜레이를 주지 않으면 CameraDrag 스크립트에서 카메라를 움직여버림
+        Debug.Log("Unit Tracking Disable");
         yield return new WaitForSeconds(0.3f);
+
         isDontMove = false;
         onStopTracking = false;
     }
 
-    protected void CameraPositionMoveStart(Vector3 startPosition)
+    void CameraPositionMoveStart(Vector3 startPosition)
     {
         isCameraMove = true;
         this.startPosition = startPosition;
         directionForce = Vector2.zero;
     }
-    protected void CameraPositionMoveProgress(Vector3 targetPosition)
+
+    void CameraPositionMoveProgress(Vector3 targetPosition)
     {
-        if (isCameraMove == false)
+        if (!isCameraMove)
         {
             CameraPositionMoveStart(targetPosition);
             return;
         }
-
+        // directionForce 연산 최소화
         directionForce = startPosition - targetPosition;
     }
-    protected void CameraPositionMoveEnd()
+
+    void CameraPositionMoveEnd()
     {
         isCameraMove = false;
     }
+
     protected void ReduceDirectionForce()
     {
         // 조작 중일때는 아무것도 안함
-        if (isCameraMove == true)
+        if (isCameraMove)
         {
             return;
         }
@@ -176,6 +195,7 @@ public class CameraDrag : MonoBehaviour
             directionForce = Vector3.zero;
         }
     }
+
     protected void UpdateCameraPosition()
     {
         // 이동 수치가 없으면 아무것도 안함
@@ -192,7 +212,7 @@ public class CameraDrag : MonoBehaviour
     protected void CameraMoveLimit()
     {
         Vector3 CameraPos = cameraTransform.position;
-        
+
         float cameraHalfWidth = camera.orthographicSize * camera.aspect;
         float cameraHalfHeight = camera.orthographicSize;
 
@@ -231,21 +251,37 @@ public class CameraDrag : MonoBehaviour
         transform.position = CameraPos;
     }
 
-#if UNITY_EDITOR
-    int segments = 100;
-    bool drawWhenSelected = true;
-
-    void OnDrawGizmosSelected()
+    // 터치 또는 마우스 입력 감지 함수
+    private bool IsTouchOrClick()
     {
-        if (drawWhenSelected)
+        return Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began);
+    }
+
+    // 터치 또는 마우스 드래그 감지 함수
+    private bool IsTouchHeld()
+    {
+        return Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved);
+    }
+
+    // 터치 또는 마우스 입력 위치 반환 함수
+    private Vector3 GetTouchOrMouseWorldPosition()
+    {
+        if (Input.touchCount > 0)
         {
-            //탐지 시야
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(transform.position, boxSize);
+            return camera.ScreenToWorldPoint(Input.GetTouch(0).position);
+        }
+        else
+        {
+            return camera.ScreenToWorldPoint(Input.mousePosition);
         }
     }
 
-
+#if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+    {
+        //탐지 시야
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, boxSize);
+    }
 #endif
-
 }

@@ -1,0 +1,60 @@
+{
+    "name": "CameraControls",
+    "maps": [
+        {
+            "name": "Camera",
+            "id": "69841e1c-dda5-49b1-be2d-92a318602a9f",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "275674ea-3d07-47af-8d06-29fc3ab94b8e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drag",
+                    "type": "Value",
+                    "id": "1200c87a-02a5-4cb7-a704-07ca641f99f1",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1f9909a8-dbd0-4008-8c2b-11626ac4a4f5",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "442f9769-4517-42b2-87ee-51d69b89f18f",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "CameraInput",
+            "bindingGroup": "CameraInput",
+            "devices": []
+        }
+    ]
+}
