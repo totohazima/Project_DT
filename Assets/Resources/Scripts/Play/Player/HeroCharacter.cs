@@ -286,7 +286,6 @@ public class HeroCharacter : Character, IPointerClickHandler
             if (hit.collider == myCollider)
             {
                 FieldManager.instance.cameraDrag.trackingTarget = this;
-                Debug.Log("Unit Tracking Enable");
             }
         }
 

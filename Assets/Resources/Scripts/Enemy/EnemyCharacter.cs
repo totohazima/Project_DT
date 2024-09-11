@@ -263,7 +263,8 @@ public class EnemyCharacter : Character
             dropItem.dropCount = 1;
 
             Vector3 dropPos = GetRandomPositionInBox(myObject.position, dropRange);
-            dropItem.Drop_Animation(dropPos);
+            dropItem.Drop_Animation(dropPos, myObject.position);
+            //StartCoroutine(dropItem.Drop_Animations(myObject.position, dropPos));
 
         }
     }

@@ -148,7 +148,6 @@ public class CameraDrag : MonoBehaviour, ICustomUpdateMono
             trackingTarget = null;
         }
 
-        Debug.Log("Unit Tracking Disable");
         yield return new WaitForSeconds(0.3f);
 
         isDontMove = false;
