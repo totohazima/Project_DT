@@ -1,3 +1,4 @@
+using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
@@ -11,6 +12,7 @@ public class FieldManager : MonoBehaviour, ICustomUpdateMono
     public AstarPath astarPath;
     public CameraDrag cameraDrag;
     public Tilemap tilemap;
+    public Transform spawnPool;
 
     public List<Transform> fieldList = new List<Transform>();
     public List<FieldActivity> fields = new List<FieldActivity>();
@@ -35,6 +37,16 @@ public class FieldManager : MonoBehaviour, ICustomUpdateMono
         }
 
         LimitPosition();    
+    }
+
+    void Start()
+    {
+        HeroSpawn();
+    }
+    void HeroSpawn()
+    {
+        GameObject heroPrefab = Resources.Load<GameObject>("Prefabs/Player/Hero");
+        GameObject hero = PoolManager.instance.Spawn(heroPrefab, Vector3.zero, Vector3.one, Quaternion.identity, true, spawnPool);
     }
     private void OnEnable()
     {

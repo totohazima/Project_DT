@@ -11,7 +11,6 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     public bool isSpawn = false; //true일 경우 리스폰
     public int spawnUnitCount;
     public Transform spawnPointGroup;
-    public Transform spawnPools;
     public List<Transform> spawnPoints = new List<Transform>();
 
     private GameObject unitPrefab;
@@ -61,7 +60,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         for (int i = 0; i < count; i++)
         {
             prefab[i].myField = fieldActivity.controlField;
-            GameObject monster = PoolManager.instance.Spawn(prefab[i].gameObject, spawnPos[i], Vector3.one, Quaternion.identity, true, spawnPools);
+            GameObject monster = PoolManager.instance.Spawn(prefab[i].gameObject, spawnPos[i], Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
             monster.transform.position = spawnPos[i];
 
             EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();

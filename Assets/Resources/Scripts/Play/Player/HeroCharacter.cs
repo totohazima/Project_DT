@@ -44,7 +44,7 @@ public class HeroCharacter : Character, IPointerClickHandler
     }
     public override void Update()
     {
-        if(isDisable)
+        if(isDisable || isDead)
         {
             return;
         }
@@ -265,11 +265,11 @@ public class HeroCharacter : Character, IPointerClickHandler
         myCollider.enabled = false;
         isReadyToMove = false;
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1f);
 
         myCollider.enabled = true;
-
-        //PoolManager.instance.Release(gameObject);
+        isDead = false;
+        Disappear();
     }
 
     /// <summary>

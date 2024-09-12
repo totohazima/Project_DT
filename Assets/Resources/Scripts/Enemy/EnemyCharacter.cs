@@ -43,6 +43,11 @@ public class EnemyCharacter : Character
     }
     public override void Update()
     {
+        if(isDisable || isDead)
+        {
+            return;
+        }
+
         StartCoroutine(RandomMoveLocation());
         StartCoroutine(ObjectScan(scanDelay));
         StatCalculate();
@@ -118,6 +123,7 @@ public class EnemyCharacter : Character
             else
             {
                 targetUnit = null;
+                isReadyToAttack = false;
             }
 
             isScanning = false;

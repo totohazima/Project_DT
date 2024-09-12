@@ -8,6 +8,7 @@ using GameSystem;
 using Pathfinding;
 using System;
 using Util;
+using static UnityEngine.GraphicsBuffer;
 
 public class Character : FieldObject
 {
@@ -84,6 +85,7 @@ public class Character : FieldObject
 
         if (playStatus.CurHealth <= 0)
         {
+            isDead = true;
             StartCoroutine(Death());
         }
         else
@@ -117,6 +119,11 @@ public class Character : FieldObject
     public virtual IEnumerator Death()
     {
         yield return 0;
+    }
+
+    public virtual void Disappear()
+    {
+        PoolManager.instance.Release(gameObject);
     }
     public void Push(Vector3 vector, bool ignoreKinematic = false)
     {
