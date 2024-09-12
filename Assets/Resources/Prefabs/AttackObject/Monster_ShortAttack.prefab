@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4333858811387652}
-  - component: {fileID: 65506597485086478}
   - component: {fileID: 2815157724855782341}
   - component: {fileID: 114689141026150568}
+  - component: {fileID: 65506597485086478}
   - component: {fileID: 54396144902308114}
   m_Layer: 10
   m_Name: Monster_ShortAttack
@@ -35,27 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65506597485086478
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1916831241361388}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2815157724855782341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,9 +80,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b82af1cccb943d74e9819e0d0029f9d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableTime: 0.1
+  disableTime: 0.2
   playDisableTime: 0
   targetCollider: {fileID: 65506597485086478}
+--- !u!65 &65506597485086478
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916831241361388}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.7, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &54396144902308114
 Rigidbody:
   m_ObjectHideFlags: 0

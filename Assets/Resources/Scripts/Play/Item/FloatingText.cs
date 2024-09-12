@@ -20,6 +20,10 @@ public class FloatingText : MonoBehaviour
         StartCoroutine(Text_Animation());
     }
     
+    protected virtual void Recycle()
+    {
+        text.text = null;
+    }
     public virtual IEnumerator Text_Animation()
     {
         yield return 0;

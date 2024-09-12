@@ -9,7 +9,6 @@ public class ItemRewardText : FloatingText
     //{
     //    base.OnEnable();
     //}
-
     public void TextSetting(GameMoney.GameMoneyType type, int count)
     {
         string typeTxt = "";
@@ -40,9 +39,14 @@ public class ItemRewardText : FloatingText
 
         yield return new WaitForSeconds(1f);
 
+        Recycle();
         Disappeer();
     }
 
+    protected override void Recycle()
+    {
+        base.Recycle();
+    }
     private void UpdateTextAlpha(float alpha)
     {
         Color color = text.color;

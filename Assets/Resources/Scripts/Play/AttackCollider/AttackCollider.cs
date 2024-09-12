@@ -116,7 +116,9 @@ public class AttackCollider : MonoBehaviour
             return;
 
         if (false == (onHItCharacter is HeroCharacter))
+        {
             //SoundManager.Instance.SFXPlay(SFXPack);
+        }
 
         if (isSurelyDeath == false)
         {

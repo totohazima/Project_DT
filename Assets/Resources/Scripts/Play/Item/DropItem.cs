@@ -12,9 +12,7 @@ public class DropItem : FieldObject, IPointerClickHandler
     public int dropCount = 1;
     [SerializeField] private bool isGetItem = false; //true인 경우 습득 가능
 
-    public float delay = 1f;
-    public float elapsedTime = 0f; 
-    public void Drop_Animation(Vector3 dropPos, Vector3 ownerPos)
+    public void Drop_Animations(Vector3 dropPos, Vector3 ownerPos)
     {
         float delay = 0.1f;
         Vector3 bouncePos = CalculateControlPoint(ownerPos, dropPos, 0.3f);
@@ -32,13 +30,20 @@ public class DropItem : FieldObject, IPointerClickHandler
         {
             isGetItem = true;
         }
+
     }
 
-    public IEnumerator Drop_Animations(Vector3 startPos, Vector3 endPos)
+    public void Drop_Animation(Vector3 startPos, Vector3 endPos)
     {
-        delay = 1f;
-        elapsedTime = 0f;
-        Vector3 middlePos = CalculateControlPoint(startPos, endPos, 2f);
+        StartCoroutine(Animation(startPos, endPos));
+    }
+
+    // 코루틴을 실행할 때 Public으로 다른 스크립트에서 실행하게 하면 안된다. 반드시 해당 스크립트내에서 자체적으로 실행하게 해야 함.
+    private IEnumerator Animation(Vector3 startPos, Vector3 endPos)
+    {
+        float delay = 0.1f;
+        float elapsedTime = 0f;
+        Vector3 middlePos = CalculateControlPoint(startPos, endPos, 0.3f);
 
         while (elapsedTime < delay)
         {
@@ -52,10 +57,17 @@ public class DropItem : FieldObject, IPointerClickHandler
             yield return null;
         }
 
+        transform.position = endPos;
         isGetItem = true;
     }
-
     
+    private void Recycle()
+    {
+        moneyType = GameMoney.GameMoneyType.GOLD;
+        dropCount = 1;
+        isGetItem = false;
+    }
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (isGetItem)
@@ -79,6 +91,7 @@ public class DropItem : FieldObject, IPointerClickHandler
         }
 
         ShowFloatingText();
+        Recycle();
         Disappear();
     }
 
@@ -92,7 +105,6 @@ public class DropItem : FieldObject, IPointerClickHandler
     }
     protected void Disappear()
     {
-        isGetItem = false;
         PoolManager.instance.Release(gameObject);    
     }
 
