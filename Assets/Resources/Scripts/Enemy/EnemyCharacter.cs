@@ -118,7 +118,6 @@ public class EnemyCharacter : Character
             if (nearestTarget != null)
             {
                 targetUnit = nearestTarget;
-                AttackRangeScan();
             }
             else
             {
@@ -126,12 +125,18 @@ public class EnemyCharacter : Character
                 isReadyToAttack = false;
             }
 
+            AttackRangeScan();
             isScanning = false;
         }
     }
 
     private void AttackRangeScan()
     {
+        if(targetUnit == null)
+        {
+            return;
+        }
+
         float distance = Vector3.Distance(myObject.position, targetUnit.position);
 
         if (distance <= playStatus.attackRange)
@@ -146,93 +151,98 @@ public class EnemyCharacter : Character
 
     public override void StatusUpdate()
     {
-        //상태
-        if (targetUnit != null)
-        {
-            isMove = true;
-            aiLerp.destination = targetUnit.position;
-        }
-        else
-        {
-            //타겟이 잡히지 않을 경우
-            if (targetLocation != Vector3.zero)
-            {
-                isMove = true;
-                aiLerp.destination = targetLocation;
-            }
-            else
-            {
-                isMove = false;
-            }
-        }
-
-        ///공격 상태
-        if (isReadyToAttack)
-        {
-            isMove = false;
-        }
-
-        if (isMove)
-        {
-            aiLerp.canMove = true;
-
-            //움직이는 중 목적지에 도달하거나 최대 경로에 도달한 경우
-            if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath)
-            {
-                isMove = false;
-            }
-        }
-        else
-        {
-            aiLerp.canMove = false;
-        }
-
-        //스탯
-        aiLerp.speed = stateController.moveSpeed;
+        UpdateMovementStatus();
+        UpdateAttackStatus();
+        UpdateLerpSpeed();
     }
 
     public override void AnimationUpdate()
     {
+        UpdateMovementAnimation();
+        UpdateAttackAnimation();
+    }
+
+    private void UpdateMovementStatus()
+    {
+        if (targetUnit != null)
+        {
+            SetTargetPosition(targetUnit.position);
+        }
+        else if (targetField != null)
+        {
+            SetTargetPosition(targetField.position);
+        }
+        else if (targetLocation != Vector3.zero)
+        {
+            SetTargetPosition(targetLocation);
+        }
+        else
+        {
+            isMove = false;
+        }
+    }
+    private void UpdateAttackStatus()
+    {
+        if (isReadyToAttack) isMove = false;
+    }
+    private void UpdateLerpSpeed()
+    {
+        aiLerp.canMove = isMove;
+        aiLerp.speed = stateController.moveSpeed;
+
+        if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath)
+        {
+            isMove = false;
+        }
+    }
+    private void SetTargetPosition(Vector3 targetPosition)
+    {
+        isMove = true;
+        aiLerp.destination = targetPosition;
+    }
+
+    private void UpdateMovementAnimation()
+    {
         if (isMove)
         {
-            if (anim.GetBool(AnimatorParams.MOVE) == false)
-            {
-                anim.SetBool(AnimatorParams.MOVE, true);
-            }
-
-            if (aiLerp.steeringTarget.x < myObject.position.x) //왼쪽
-            {
-                viewObject.rotation = Quaternion.Euler(0, 180, 0);
-            }
-            else //오른쪽
-            {
-                viewObject.rotation = Quaternion.Euler(0, 0, 0);
-            }
+            anim.SetBool(AnimatorParams.MOVE, true);
         }
         else
         {
-            if (anim.GetBool(AnimatorParams.MOVE) == true)
+            anim.SetBool(AnimatorParams.MOVE, false);
+        }
+        SetDirection();
+    }
+    private void SetDirection()
+    {
+        if (isMove)
+        {
+            if (aiLerp.steeringTarget.x < myObject.position.x)
             {
-                anim.SetBool(AnimatorParams.MOVE, false);
+                viewObject.rotation = Quaternion.Euler(0, 180, 0); // Left
+            }
+            else
+            {
+                viewObject.rotation = Quaternion.Euler(0, 0, 0); // Right
             }
         }
-
-        ///공격 애니메이션
-        if (isReadyToAttack)
+        else if (isReadyToAttack)
         {
-            if (!anim.GetBool(AnimatorParams.ATTACK_1))
+            if (targetUnit.position.x < myObject.position.x)
             {
-                anim.SetBool(AnimatorParams.ATTACK_1, true);
+                viewObject.rotation = Quaternion.Euler(0, 180, 0); // Left
             }
-        }
-        else
-        {
-            if (anim.GetBool(AnimatorParams.ATTACK_1))
+            else
             {
-                anim.SetBool(AnimatorParams.ATTACK_1, false);
+                viewObject.rotation = Quaternion.Euler(0, 0, 0); // Right
             }
         }
     }
+    private void UpdateAttackAnimation()
+    {
+        anim.SetBool(AnimatorParams.ATTACK_1, isReadyToAttack);
+    }
+
 
     public override IEnumerator Death()
     {

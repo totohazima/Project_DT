@@ -1969,7 +1969,7 @@ MonoBehaviour:
     attackSpeedPercent: 1
     maxHealth: 5
     moveSpeedPercent: 1
-    viewRange: 2
+    viewRange: 3
     curHealth: 0
   desirePlayStatus:
     hunger: 100
@@ -1977,7 +1977,7 @@ MonoBehaviour:
     stress: 100
   anim: {fileID: 7880283088654874363}
   aiLerp: {fileID: 454615847765364440}
-  dropRange: {x: 0.7, y: 0.7, z: 0.7}
+  dropRange: {x: 1, y: 1, z: 1}
   targetField: {fileID: 0}
   targetUnit: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}

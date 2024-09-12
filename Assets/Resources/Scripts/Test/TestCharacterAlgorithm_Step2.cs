@@ -46,10 +46,10 @@ public class TestCharacterAlgorithm_Step2 : MonoBehaviour
                 yield break;
             }
 
-            if(character.targetUnit == null)
-            {
-                character.targetUnit = TargetReSetting();
-            }
+            //if(character.targetUnit == null)
+            //{
+            //    character.targetUnit = TargetReSetting();
+            //}
 
             yield return null;
         }
@@ -101,10 +101,10 @@ public class TestCharacterAlgorithm_Step2 : MonoBehaviour
                 yield break;
             }
 
-            if (character.targetUnit == null)
-            {
-                character.targetUnit = TargetReSetting();
-            }
+            //if (character.targetUnit == null)
+            //{
+            //    character.targetUnit = TargetReSetting();
+            //}
 
             yield return null;
         }

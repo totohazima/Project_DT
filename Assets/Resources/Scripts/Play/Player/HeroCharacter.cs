@@ -9,24 +9,35 @@ using UnityEngine.EventSystems;
 
 public class HeroCharacter : Character, IPointerClickHandler
 {
+    [Header("Field and Movement Info")]
     public bool isFieldEnter = false;
-    [Header("RandomMove_Info")]
     public bool onRandomMove = false;
-    private float randomMoveRadius = 2f; //이 만큼의 거리내로 랜덤 이동
-    private float randomMoveTime; //이 시간 동안 타겟이 잡히지 않으면 일정 거리 내 위치로 랜덤 이동
-    private float randomMoveTime_Max = 10f; 
+
+    private float randomMoveRadius = 2f;
+    private float randomMoveTime;
+    private float randomMoveTime_Max = 10f;
     private float randomMoveTime_Min = 3f;
-    [Header("ScanTime_Info")]
-    private float scanDelay = 0.1f; //스캔이 재작동하는 시간
-    private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
-    protected bool onClickProcess; //유닛 클릭 여부 체크 (연속 클릭 방지용)
-    [Header("GameEvent")]
+
+    [Header("Scanning Info")]
+    private float scanDelay = 0.1f;
+    private bool isScanning = false;
+
+    [Header("Click Process Info")]
+    protected bool onClickProcess;
+
+    [Header("Game Event Info")]
     public EventCallAnimation eventCallAnimation = null;
     public GameObject attackPrefab;
     public GameEventFilter attackEvent = null;
     UnityEvent eventListener = null;
 
     public override void ReCycle()
+    {
+        ResetStatus();
+        StopAllCoroutines();
+    }
+
+    private void ResetStatus()
     {
         isReadyToAttack = false;
         isAttacking = false;
@@ -39,9 +50,8 @@ public class HeroCharacter : Character, IPointerClickHandler
         targetField = null;
         targetUnit = null;
         targetLocation = Vector3.zero;
-
-        StopAllCoroutines();
     }
+
     public override void Update()
     {
         if(isDisable || isDead)
@@ -155,104 +165,102 @@ public class HeroCharacter : Character, IPointerClickHandler
 
     public override void StatusUpdate()
     {
-        ///타겟 상태
-        if (targetUnit != null)
-        {
-            isMove = true;
-            aiLerp.destination = targetUnit.position;
-        }
-        else if (targetField != null)
-        {
-            isMove = true;
-            aiLerp.destination = targetField.position;
-        }
-        else
-        {
-            //타겟이 잡히지 않을 경우
-            if (targetLocation != Vector3.zero)
-            {
-                isMove = true;
-                aiLerp.destination = targetLocation;
-            }
-            else
-            {
-                isMove = false;
-            }
-        }
-
-        ///공격 상태
-        if (isReadyToAttack)
-        {
-            isMove = false;
-        }
-         
-        ///이동 상태
-        if (isMove)
-        {
-            aiLerp.canMove = true;
-
-            if(targetField != null && myObject.position == targetField.position || targetUnit != null)
-            {
-                targetField = null;
-            }
-
-            //움직이는 중 목적지에 도달하거나 최대 경로에 도달한 경우
-            if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath)
-            {
-                isMove = false;
-            }
-        }
-        else
-        {
-            aiLerp.canMove = false;
-        }
-
-        //스탯
-        aiLerp.speed = stateController.moveSpeed;
+        UpdateMovementStatus();
+        UpdateAttackStatus();
+        UpdateLerpSpeed();
     }
 
     public override void AnimationUpdate()
     {
-        ///이동 애니메이션
-        if (isMove)  
-        {
-            if (!anim.GetBool(AnimatorParams.MOVE))
-            {
-                anim.SetBool(AnimatorParams.MOVE, true);
-            }
+        UpdateMovementAnimation();
+        UpdateAttackAnimation();
+    }
 
-            if(aiLerp.steeringTarget.x < myObject.position.x) //왼쪽
-            {
-                viewObject.rotation = Quaternion.Euler(0, 180, 0); 
-            }
-            else //오른쪽
-            {
-                viewObject.rotation = Quaternion.Euler(0, 0, 0);
-            }
+
+    private void UpdateMovementStatus()
+    {
+        if (targetUnit != null)
+        {
+            SetTargetPosition(targetUnit.position);
+        }
+        else if (targetField != null)
+        {
+            SetTargetPosition(targetField.position);
+        }
+        else if (targetLocation != Vector3.zero)
+        {
+            SetTargetPosition(targetLocation);
         }
         else
         {
-            if (anim.GetBool(AnimatorParams.MOVE))
-            {
-                anim.SetBool(AnimatorParams.MOVE, false);
-            }
+            isMove = false;
         }
+    }
 
-        ///공격 애니메이션
+    private void UpdateAttackStatus()
+    {
         if (isReadyToAttack) 
+            isMove = false;
+    }
+
+    private void UpdateLerpSpeed()
+    {
+        aiLerp.canMove = isMove;
+        aiLerp.speed = stateController.moveSpeed;
+
+        if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath)
         {
-            if(!anim.GetBool(AnimatorParams.DEVILATTACK_1))
-            {
-                anim.SetBool(AnimatorParams.DEVILATTACK_1, true);
-            }
+            isMove = false;
+        }
+    }
+    private void SetTargetPosition(Vector3 targetPosition)
+    {
+        isMove = true;
+        aiLerp.destination = targetPosition;
+    }
+
+    private void UpdateMovementAnimation()
+    {
+        if (isMove)
+        {
+            anim.SetBool(AnimatorParams.MOVE, true);
         }
         else
         {
-            if (anim.GetBool(AnimatorParams.DEVILATTACK_1))
+            anim.SetBool(AnimatorParams.MOVE, false);
+        }
+        SetDirection();
+    }
+
+    private void SetDirection()
+    {
+        if (isMove)
+        {
+            if (aiLerp.steeringTarget.x < myObject.position.x)
             {
-                anim.SetBool(AnimatorParams.DEVILATTACK_1, false);
+                viewObject.rotation = Quaternion.Euler(0, 180, 0); // Left
+            }
+            else
+            {
+                viewObject.rotation = Quaternion.Euler(0, 0, 0); // Right
             }
         }
+        else if(isReadyToAttack)
+        {
+            if (targetUnit.position.x < myObject.position.x)
+            {
+                viewObject.rotation = Quaternion.Euler(0, 180, 0); // Left
+            }
+            else
+            {
+                viewObject.rotation = Quaternion.Euler(0, 0, 0); // Right
+            }
+        }
+    }
+
+    private void UpdateAttackAnimation()
+    {
+        anim.SetBool(AnimatorParams.DEVILATTACK_1, isReadyToAttack);
     }
 
     public override IEnumerator Death()
