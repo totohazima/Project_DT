@@ -14,6 +14,7 @@ public class Character : FieldObject
 {
     public WhiteFlash whiteFlash;
     public StateController stateController;
+    public UICharacterCostume characterCostume;
     public bool isInvincible; //true老 版快 公利
     public bool isDisable; //true老 版快 沥瘤
     public bool isReadyToMove; //true老 版快 框流烙
@@ -38,10 +39,22 @@ public class Character : FieldObject
     public void OnEnable()
     {
         playStatus.CurHealth = playStatus.MaxHealth;
+        ReCycle();
         isReadyToMove = true;
     }
     public virtual void ReCycle()
     {
+        isReadyToAttack = false;
+        isAttacking = false;
+        isReadyToMove = false;
+        isMove = false;
+        isDead = false;
+
+        targetField = null;
+        targetUnit = null;
+        targetLocation = Vector3.zero;
+
+        StopAllCoroutines();
     }
     public virtual void Update()
     {       

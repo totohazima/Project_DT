@@ -79461,9 +79461,135 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449621ffdaf499542957a130fed99b0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costumeInfos: []
-  wingCostumeInfos: []
-  weaponCostumeInfos: []
+  costumeInfos:
+  - key: Pelvis_Imge
+    renderers:
+    - {fileID: 3375320021767460567}
+  - key: Head_Imge01
+    renderers:
+    - {fileID: 9124373451997214097}
+  - key: Head_Imge02
+    renderers:
+    - {fileID: 9124373450920513451}
+  - key: Head_Imge03
+    renderers:
+    - {fileID: 9124373451732848643}
+  - key: Eye_Img01
+    renderers:
+    - {fileID: 9124373451905387718}
+  - key: Eye_Img02
+    renderers:
+    - {fileID: 9124373452403508257}
+  - key: Eye_Img03
+    renderers:
+    - {fileID: 9124373450955126506}
+  - key: Eye_Img04
+    renderers:
+    - {fileID: 9124373452471376405}
+  - key: Mouth_Img
+    renderers:
+    - {fileID: 9124373451843652878}
+  - key: BackHair_Img01
+    renderers:
+    - {fileID: 5697273858780070609}
+  - key: BackHair_Img02
+    renderers:
+    - {fileID: 5697273859188300972}
+  - key: BackHair_Img03
+    renderers:
+    - {fileID: 5697273859655295494}
+  - key: L_Arm_img
+    renderers:
+    - {fileID: 9124373451350474719}
+    - {fileID: 9124373451554869860}
+  - key: L_Hand_img
+    renderers:
+    - {fileID: 9124373452126220325}
+    - {fileID: 9124373452377734791}
+  - key: R_Arm_Img
+    renderers:
+    - {fileID: 9124373451025645712}
+    - {fileID: 9124373451980626563}
+  - key: R_Hand_Img
+    renderers:
+    - {fileID: 9124373451410258839}
+    - {fileID: 9124373451946687470}
+  - key: Body_Img
+    renderers:
+    - {fileID: 9124373450996341990}
+    - {fileID: 9124373452156151338}
+  - key: Hood_Img01
+    renderers:
+    - {fileID: 425744323575523685}
+    - {fileID: 298197124908845355}
+  - key: Hood_Img02
+    renderers:
+    - {fileID: 425744323931307386}
+    - {fileID: 298197125290253620}
+  - key: Hood_Img03
+    renderers:
+    - {fileID: 425744322367351601}
+    - {fileID: 298197126922357631}
+  - key: L_shoulder_Img
+    renderers:
+    - {fileID: 4692628052253905902}
+    - {fileID: 8769890403819796399}
+  - key: R_shoulder_Img
+    renderers:
+    - {fileID: 6556462303591906810}
+    - {fileID: 7443216351021195438}
+  - key: Cape_Img01
+    renderers:
+    - {fileID: 7440525379197191651}
+  - key: Cape_Img02
+    renderers:
+    - {fileID: 7440525379475821950}
+  - key: Cape_Img03
+    renderers:
+    - {fileID: 7440525379258104273}
+  - key: Belt_Img
+    renderers:
+    - {fileID: 9124373451554928833}
+  - key: L_skirt_Img
+    renderers:
+    - {fileID: 9124373452354923668}
+  - key: R_skirt_Img
+    renderers:
+    - {fileID: 9124373451895445651}
+  - key: L_Leg_Img
+    renderers:
+    - {fileID: 3375400209965598121}
+  - key: R_Leg_Img
+    renderers:
+    - {fileID: 3374849857112559523}
+  wingCostumeInfos:
+  - key: L_Wingcostume
+    renderers:
+    - {fileID: 7183090845405340168}
+  - key: R_Wingcostume
+    renderers:
+    - {fileID: 7183090845039245892}
+  - key: C_Wingcostume
+    renderers:
+    - {fileID: 7183090843534584194}
+  weaponCostumeInfos:
+  - key: Back_AngelSword
+    renderers:
+    - {fileID: 9124373452084426207}
+  - key: Back_DevilSword
+    renderers:
+    - {fileID: 9124373452880608703}
+  - key: Equip_AngelSword
+    renderers:
+    - {fileID: 9124373451360614272}
+    - {fileID: 3660744602996759823}
+  - key: Equip_DevilSword
+    renderers:
+    - {fileID: 9124373451672207630}
+    - {fileID: 2007609923286866102}
+  - key: AngelSwordFX
+    renderers:
+    - {fileID: 1114686441188680006}
 --- !u!1 &3180307764863694625
 GameObject:
   m_ObjectHideFlags: 0
@@ -79666,6 +79792,7 @@ MonoBehaviour:
   myCollider: {fileID: 1145035902}
   whiteFlash: {fileID: 0}
   stateController: {fileID: 2260746178445977647}
+  characterCostume: {fileID: 8717389949831578577}
   isInvincible: 1
   isDisable: 0
   isReadyToMove: 0
@@ -79684,7 +79811,7 @@ MonoBehaviour:
     curHealth: 0
   desirePlayStatus:
     hunger: 100
-    sleep: 100
+    sleep: 86
     stress: 100
   anim: {fileID: 3180159873120409964}
   aiLerp: {fileID: 2329373645779255952}
@@ -79710,7 +79837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 4209376665973604264}
-  waitSecond: 30
+  waitSecond: 5
   enemies: []
 --- !u!1 &3180633415963608375
 GameObject:

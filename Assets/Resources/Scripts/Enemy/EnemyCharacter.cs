@@ -28,18 +28,9 @@ public class EnemyCharacter : Character
 
     public override void ReCycle()
     {
-        isReadyToAttack = false;
-        isAttacking = false;
-        isReadyToMove = false;
-        isMove = false;
+        base.ReCycle();
         onRandomMove = false;
         isScanning = false;
-
-        targetField = null;
-        targetUnit = null;
-        targetLocation = Vector3.zero;
-
-        StopAllCoroutines();
     }
     public override void Update()
     {
@@ -63,28 +54,29 @@ public class EnemyCharacter : Character
     }
     private IEnumerator RandomMoveLocation()
     {
-        if (!onRandomMove)
+        if (onRandomMove)
         {
-            onRandomMove = true;
-            randomMoveTime = Random.Range(randomMoveTime_Min, randomMoveTime_Max);
-
-            yield return new WaitForSeconds(randomMoveTime);
-
-            Vector3 boxSize = FieldManager.instance.fields[(int)myField].boxSize;
-            // 오버랩 박스 내에서 무작위 위치 생성
-            Vector3 randomPositionWithinBox = new Vector3(
-                Random.Range(-boxSize.x / 2, boxSize.x / 2),
-                Random.Range(-boxSize.y / 2, boxSize.y / 2),
-                Random.Range(-boxSize.z / 2, boxSize.z / 2)
-            );
-
-            // 현재 위치에 대해 상대적인 위치를 적용하여 이동
-            FieldActivity controlField = FieldManager.instance.fields[(int)myField];
-            targetLocation = controlField.getTransform.position + randomPositionWithinBox;
-
-            onRandomMove = false;  // 이동 종료
-
+            yield break;
         }
+
+        onRandomMove = true;
+        randomMoveTime = Random.Range(randomMoveTime_Min, randomMoveTime_Max);
+
+        yield return new WaitForSeconds(randomMoveTime);
+
+        Vector3 boxSize = FieldManager.instance.fields[(int)myField].boxSize;
+        // 오버랩 박스 내에서 무작위 위치 생성
+        Vector3 randomPositionWithinBox = new Vector3(
+            Random.Range(-boxSize.x / 2, boxSize.x / 2),
+            Random.Range(-boxSize.y / 2, boxSize.y / 2),
+            Random.Range(-boxSize.z / 2, boxSize.z / 2)
+        );
+
+        // 현재 위치에 대해 상대적인 위치를 적용하여 이동
+        FieldActivity controlField = FieldManager.instance.fields[(int)myField];
+        targetLocation = controlField.getTransform.position + randomPositionWithinBox;
+
+        onRandomMove = false;  // 이동 종료
     }
     public override IEnumerator ObjectScan(float scanDelay)
     {
@@ -291,9 +283,5 @@ public class EnemyCharacter : Character
         float randomY = Random.Range(center.y - range.y / 2f, center.y + range.y / 2f);
 
         return new Vector3(randomX, randomY, center.z);
-    }
-    private void Disappear()
-    {
-        PoolManager.instance.Release(gameObject);
     }
 }
