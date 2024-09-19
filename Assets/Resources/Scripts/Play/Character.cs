@@ -10,7 +10,7 @@ using System;
 using Util;
 using static UnityEngine.GraphicsBuffer;
 
-public class Character : FieldObject
+public class Character : FieldObject, ICustomUpdateMono
 {
     public WhiteFlash whiteFlash;
     public StateController stateController;
@@ -38,9 +38,14 @@ public class Character : FieldObject
 
     public void OnEnable()
     {
+        CustomUpdateManager.customUpdateMonos.Add(this);
         playStatus.CurHealth = playStatus.MaxHealth;
         ReCycle();
         isReadyToMove = true;
+    }
+    public void OnDisable()
+    {
+        CustomUpdateManager.customUpdateMonos.Remove(this);   
     }
     public virtual void ReCycle()
     {
@@ -56,7 +61,7 @@ public class Character : FieldObject
 
         StopAllCoroutines();
     }
-    public virtual void Update()
+    public virtual void CustomUpdate()
     {       
     }
 

@@ -32,7 +32,7 @@ public class EnemyCharacter : Character
         onRandomMove = false;
         isScanning = false;
     }
-    public override void Update()
+    public override void CustomUpdate()
     {
         if(isDisable || isDead)
         {

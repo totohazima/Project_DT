@@ -39,7 +39,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         isScanning = false;
     }
 
-    public override void Update()
+    public override void CustomUpdate()
     {
         if(isDisable || isDead)
         {
@@ -175,7 +175,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         if (targetUnit != null)
         {
             SetTargetPosition(targetUnit.position);
-            if(isFieldEnter)
+            if(isFieldEnter) //필드 진입 시 더 이상 필드 중앙으로 이동할 필요 X
             {
                 isFieldEnter = false;
                 targetField = null;

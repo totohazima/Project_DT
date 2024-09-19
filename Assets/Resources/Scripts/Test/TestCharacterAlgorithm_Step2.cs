@@ -5,6 +5,7 @@ using FieldHelper;
 using Unity.VisualScripting;
 public class TestCharacterAlgorithm_Step2 : MonoBehaviour
 {
+    public int cycleCount = 0;
     public HeroCharacter character;
     public float waitSecond = 30f;
     [SerializeField] List<EnemyCharacter> enemies = new List<EnemyCharacter>();
@@ -119,6 +120,8 @@ public class TestCharacterAlgorithm_Step2 : MonoBehaviour
             if (character.myField == FieldMap.Field.VILLAGE)
             {
                 yield return new WaitForSeconds(waitSecond);
+                cycleCount++;
+                Debug.Log("알고리즘 실행 횟수: " + cycleCount);
                 FieldManager.instance.AllFieldSpawn();
                 StartCoroutine(Step1_GoDesert());
                 yield break;

@@ -10,28 +10,8 @@ public class DropItem : FieldObject, IPointerClickHandler
     [Header("ItemInfo")]
     public GameMoney.GameMoneyType moneyType;
     public int dropCount = 1;
-    [SerializeField] private bool isGetItem = false; //true인 경우 습득 가능
-
-    public void Drop_Animations(Vector3 dropPos, Vector3 ownerPos)
-    {
-        float delay = 0.1f;
-        Vector3 bouncePos = CalculateControlPoint(ownerPos, dropPos, 0.3f);
-        //Vector3 bouncePos = new Vector3(dropPos.x, dropPos.y + 0.4f, dropPos.z);
-
-        LTDescr tween = LeanTween.move(gameObject, bouncePos, delay).setEase(LeanTweenType.easeOutQuart);
-        tween.setOnComplete(DropDown_Animation);
-
-        void DropDown_Animation()
-        {
-            LTDescr tween = LeanTween.move(gameObject, dropPos, delay).setEase(LeanTweenType.easeInSine).setFrom(bouncePos);
-            tween.setOnComplete(End_Animation);
-        }
-        void End_Animation()
-        {
-            isGetItem = true;
-        }
-
-    }
+    [SerializeField] private bool readyToGet = false; //true인 경우 습득 가능
+    private GameObject rewardText = null;
 
     public void Drop_Animation(Vector3 startPos, Vector3 endPos)
     {
@@ -58,19 +38,23 @@ public class DropItem : FieldObject, IPointerClickHandler
         }
 
         transform.position = endPos;
-        isGetItem = true;
+        readyToGet = true;
     }
     
+    void Awake()
+    {
+        rewardText = Resources.Load<GameObject>("Prefabs/FieldObject/ItemRewardTxt");
+    }
     private void Recycle()
     {
         moneyType = GameMoney.GameMoneyType.GOLD;
         dropCount = 1;
-        isGetItem = false;
+        readyToGet = false;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (isGetItem)
+        if (readyToGet)
         {
             GetItem();
         }
@@ -97,8 +81,7 @@ public class DropItem : FieldObject, IPointerClickHandler
 
     protected void ShowFloatingText()
     {
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/ItemRewardTxt");
-        GameObject text = PoolManager.instance.Spawn(prefab, myObject.position, Vector3.one, Quaternion.identity, true, myObject.parent);
+        GameObject text = PoolManager.instance.Spawn(rewardText, myObject.position, Vector3.one, Quaternion.identity, true, myObject.parent);
 
         ItemRewardText floatText = text.GetComponent<ItemRewardText>();
         floatText.TextSetting(moneyType, dropCount);
