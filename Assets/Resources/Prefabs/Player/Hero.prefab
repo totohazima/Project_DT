@@ -79807,11 +79807,11 @@ MonoBehaviour:
     attackSpeedPercent: 1.2
     maxHealth: 10
     moveSpeedPercent: 2
-    viewRange: 3.5
+    viewRange: 7
     curHealth: 0
   desirePlayStatus:
     hunger: 100
-    sleep: 86
+    sleep: 100
     stress: 100
   anim: {fileID: 3180159873120409964}
   aiLerp: {fileID: 2329373645779255952}
@@ -79837,7 +79837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 4209376665973604264}
-  waitSecond: 5
+  waitSecond: 30
   enemies: []
 --- !u!1 &3180633415963608375
 GameObject:

@@ -46,8 +46,9 @@ public class HeroCharacter : Character, IPointerClickHandler
             return;
         }
 
-        StartCoroutine(ObjectScan(scanDelay));
         //StartCoroutine(RandomMoveLocation());
+        StartCoroutine(ObjectScan(scanDelay));
+        AttackRangeScan();
         StatCalculate();
         StatusUpdate();
         AnimationUpdate();
@@ -74,6 +75,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         {
             yield break;
         }
+
         onRandomMove = true;
         randomMoveTime = Random.Range(randomMoveTime_Min, randomMoveTime_Max);
 
@@ -123,7 +125,6 @@ public class HeroCharacter : Character, IPointerClickHandler
             if (nearestTarget != null)
             {
                 targetUnit = nearestTarget;
-                AttackRangeScan();
             }
             else
             {
@@ -138,6 +139,11 @@ public class HeroCharacter : Character, IPointerClickHandler
     }
     private void AttackRangeScan()
     {
+        if(targetUnit == null)
+        {
+            return;
+        }
+
         float distance = Vector3.Distance(myObject.position, targetUnit.position);
 
         if(distance <= playStatus.attackRange)
@@ -169,6 +175,11 @@ public class HeroCharacter : Character, IPointerClickHandler
         if (targetUnit != null)
         {
             SetTargetPosition(targetUnit.position);
+            if(isFieldEnter)
+            {
+                isFieldEnter = false;
+                targetField = null;
+            }
         }
         else if (targetField != null)
         {
