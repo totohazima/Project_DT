@@ -108,14 +108,45 @@ public class HeroCharacter : Character, IPointerClickHandler
         {
             isScanning = true;
 
-            Collider[] detectedColls = Physics.OverlapSphere(myObject.position, (float)playStatus.viewRange, 1 << 7);
+            //Collider[] detectedColls = Physics.OverlapSphere(myObject.position, (float)playStatus.viewRange, 1 << 7);
+            //List<Collider> detectedList = new List<Collider>(); //타겟으로 잡을 수 있는 상태의 몬스터들을 담음
+            //float shortestDistance = Mathf.Infinity;
+            //Transform nearestTarget = null;
+
+            //FieldActivity field = FieldManager.instance.fields[(int)myField];
+
+            //foreach(Collider col in detectedColls)
+            //{
+            //    if (col == null || col == myCollider)
+            //    {
+            //        continue;
+            //    }
+
+            //    for (int i = 0; i < field.monsters.Count; i++)
+            //    {
+            //        if (col == field.monsters[i].myCollider)
+            //        {
+            //            if (field.monsters[i].isUntargetted == false)
+            //            {
+            //                detectedList.Add(field.monsters[i].myCollider);        
+            //            }
+            //        }
+            //    }
+            //}
+
+            ///주변 적 탐지가 아닌 필드 내 몬스터의 정보를 가져오는 방식
+            FieldActivity field = FieldManager.instance.fields[(int)myField];
+            List<Collider> detectedColls = new List<Collider>();
             List<Collider> detectedList = new List<Collider>(); //타겟으로 잡을 수 있는 상태의 몬스터들을 담음
             float shortestDistance = Mathf.Infinity;
             Transform nearestTarget = null;
-            
-            FieldActivity field = FieldManager.instance.fields[(int)myField];
 
-            foreach(Collider col in detectedColls)
+            foreach (EnemyCharacter enemy in field.monsters)
+            {
+                detectedColls.Add(enemy.myCollider);
+            }
+
+            foreach (Collider col in detectedColls)
             {
                 if (col == null || col == myCollider)
                 {
@@ -128,12 +159,11 @@ public class HeroCharacter : Character, IPointerClickHandler
                     {
                         if (field.monsters[i].isUntargetted == false)
                         {
-                            detectedList.Add(field.monsters[i].myCollider);        
+                            detectedList.Add(field.monsters[i].myCollider);
                         }
                     }
                 }
             }
-
 
             foreach (Collider col in detectedList)
             {

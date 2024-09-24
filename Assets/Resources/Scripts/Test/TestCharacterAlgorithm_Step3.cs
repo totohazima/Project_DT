@@ -8,21 +8,22 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
     public HeroCharacter character;
     public FieldMap.Field combatField;
     public float combatTime = 0f;
+    private float combatTimer = 0f;
 
     private void Start()
     {
         character = GetComponent<HeroCharacter>();
-
+        
         StartCoroutine(GoCombatField(combatField));
     }
     private void Update()
     {
         if(character.isReadyToAttack)
         {
-            combatTime -= Time.deltaTime;  
+            combatTimer -= Time.deltaTime;  
         }
 
-        if (combatTime <= 0f && !character.isReadyToAttack)
+        if (combatTimer <= 0f && !character.isReadyToAttack || FieldManager.instance.fields[(int)combatField].monsters.Count == 0)
         {
             StartCoroutine(GoVillage());
         }
@@ -32,12 +33,14 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
     {
         character.targetField = FieldManager.instance.fieldList[(int)combatField];
         character.targetUnit = null;
+        combatTimer = combatTime;
+
         while (true)
         {
-
             if (character.myField == combatField)
             {
                 yield return new WaitForSeconds(3f);
+
                 yield break;
             }
 
@@ -55,7 +58,8 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
 
             if(character.myField == FieldMap.Field.VILLAGE)
             {
-                yield return new WaitForSeconds(3f);
+                yield return new WaitForSeconds(10f);
+                StartCoroutine(GoCombatField(combatField));
                 yield break;
             }
 

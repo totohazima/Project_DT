@@ -32,7 +32,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     }
     public void CustomUpdate()
     {
-        if(fieldActivity.monsters.Count < spawnUnitCount || isSpawn)
+        if(isSpawn)
         {
             SpawnSetting();
             isSpawn = false;
@@ -45,27 +45,32 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 
     protected void SpawnSetting()
     {
-        EnemyCharacter prefabs = new EnemyCharacter();
-        Vector3 pos = Vector3.zero;
+        List<EnemyCharacter> prefabs = new List<EnemyCharacter>();
+        List<Vector3> pos = new List<Vector3>();
 
-        prefabs = monster;
-        pos = SpawnPointSet();
+        for (int i = 0; i < spawnUnitCount; i++)
+        {
+            prefabs.Add(monster);
+        }
+        pos = SpawnPointSet(spawnUnitCount);
+        UnitSpawn(prefabs, spawnUnitCount, pos);
 
-        UnitSpawn(prefabs, pos);
     }
-    protected void UnitSpawn(EnemyCharacter prefab,Vector3 spawnPos)
+    protected void UnitSpawn(List<EnemyCharacter> prefab, int count, List<Vector3> spawnPos)
     {
-        prefab.myField = fieldActivity.controlField;
-        GameObject monster = PoolManager.instance.Spawn(prefab.gameObject, spawnPos, Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
-        monster.transform.position = spawnPos;
-
-        EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
-        fieldActivity.monsters.Add(monsterCharacter);
+        for (int i = 0; i < count; i++)
+        {
+            prefab[i].myField = fieldActivity.controlField;
+            GameObject monster = PoolManager.instance.Spawn(prefab[i].gameObject, spawnPos[i], Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
+            monster.transform.position = spawnPos[i];
+            EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
+            fieldActivity.monsters.Add(monsterCharacter);
+        }
     }
 
-    protected Vector3 SpawnPointSet()
+    protected List<Vector3> SpawnPointSet(int count)
     {
-        Vector3 pos = Vector3.zero;
+        List<Vector3> pos = new List<Vector3>();
 
         float[] chanceList = new float[spawnPoints.Count];
 
@@ -74,11 +79,12 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
             chanceList[i] = 1f / chanceList.Length; // 각 스폰 포인트의 확률을 동일하게 설정
         }
 
-        int index = GameManager.instance.Judgment(chanceList);
-
-        Vector3 randPos = spawnPoints[index].position;
-        pos = randPos;
-
+        for (int i = 0; i < count; i++)
+        {
+            int index = GameManager.instance.Judgment(chanceList);
+            Vector3 randPos = spawnPoints[index].position;
+            pos.Add(randPos);
+        }
         return pos;
     }
 

@@ -38,6 +38,7 @@ public class FieldManager : MonoBehaviour
     void Start()
     {
         HeroSpawn();
+        AllFieldSpawn();
     }
     private void HeroSpawn()
     {
