@@ -62,4 +62,19 @@ namespace StatusHelper
             stress = 100;
         }
     }
+
+    [System.Serializable]
+    public class KDA
+    {
+        public int kill_Score = 0;
+        public int death_Score = 0;
+        public int assist_Score = 0;
+
+        public void Reset()
+        {
+            kill_Score = 0;
+            death_Score = 0;
+            assist_Score = 0;
+        }
+    }
 }

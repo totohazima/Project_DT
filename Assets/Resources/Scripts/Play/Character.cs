@@ -14,9 +14,11 @@ public class Character : FieldObject, ICustomUpdateMono
 {
     public WhiteFlash whiteFlash;
     public StateController stateController;
+    public KDA_Controller kda_Controller;
     public UICharacterCostume characterCostume;
     public bool isInvincible; //true일 경우 무적
-    public bool isDisable; //true일 경우 정지
+    public bool isUntargetted; //true일 경우 타겟으로 잡히지 않음
+    public bool isStopScanning; //true일 경우 스캔 정지
     public bool isReadyToMove; //true일 경우 움직임
     public bool isReadyToAttack; //true일 경우 공격 가능
     public bool isMove;
@@ -25,8 +27,12 @@ public class Character : FieldObject, ICustomUpdateMono
     [Header("StatusInfo")]
     //public StatusInfo statusInfo;
     public FieldMap.Field myField;
+    public string code;
+    public string name;
+    public string jobClass;
     public PlayStatus playStatus;
-    public DesirePlayStatus desirePlayStatus;
+    public Desire_PlayStatus playStatus_Desire;
+    public KDA_PlayStatus playStatus_KDA;
     public Animator anim;
     public AILerp aiLerp;
     public Vector3 dropRange = new Vector3(1f, 1f, 1f);
@@ -83,8 +89,12 @@ public class Character : FieldObject, ICustomUpdateMono
     /// <summary>
     /// 공격이 들어오는지 체크하는 함수
     /// </summary>
-    public virtual void OnHit(double damage)
+    public virtual void OnHit(double damage, Character attacker)
     {
+        if (kda_Controller != null)
+        {
+            kda_Controller.OnAttacked(attacker);
+        }
         DamageCalc(damage);
     }
 

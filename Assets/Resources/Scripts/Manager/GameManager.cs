@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
         ScriptInit();
-        
+
+        Application.targetFrameRate = 60;
         //LoadingManager.instance.LoadScene("Stage");
     }
 

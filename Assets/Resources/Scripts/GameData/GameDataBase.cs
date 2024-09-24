@@ -14,14 +14,16 @@ namespace GDBA
             instance = this;
         }
 
+        [Header("Character")]
+        public CharacterInfoTable characterInfoTable;
 
         [Header("Equipment")]
-        public EquipmentInfoTable weaponInfoTable = new EquipmentInfoTable();
-        public EquipmentInfoTable helmetInfoTable = new EquipmentInfoTable();
+        public EquipmentInfoTable weaponInfoTable;
+        public EquipmentInfoTable helmetInfoTable;
 
         [Header("SpriteAtlas")]
-        public SpriteAtlas weaponSpriteAtlas = new SpriteAtlas();
-        public SpriteAtlas helmetSpriteAtlas = new SpriteAtlas();
+        public SpriteAtlas weaponSpriteAtlas;
+        public SpriteAtlas helmetSpriteAtlas;
     }
 
 

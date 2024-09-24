@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 1169640047}
   - {fileID: 1472991038}
+  - {fileID: 7238400716185745001}
   - {fileID: 7768104052553875533}
   - {fileID: 1443793873707475919}
   m_Father: {fileID: 5768949269878608820}
@@ -1126,6 +1127,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 185537554}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1708286270704254896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7238400716185745001}
+  - component: {fileID: 8777379978728773984}
+  m_Layer: 7
+  m_Name: KDA_Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7238400716185745001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708286270704254896}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 185537554}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8777379978728773984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708286270704254896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d661bb5137a0014c86c097f5de97ea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2390984898886664496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,14 +2000,20 @@ MonoBehaviour:
   myCollider: {fileID: 1169640046}
   whiteFlash: {fileID: 8149681236871064764}
   stateController: {fileID: 2085495512249751346}
+  kda_Controller: {fileID: 0}
+  characterCostume: {fileID: 0}
   isInvincible: 0
-  isDisable: 0
+  isUntargetted: 0
+  isStopScanning: 0
   isReadyToMove: 0
   isReadyToAttack: 0
   isMove: 0
   isAttacking: 0
   isDead: 0
   myField: 2
+  code: 
+  name: 
+  jobClass: 
   playStatus:
     attackPower: 1
     attackRange: 0.45
@@ -1971,17 +2022,22 @@ MonoBehaviour:
     moveSpeedPercent: 1
     viewRange: 3
     curHealth: 0
-  desirePlayStatus:
+  playStatus_Desire:
     hunger: 100
     sleep: 100
     stress: 100
+  playStatus_KDA:
+    kill_Score: 0
+    death_Score: 0
+    assist_Score: 0
   anim: {fileID: 7880283088654874363}
   aiLerp: {fileID: 454615847765364440}
   dropRange: {x: 1, y: 1, z: 1}
   targetField: {fileID: 0}
   targetUnit: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
-  dropItemCount: 3
+  soonAttacker: []
+  dropItemCount: 1
   eventCallAnimation: {fileID: 3744511214837868610}
   attackPrefab: {fileID: 1916831241361388, guid: cb7928c1d8694d74588ebb28f5c7e60f, type: 3}
   attackEvent: {fileID: 11400000, guid: 58680498672b6a44c826a3d8b999b500, type: 2}

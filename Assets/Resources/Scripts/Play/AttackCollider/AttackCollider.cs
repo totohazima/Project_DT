@@ -2,7 +2,6 @@ using StatusHelper;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using Util;
 using GameSystem;
 
@@ -134,7 +133,7 @@ public class AttackCollider : MonoBehaviour
             StartCoroutine(onHItCharacter.Death());
         }
         double damage = attackDamage;
-        onHItCharacter.OnHit(damage);
+        onHItCharacter.OnHit(damage, owner);
 
         if (HitCount != -1)
             runHitCount--;

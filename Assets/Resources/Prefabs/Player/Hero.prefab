@@ -79462,16 +79462,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   costumeInfos:
-  - key: Pelvis_Imge
+  - key: Pelvis_img
     renderers:
     - {fileID: 3375320021767460567}
-  - key: Head_Imge01
+  - key: Head_Img01
     renderers:
     - {fileID: 9124373451997214097}
-  - key: Head_Imge02
+  - key: Head_Img02
     renderers:
     - {fileID: 9124373450920513451}
-  - key: Head_Imge03
+  - key: Head_Img03
     renderers:
     - {fileID: 9124373451732848643}
   - key: Eye_Img01
@@ -79506,11 +79506,11 @@ MonoBehaviour:
     renderers:
     - {fileID: 9124373452126220325}
     - {fileID: 9124373452377734791}
-  - key: R_Arm_Img
+  - key: R_Arm_img
     renderers:
     - {fileID: 9124373451025645712}
     - {fileID: 9124373451980626563}
-  - key: R_Hand_Img
+  - key: R_Hand_img
     renderers:
     - {fileID: 9124373451410258839}
     - {fileID: 9124373451946687470}
@@ -79530,11 +79530,11 @@ MonoBehaviour:
     renderers:
     - {fileID: 425744322367351601}
     - {fileID: 298197126922357631}
-  - key: L_shoulder_Img
+  - key: L_shoulder_img
     renderers:
     - {fileID: 4692628052253905902}
     - {fileID: 8769890403819796399}
-  - key: R_shoulder_Img
+  - key: R_shoulder_img
     renderers:
     - {fileID: 6556462303591906810}
     - {fileID: 7443216351021195438}
@@ -79590,6 +79590,7 @@ MonoBehaviour:
   - key: AngelSwordFX
     renderers:
     - {fileID: 1114686441188680006}
+  dressCostume_Code: Dresscostume122
 --- !u!1 &3180307764863694625
 GameObject:
   m_ObjectHideFlags: 0
@@ -79642,7 +79643,7 @@ GameObject:
   - component: {fileID: 1991811962535137311}
   - component: {fileID: 2329373645779255952}
   - component: {fileID: 4209376665973604264}
-  - component: {fileID: 8722014925320892153}
+  - component: {fileID: 2493848966955312624}
   m_Layer: 8
   m_Name: Hero
   m_TagString: Player
@@ -79712,8 +79713,8 @@ MonoBehaviour:
   detailedGizmos: 0
   startEndModifier:
     addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
+    exactStartPoint: 4
+    exactEndPoint: 0
     useRaycasting: 0
     mask:
       serializedVersion: 2
@@ -79792,27 +79793,36 @@ MonoBehaviour:
   myCollider: {fileID: 1145035902}
   whiteFlash: {fileID: 0}
   stateController: {fileID: 2260746178445977647}
+  kda_Controller: {fileID: 0}
   characterCostume: {fileID: 8717389949831578577}
   isInvincible: 1
-  isDisable: 0
+  isUntargetted: 0
+  isStopScanning: 0
   isReadyToMove: 0
   isReadyToAttack: 0
   isMove: 0
   isAttacking: 0
   isDead: 0
   myField: 0
+  code: Hunter9
+  name: "\uD5CC\uD130 9"
+  jobClass: "\uC804\uC0AC"
   playStatus:
-    attackPower: 2
+    attackPower: 1
     attackRange: 0.4
     attackSpeedPercent: 1.2
     maxHealth: 10
     moveSpeedPercent: 2
-    viewRange: 7
+    viewRange: 5
     curHealth: 0
-  desirePlayStatus:
+  playStatus_Desire:
     hunger: 100
     sleep: 100
     stress: 100
+  playStatus_KDA:
+    kill_Score: 0
+    death_Score: 0
+    assist_Score: 0
   anim: {fileID: 3180159873120409964}
   aiLerp: {fileID: 2329373645779255952}
   dropRange: {x: 1, y: 1, z: 1}
@@ -79824,7 +79834,7 @@ MonoBehaviour:
   eventCallAnimation: {fileID: 1203327867357678589}
   attackPrefab: {fileID: 1916831241361388, guid: 11063ed69985f27448f832ee1123eaad, type: 3}
   attackEvent: {fileID: 11400000, guid: 58680498672b6a44c826a3d8b999b500, type: 2}
---- !u!114 &8722014925320892153
+--- !u!114 &2493848966955312624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79833,13 +79843,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3180573088566432487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db79603ae6557d249947683ed0684c0a, type: 3}
+  m_Script: {fileID: 11500000, guid: 965fc7228711c6643b60ca04f4d7d71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cycleCount: 0
-  character: {fileID: 4209376665973604264}
-  waitSecond: 30
-  enemies: []
+  character: {fileID: 0}
+  combatField: 1
+  combatTime: 30
 --- !u!1 &3180633415963608375
 GameObject:
   m_ObjectHideFlags: 0
@@ -85283,7 +85292,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: x00
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 816e98db3a71d8e4b9d454b21863f563, type: 2}
+  m_fontAsset: {fileID: 0}
   m_sharedMaterial: {fileID: 7051806395328159520, guid: 816e98db3a71d8e4b9d454b21863f563, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

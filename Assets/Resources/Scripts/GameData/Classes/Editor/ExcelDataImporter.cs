@@ -501,6 +501,8 @@ namespace GDBA
                     return true;
                 case "HelmetInfoTable":
                     return true;
+                case "CharacterInfoTable":
+                    return true;
             }
             return true;
         }
@@ -515,6 +517,8 @@ namespace GDBA
                     return new WeaponInfoImporter(filePath);
                 case "HelmetInfoTable":
                     return new HelmetInfoImporter(filePath);
+                case "CharacterInfoTable":
+                    return new CharacterInfoImporter(filePath);
             }
 
             return null;

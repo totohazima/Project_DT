@@ -9,7 +9,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 {
     public FieldActivity fieldActivity;
     public bool isSpawn = false; //true일 경우 리스폰
-    public int spawnUnitCount;
+    public int spawnUnitCount; //유닛 수 제한
     public Transform spawnPointGroup;
     public List<Transform> spawnPoints = new List<Transform>();
 
@@ -32,7 +32,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     }
     public void CustomUpdate()
     {
-        if(isSpawn)
+        if(fieldActivity.monsters.Count < spawnUnitCount || isSpawn)
         {
             SpawnSetting();
             isSpawn = false;
@@ -45,32 +45,27 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 
     protected void SpawnSetting()
     {
-        List<EnemyCharacter> prefabs = new List<EnemyCharacter>();
-        List<Vector3> pos = new List<Vector3>();
+        EnemyCharacter prefabs = new EnemyCharacter();
+        Vector3 pos = Vector3.zero;
 
-        for (int i = 0; i < spawnUnitCount; i++)
-        {
-            prefabs.Add(monster);
-        }
-        pos = SpawnPointSet(spawnUnitCount);
-        UnitSpawn(prefabs, spawnUnitCount, pos);
+        prefabs = monster;
+        pos = SpawnPointSet();
+
+        UnitSpawn(prefabs, pos);
     }
-    protected void UnitSpawn(List<EnemyCharacter> prefab, int count, List<Vector3> spawnPos)
+    protected void UnitSpawn(EnemyCharacter prefab,Vector3 spawnPos)
     {
-        for (int i = 0; i < count; i++)
-        {
-            prefab[i].myField = fieldActivity.controlField;
-            GameObject monster = PoolManager.instance.Spawn(prefab[i].gameObject, spawnPos[i], Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
-            monster.transform.position = spawnPos[i];
+        prefab.myField = fieldActivity.controlField;
+        GameObject monster = PoolManager.instance.Spawn(prefab.gameObject, spawnPos, Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
+        monster.transform.position = spawnPos;
 
-            EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
-            fieldActivity.monsters.Add(monsterCharacter);
-        }
+        EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
+        fieldActivity.monsters.Add(monsterCharacter);
     }
 
-    protected List<Vector3> SpawnPointSet(int count)
+    protected Vector3 SpawnPointSet()
     {
-        List<Vector3> pos = new List<Vector3>();
+        Vector3 pos = Vector3.zero;
 
         float[] chanceList = new float[spawnPoints.Count];
 
@@ -79,13 +74,10 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
             chanceList[i] = 1f / chanceList.Length; // 각 스폰 포인트의 확률을 동일하게 설정
         }
 
-        for (int i = 0; i < count; i++)
-        {
-            int index = GameManager.instance.Judgment(chanceList);
+        int index = GameManager.instance.Judgment(chanceList);
 
-            Vector3 randPos = spawnPoints[index].position;
-            pos.Add(randPos);
-        }
+        Vector3 randPos = spawnPoints[index].position;
+        pos = randPos;
 
         return pos;
     }

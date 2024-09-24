@@ -1,24 +1,22 @@
+using FieldHelper;
 using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Schema;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class FieldManager : MonoBehaviour, ICustomUpdateMono
+public class FieldManager : MonoBehaviour
 {
     public static FieldManager instance;
     public AstarPath astarPath;
     public CameraDrag cameraDrag;
-    public Tilemap tilemap;
     public Transform spawnPool;
 
     public List<Transform> fieldList = new List<Transform>();
-    public List<FieldActivity> fields = new List<FieldActivity>();
-    public List<FieldSpawner> fieldSpawners = new List<FieldSpawner>();
+    [HideInInspector] public List<FieldActivity> fields = new List<FieldActivity>();
+    [HideInInspector] public List<FieldSpawner> fieldSpawners = new List<FieldSpawner>();
 
-    [HideInInspector] public float xMin, xMax, yMin, yMax;
+    [Range(0, 10)] public int spawnHeroCount = 1;
 
     private void Awake()
     {
@@ -34,43 +32,56 @@ public class FieldManager : MonoBehaviour, ICustomUpdateMono
             {
                 fieldSpawners.Add(fieldList[i].GetComponentInChildren<FieldSpawner>());
             }
-        }
-
-        LimitPosition();    
+        }   
     }
 
     void Start()
     {
         HeroSpawn();
     }
-    void HeroSpawn()
+    private void HeroSpawn()
     {
-        GameObject heroPrefab = Resources.Load<GameObject>("Prefabs/Player/Hero");
-        GameObject hero = PoolManager.instance.Spawn(heroPrefab, Vector3.zero, Vector3.one, Quaternion.identity, true, spawnPool);
+        List<Vector3> pos = new List<Vector3>();
+        pos = SpawnPointSet(spawnHeroCount);
+
+        for (int i = 0; i < pos.Count; i++)
+        {
+            GameObject heroPrefab = Resources.Load<GameObject>("Prefabs/Player/Hero");
+
+            Character character = heroPrefab.GetComponent<Character>();
+            CharacterInfoTable.Data data = GameManager.instance.gameDataBase.characterInfoTable.table[i];
+
+            character.code = data.characterCode;
+            character.name = data.characterName;
+            character.jobClass = data.characterClass;
+            character.characterCostume.dressCostume_Code = data.characterCostumeCode;
+
+            GameObject hero = PoolManager.instance.Spawn(character.gameObject, pos[i], Vector3.one, Quaternion.identity, true, spawnPool);
+        }
     }
-    private void OnEnable()
+    protected List<Vector3> SpawnPointSet(int count)
     {
-        CustomUpdateManager.customUpdateMonos.Add(this);
-    }
-    private void OnDisable()
-    {
-        CustomUpdateManager.customUpdateMonos.Remove(this);
+        List<Vector3> pos = new List<Vector3>();
+        FieldSpawner spawner = fieldSpawners[(int)FieldMap.Field.VILLAGE];
+
+        float[] chanceList = new float[spawner.spawnPoints.Count];
+
+        for (int i = 0; i < chanceList.Length; i++)
+        {
+            chanceList[i] = 1f / chanceList.Length; // 각 스폰 포인트의 확률을 동일하게 설정
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            int index = GameManager.instance.Judgment(chanceList);
+
+            Vector3 randPos = spawner.spawnPoints[index].position;
+            pos.Add(randPos);
+        }
+
+        return pos;
     }
 
-    public void CustomUpdate()
-    {
-
-    }
-
-    private void LimitPosition()
-    {
-        BoundsInt bounds = tilemap.cellBounds;
-
-        xMin = bounds.xMin;
-        xMax = bounds.xMax;
-        yMin = bounds.yMin;
-        yMax = bounds.yMax;
-    }
 
     public void AllFieldSpawn()
     {

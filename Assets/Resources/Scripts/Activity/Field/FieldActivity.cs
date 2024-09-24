@@ -14,6 +14,8 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);
     [Header("Monsters")]
     public List<EnemyCharacter> monsters = new List<EnemyCharacter>();
+    [Header("Boss")]
+    public int bossPoint = 0;
     void OnEnable()
     {
        CustomUpdateManager.customUpdateMonos.Add(this);

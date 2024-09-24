@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
-using static Pathfinding.Examples.Interactable.TeleportAgentOnLinkAction;
 
 public class EnemyCharacter : Character
 {
@@ -15,7 +14,9 @@ public class EnemyCharacter : Character
     private float randomMoveTime; //이 시간 동안 타겟이 잡히지 않으면 일정 거리 내 위치로 랜덤 이동
     private float randomMoveTime_Max = 5f;
     private float randomMoveTime_Min = 1f;
-    [Header("ScanTime_Info")]
+    [Header("Scan_Info")]
+    public List<HeroCharacter> soonAttacker = new List<HeroCharacter>();
+    [HideInInspector] public int soonAttackerLimit = 2;
     private float scanDelay = 0.1f; //스캔이 재작동하는 시간
     private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
     [Header("ItemDrop_Info")]
@@ -31,16 +32,20 @@ public class EnemyCharacter : Character
         base.ReCycle();
         onRandomMove = false;
         isScanning = false;
+        soonAttacker.Clear();
+        playStatus_Desire.Reset();
+        playStatus_KDA.Reset();
     }
     public override void CustomUpdate()
     {
-        if(isDisable || isDead)
+        if(isDead)
         {
             return;
         }
 
         StartCoroutine(RandomMoveLocation());
-        StartCoroutine(ObjectScan(scanDelay));
+        //StartCoroutine(ObjectScan(scanDelay));
+        AttackRangeScan();
         StatCalculate();
         StatusUpdate();
         AnimationUpdate();
@@ -52,6 +57,8 @@ public class EnemyCharacter : Character
             eventCallAnimation.callPrefab = attackPrefab;
         }
     }
+
+
     private IEnumerator RandomMoveLocation()
     {
         if (onRandomMove)
@@ -117,7 +124,6 @@ public class EnemyCharacter : Character
                 isReadyToAttack = false;
             }
 
-            AttackRangeScan();
             isScanning = false;
         }
     }
@@ -175,7 +181,19 @@ public class EnemyCharacter : Character
     }
     private void UpdateAttackStatus()
     {
-        if (isReadyToAttack) isMove = false;
+        if (isReadyToAttack)
+        {
+            isMove = false;
+        }
+
+        if(soonAttacker.Count > soonAttackerLimit)
+        {
+            isUntargetted = true;
+        }
+        else
+        {
+            isUntargetted = false;
+        }
     }
     private void UpdateLerpSpeed()
     {
@@ -235,6 +253,13 @@ public class EnemyCharacter : Character
         anim.SetBool(AnimatorParams.ATTACK_1, isReadyToAttack);
     }
 
+    public override void OnHit(double damage, Character attacker)
+    {
+        base.OnHit(damage, attacker);
+
+        //피격 됐을때 타겟
+        targetUnit = attacker.transform;
+    }
 
     public override IEnumerator Death()
     {

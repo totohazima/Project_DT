@@ -1,8 +1,10 @@
+using FieldHelper;
 using GameEvent;
 using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -21,7 +23,7 @@ public class HeroCharacter : Character, IPointerClickHandler
     [Header("Scanning Info")]
     private float scanDelay = 0.1f;
     private bool isScanning = false;
-
+    private EnemyCharacter soonTargetter = null;
     [Header("Click Process Info")]
     protected bool onClickProcess;
 
@@ -37,17 +39,22 @@ public class HeroCharacter : Character, IPointerClickHandler
         onRandomMove = false;
         isFieldEnter = false;
         isScanning = false;
+        soonTargetter = null;
+        characterCostume.CostumeEquip_Process();
     }
 
     public override void CustomUpdate()
     {
-        if(isDisable || isDead)
+        if(isDead)
         {
             return;
         }
 
         //StartCoroutine(RandomMoveLocation());
-        StartCoroutine(ObjectScan(scanDelay));
+        if (!isStopScanning)
+        {
+            StartCoroutine(ObjectScan(scanDelay));
+        }
         AttackRangeScan();
         StatCalculate();
         StatusUpdate();
@@ -102,10 +109,33 @@ public class HeroCharacter : Character, IPointerClickHandler
             isScanning = true;
 
             Collider[] detectedColls = Physics.OverlapSphere(myObject.position, (float)playStatus.viewRange, 1 << 7);
+            List<Collider> detectedList = new List<Collider>(); //타겟으로 잡을 수 있는 상태의 몬스터들을 담음
             float shortestDistance = Mathf.Infinity;
             Transform nearestTarget = null;
+            
+            FieldActivity field = FieldManager.instance.fields[(int)myField];
 
-            foreach (Collider col in detectedColls)
+            foreach(Collider col in detectedColls)
+            {
+                if (col == null || col == myCollider)
+                {
+                    continue;
+                }
+
+                for (int i = 0; i < field.monsters.Count; i++)
+                {
+                    if (col == field.monsters[i].myCollider)
+                    {
+                        if (field.monsters[i].isUntargetted == false)
+                        {
+                            detectedList.Add(field.monsters[i].myCollider);        
+                        }
+                    }
+                }
+            }
+
+
+            foreach (Collider col in detectedList)
             {
                 if (col == null || col == myCollider)
                 {
@@ -124,12 +154,52 @@ public class HeroCharacter : Character, IPointerClickHandler
 
             if (nearestTarget != null)
             {
-                targetUnit = nearestTarget;
+                if (nearestTarget != targetUnit)
+                {
+                    EnemyCharacter target = nearestTarget.GetComponentInParent<EnemyCharacter>();
+                    bool isTargeting = false;
+                    //기존 타겟이 아예 없는 경우->새로 잡은 타겟이 기존 타겟이 되며 어태커 리스트에 자신을 추가
+                    //새로 잡은 타겟이 기존에 잡은 타겟과 같은 경우 -> 아무것도 할 필요 없음
+                    //새로 잡은 타겟이 기존 타겟과 다른 경우->기존 타겟 어태커 리스트에서 자신을 지움 이후 새 타겟의 어태커 리스트에 자신을 추가
+                    if (soonTargetter == null)
+                    {
+                        soonTargetter = target;
+
+                        if (soonTargetter.soonAttacker.Count < soonTargetter.soonAttackerLimit)
+                        {
+                            soonTargetter.soonAttacker.Add(this);
+                            isTargeting = true;
+                        }
+                    }
+                    else if(soonTargetter == target)
+                    {
+                        soonTargetter = target;
+                        if (soonTargetter.soonAttacker.Count < soonTargetter.soonAttackerLimit)
+                        {
+                            isTargeting = true;
+                        }
+                    }
+                    else if(soonTargetter != target)
+                    {
+                        soonTargetter.soonAttacker.Remove(this);
+
+                        soonTargetter = target;
+
+                        if (soonTargetter.soonAttacker.Count < soonTargetter.soonAttackerLimit)
+                        {
+                            soonTargetter.soonAttacker.Add(this);
+                            isTargeting = true;
+                        }
+                    }
+
+                    if (isTargeting)
+                        targetUnit = soonTargetter.transform;
+                    
+                }
             }
             else
             {
                 targetUnit = null;
-                isReadyToAttack = false;
             }
 
 
@@ -141,6 +211,7 @@ public class HeroCharacter : Character, IPointerClickHandler
     {
         if(targetUnit == null)
         {
+            isReadyToAttack = false;
             return;
         }
 
@@ -180,6 +251,11 @@ public class HeroCharacter : Character, IPointerClickHandler
                 isFieldEnter = false;
                 targetField = null;
             }
+
+            if(!targetUnit.gameObject.activeSelf)
+            {
+                targetUnit = null;
+            }
         }
         else if (targetField != null)
         {
@@ -197,8 +273,19 @@ public class HeroCharacter : Character, IPointerClickHandler
 
     private void UpdateAttackStatus()
     {
-        if (isReadyToAttack) 
+        if (isReadyToAttack)
+        {
             isMove = false;
+        }
+
+        if(myField == FieldMap.Field.VILLAGE)
+        {
+            isStopScanning = true;
+        }
+        else
+        {
+            isStopScanning = false; 
+        }
     }
 
     private void UpdateLerpSpeed()
@@ -244,7 +331,7 @@ public class HeroCharacter : Character, IPointerClickHandler
             }
         }
 
-        if(isReadyToAttack)
+        if(isReadyToAttack && targetUnit != null)
         {
             if (targetUnit.position.x < myObject.position.x)
             {
@@ -271,7 +358,11 @@ public class HeroCharacter : Character, IPointerClickHandler
 
         myCollider.enabled = false;
         isReadyToMove = false;
-
+        
+        if(kda_Controller != null)
+        {
+            //kda_Controller.KDA_Calculator()
+        }
         yield return new WaitForSeconds(1f);
 
         myCollider.enabled = true;

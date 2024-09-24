@@ -49,7 +49,7 @@ namespace StatusHelper
     }
 
     [System.Serializable]
-    public class DesirePlayStatus : Desire
+    public class Desire_PlayStatus : Desire
     {
         public double Hunger
         {
@@ -67,6 +67,26 @@ namespace StatusHelper
         {
             get { return stress; }
             set { stress = value; }
+        }
+    }
+
+    [System.Serializable]
+    public class KDA_PlayStatus : KDA
+    {
+        public int Kill_Score
+        {
+            get { return kill_Score; }
+            set { kill_Score = value; }
+        }
+        public int Death_Score
+        {
+            get { return death_Score; }
+            set { death_Score = value; }
+        }
+        public int Assist_Score
+        {
+            get { return assist_Score; }
+            set { assist_Score = value; }
         }
     }
 }
