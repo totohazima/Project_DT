@@ -17,6 +17,7 @@ public class FieldManager : MonoBehaviour
     [HideInInspector] public List<FieldSpawner> fieldSpawners = new List<FieldSpawner>();
 
     [Range(0, 10)] public int spawnHeroCount = 1;
+    public List<HeroCharacter> heroList = new List<HeroCharacter>();
 
     private void Awake()
     {
@@ -49,11 +50,11 @@ public class FieldManager : MonoBehaviour
         {
             GameObject heroPrefab = Resources.Load<GameObject>("Prefabs/Player/Hero");
 
-            Character character = heroPrefab.GetComponent<Character>();
+            HeroCharacter character = heroPrefab.GetComponent<HeroCharacter>();
             CharacterInfoTable.Data data = GameManager.instance.gameDataBase.characterInfoTable.table[i];
 
             character.code = data.characterCode;
-            character.name = data.characterName;
+            character.characterName = data.characterName;
             character.jobClass = data.characterClass;
             character.characterCostume.dressCostume_Code = data.characterCostumeCode;
 
@@ -67,6 +68,9 @@ public class FieldManager : MonoBehaviour
             {
                 algorithm.combatField = FieldMap.Field.SNOW;
             }
+
+            HeroCharacter heroCharacter = hero.GetComponent<HeroCharacter>();
+            heroList.Add(heroCharacter);
         }
     }
     protected List<Vector3> SpawnPointSet(int count)

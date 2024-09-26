@@ -32,7 +32,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     }
     public void CustomUpdate()
     {
-        if(isSpawn)
+        if(isSpawn || fieldActivity.monsters.Count == 0)
         {
             SpawnSetting();
             isSpawn = false;
@@ -63,7 +63,10 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
             prefab[i].myField = fieldActivity.controlField;
             GameObject monster = PoolManager.instance.Spawn(prefab[i].gameObject, spawnPos[i], Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
             monster.transform.position = spawnPos[i];
+
             EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
+            monsterCharacter.myField = fieldActivity.controlField;
+            monsterCharacter.targetField = fieldActivity.controlField;
             fieldActivity.monsters.Add(monsterCharacter);
         }
     }

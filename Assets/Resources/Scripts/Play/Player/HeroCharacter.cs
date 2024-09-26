@@ -4,6 +4,7 @@ using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Build.Pipeline.Utilities;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,12 +15,11 @@ public class HeroCharacter : Character, IPointerClickHandler
     [Header("Field and Movement Info")]
     public bool isFieldEnter = false;
     public bool onRandomMove = false;
-
+    public bool isBuildingUsing = false;
     private float randomMoveRadius = 2f;
     private float randomMoveTime;
     private float randomMoveTime_Max = 10f;
     private float randomMoveTime_Min = 3f;
-
     [Header("Scanning Info")]
     private float scanDelay = 0.1f;
     private bool isScanning = false;
@@ -50,7 +50,7 @@ public class HeroCharacter : Character, IPointerClickHandler
             return;
         }
 
-        //StartCoroutine(RandomMoveLocation());
+        //StartCoroutine(RandomMoveLocation(myField));
         if (!isStopScanning)
         {
             StartCoroutine(ObjectScan(scanDelay));
@@ -76,7 +76,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         }
     }
 
-    private IEnumerator RandomMoveLocation()
+    private IEnumerator RandomMoveLocation(FieldMap.Field field)
     {
         if (onRandomMove)
         {
@@ -88,7 +88,7 @@ public class HeroCharacter : Character, IPointerClickHandler
 
         yield return new WaitForSeconds(randomMoveTime);
 
-        Vector3 boxSize = FieldManager.instance.fields[(int)myField].boxSize;
+        Vector3 boxSize = FieldManager.instance.fields[(int)field].boxSize;
         // 오버랩 박스 내에서 무작위 위치 생성
         Vector3 randomPositionWithinBox = new Vector3(
             Random.Range(-boxSize.x / 2, boxSize.x / 2),
@@ -97,7 +97,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         );
 
         // 현재 위치에 대해 상대적인 위치를 적용하여 이동
-        FieldActivity controlField = FieldManager.instance.fields[(int)myField];
+        FieldActivity controlField = FieldManager.instance.fields[(int)field];
         targetLocation = controlField.getTransform.position + randomPositionWithinBox;
 
         onRandomMove = false;  // 이동 종료
@@ -279,17 +279,45 @@ public class HeroCharacter : Character, IPointerClickHandler
             if(isFieldEnter) //필드 진입 시 더 이상 필드 중앙으로 이동할 필요 X
             {
                 isFieldEnter = false;
-                targetField = null;
+                targetField = myField;
             }
 
             if(!targetUnit.gameObject.activeSelf)
             {
                 targetUnit = null;
             }
+        }                                                      
+        else if (targetField != myField)
+        { 
+            if(!isMove) //UpdateLerpSpeed가 이 메서드보다 늦게 실행되어 onTargetFieldPos가 true가 되어 움직이지 못하는 현상 방지
+            {
+                onTargetFieldPos = false;
+            }
+
+            if (!onTargetFieldPos)
+            {
+                onTargetFieldPos = true;
+
+                Vector3 fieldPos = Vector3.zero;
+                Vector3 boxSize = FieldManager.instance.fields[(int)targetField].boxSize;
+
+                Vector3 randomPositionWithinBox = new Vector3(
+                    Random.Range(-boxSize.x / 2, boxSize.x / 2),
+                    Random.Range(-boxSize.y / 2, boxSize.y / 2),
+                    Random.Range(-boxSize.z / 2, boxSize.z / 2)
+                );
+
+                FieldActivity controlField = FieldManager.instance.fields[(int)targetField];
+                fieldPos = controlField.getTransform.position + randomPositionWithinBox;
+
+                SetTargetPosition(fieldPos);
+            }
         }
-        else if (targetField != null)
+        else if(targetBuilding != Building.BuildingType.NONE)
         {
-            SetTargetPosition(targetField.position);
+            Vector3 buildingPos = BuildingManager.Instance.buildings[(int)targetBuilding - 1].interactionCenter.position;
+
+            SetTargetPosition(buildingPos);
         }
         else if (targetLocation != Vector3.zero)
         {
@@ -297,7 +325,12 @@ public class HeroCharacter : Character, IPointerClickHandler
         }
         else
         {
-            isMove = false;
+            //isMove = false;
+        }
+
+        if(targetField == myField)
+        {
+            onTargetFieldPos = false;
         }
     }
 
@@ -323,7 +356,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         aiLerp.canMove = isMove;
         aiLerp.speed = stateController.moveSpeed;
 
-        if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath)
+        if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath || isBuildingUsing)
         {
             isMove = false;
         }
@@ -393,7 +426,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         {
             //kda_Controller.KDA_Calculator()
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
 
         myCollider.enabled = true;
         Disappear();
@@ -419,4 +452,24 @@ public class HeroCharacter : Character, IPointerClickHandler
         yield return 0;
     }
 
+    /// <summary>
+    /// 건물 상호작용 애니메이션
+    /// </summary>
+    public void Builng_Use(Building building)
+    {
+        StartCoroutine(Building_Interaction(building));    
+    }
+    protected IEnumerator Building_Interaction(Building building)
+    {
+        Debug.Log(characterName + building.buildingName + " 상호작용 시작");
+        isBuildingUsing = true;
+
+        yield return new WaitForSeconds(5f);
+
+        targetBuilding = Building.BuildingType.NONE;
+        isBuildingUsing = false;
+        building.isInteraction = false;
+        building.customerList.Remove(this);
+        Debug.Log(characterName + building.buildingName + " 상호작용 완료");
+    }
 }

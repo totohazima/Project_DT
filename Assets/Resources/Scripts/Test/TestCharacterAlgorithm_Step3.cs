@@ -8,7 +8,7 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
     public HeroCharacter character;
     public FieldMap.Field combatField;
     public float combatTime = 0f;
-    private float combatTimer = 0f;
+    [SerializeField] private float combatTimer = 0f;
 
     private void Start()
     {
@@ -16,22 +16,9 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
         
         StartCoroutine(GoCombatField(combatField));
     }
-    private void Update()
-    {
-        if(character.isReadyToAttack)
-        {
-            combatTimer -= Time.deltaTime;  
-        }
-
-        if (combatTimer <= 0f && !character.isReadyToAttack || FieldManager.instance.fields[(int)combatField].monsters.Count == 0)
-        {
-            StartCoroutine(GoVillage());
-        }
-    }
-
     private IEnumerator GoCombatField(FieldMap.Field combatField)
     {
-        character.targetField = FieldManager.instance.fieldList[(int)combatField];
+        character.targetField = combatField;
         character.targetUnit = null;
         combatTimer = combatTime;
 
@@ -39,8 +26,7 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
         {
             if (character.myField == combatField)
             {
-                yield return new WaitForSeconds(3f);
-
+                StartCoroutine(CombatField());
                 yield break;
             }
 
@@ -48,9 +34,27 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
         }
     }
 
+    private IEnumerator CombatField()
+    {
+        while (true)
+        {
+            if (character.isReadyToAttack)
+            {
+                combatTimer -= Time.deltaTime;
+            }
+
+            if (combatTimer <= 0f && !character.isReadyToAttack || FieldManager.instance.fields[(int)combatField].monsters.Count == 0)
+            {
+                StartCoroutine(GoVillage());
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
     private IEnumerator GoVillage()
     {
-        character.targetField = FieldManager.instance.fieldList[(int)FieldMap.Field.VILLAGE];
+        character.targetField = FieldMap.Field.VILLAGE;
         character.targetUnit = null;
         while(true)
         {
@@ -58,7 +62,22 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
 
             if(character.myField == FieldMap.Field.VILLAGE)
             {
-                yield return new WaitForSeconds(10f);
+                character.targetBuilding = GameManager.instance.GetRandomEnumValue<Building.BuildingType>(1);
+                StartCoroutine(GoBuilding());
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator GoBuilding()
+    {
+        
+        while (true)
+        {
+            if(character.targetBuilding == Building.BuildingType.NONE)
+            {
                 StartCoroutine(GoCombatField(combatField));
                 yield break;
             }

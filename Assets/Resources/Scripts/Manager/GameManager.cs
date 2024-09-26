@@ -49,5 +49,18 @@ public class GameManager : MonoBehaviour
 
         return -1;
     }
+
+
+    /// <summary>
+    /// 열거형에서 랜덤으로 값을 가져옴
+    /// </summary>
+    /// <param name="minNumber">몇번부터 가져올건지 Ex)0번이 NONE일 경우 가져오지 않게하기 위함</param>
+    public T GetRandomEnumValue<T>(int minNumber)
+    {
+        T[] values = (T[])System.Enum.GetValues(typeof(T));
+
+        // 랜덤 인덱스로 하나를 선택
+        return values[Random.Range(minNumber, values.Length)];
+    }
 }
     

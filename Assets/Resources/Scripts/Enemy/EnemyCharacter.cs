@@ -1,3 +1,4 @@
+using FieldHelper;
 using GameEvent;
 using GameSystem;
 using System.Collections;
@@ -43,7 +44,7 @@ public class EnemyCharacter : Character
             return;
         }
 
-        StartCoroutine(RandomMoveLocation());
+        StartCoroutine(RandomMoveLocation(myField));
         //StartCoroutine(ObjectScan(scanDelay));
         AttackRangeScan();
         StatCalculate();
@@ -59,7 +60,7 @@ public class EnemyCharacter : Character
     }
 
 
-    private IEnumerator RandomMoveLocation()
+    private IEnumerator RandomMoveLocation(FieldMap.Field field)
     {
         if (onRandomMove)
         {
@@ -71,7 +72,7 @@ public class EnemyCharacter : Character
 
         yield return new WaitForSeconds(randomMoveTime);
 
-        Vector3 boxSize = FieldManager.instance.fields[(int)myField].boxSize;
+        Vector3 boxSize = FieldManager.instance.fields[(int)field].boxSize;
         // 오버랩 박스 내에서 무작위 위치 생성
         Vector3 randomPositionWithinBox = new Vector3(
             Random.Range(-boxSize.x / 2, boxSize.x / 2),
@@ -80,7 +81,7 @@ public class EnemyCharacter : Character
         );
 
         // 현재 위치에 대해 상대적인 위치를 적용하여 이동
-        FieldActivity controlField = FieldManager.instance.fields[(int)myField];
+        FieldActivity controlField = FieldManager.instance.fields[(int)field];
         targetLocation = controlField.getTransform.position + randomPositionWithinBox;
 
         onRandomMove = false;  // 이동 종료
@@ -166,9 +167,12 @@ public class EnemyCharacter : Character
         {
             SetTargetPosition(targetUnit.position);
         }
-        else if (targetField != null)
+        else if (targetField != myField)
         {
-            SetTargetPosition(targetField.position);
+            Vector3 fieldPos = Vector3.zero;
+
+
+            SetTargetPosition(fieldPos);
         }
         else if (targetLocation != Vector3.zero)
         {
@@ -273,7 +277,7 @@ public class EnemyCharacter : Character
         FieldActivity field = FieldManager.instance.fields[(int)myField];
         field.monsters.Remove(this);
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         myCollider.enabled = true;
 

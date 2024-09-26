@@ -24,11 +24,12 @@ public class Character : FieldObject, ICustomUpdateMono
     public bool isMove;
     public bool isAttacking;
     public bool isDead;
+
     [Header("StatusInfo")]
     //public StatusInfo statusInfo;
     public FieldMap.Field myField;
     public string code;
-    public string name;
+    public string characterName;
     public string jobClass;
     public PlayStatus playStatus;
     public Desire_PlayStatus playStatus_Desire;
@@ -36,11 +37,13 @@ public class Character : FieldObject, ICustomUpdateMono
     public Animator anim;
     public AILerp aiLerp;
     public Vector3 dropRange = new Vector3(1f, 1f, 1f);
+
     [Header("TargetInfo")]
-    public Transform targetField; //내가 가야 할 필드
+    public FieldMap.Field targetField; //내가 가야 할 필드
     public Transform targetUnit;  //타겟으로 잡힌 유닛
     public Vector3 targetLocation;  //이동해야 할 좌표(위치)
-
+    public Building.BuildingType targetBuilding; //내가 가야 할 건물
+    [SerializeField] protected bool onTargetFieldPos = false; //필드 내 랜덤위치를 구할 시 true로
 
     public void OnEnable()
     {
@@ -61,9 +64,9 @@ public class Character : FieldObject, ICustomUpdateMono
         isMove = false;
         isDead = false;
 
-        targetField = null;
         targetUnit = null;
         targetLocation = Vector3.zero;
+        targetBuilding = Building.BuildingType.NONE;
 
         StopAllCoroutines();
     }

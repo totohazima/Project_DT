@@ -12,9 +12,12 @@ public class DropItem : FieldObject, IPointerClickHandler
     public int dropCount = 1;
     [SerializeField] private bool readyToGet = false; //true인 경우 습득 가능
     private GameObject rewardText = null;
+    [Header("DestroyInfo")]
+    public float destroyTime = 60f;
 
     public void Drop_Animation(Vector3 startPos, Vector3 endPos)
     {
+        StartCoroutine(AutoDisappear(destroyTime));
         StartCoroutine(Animation(startPos, endPos));
     }
 
@@ -45,6 +48,7 @@ public class DropItem : FieldObject, IPointerClickHandler
     {
         rewardText = Resources.Load<GameObject>("Prefabs/FieldObject/ItemRewardTxt");
     }
+
     private void Recycle()
     {
         moneyType = GameMoney.GameMoneyType.GOLD;
@@ -59,9 +63,17 @@ public class DropItem : FieldObject, IPointerClickHandler
             GetItem();
         }
     }
+    protected IEnumerator AutoDisappear(float timer)
+    {
+        yield return new WaitForSeconds(timer); //시간 지날 시 자동으로 삭제
+
+        Disappear();
+    }
 
     protected void GetItem()
     {
+        StopCoroutine(AutoDisappear(destroyTime)); //코루틴 해제
+
         PlayerInfo playerInfo = GameManager.instance.gameDataBase.playerInfo;
 
         switch(moneyType)
@@ -79,6 +91,7 @@ public class DropItem : FieldObject, IPointerClickHandler
         Disappear();
     }
 
+    
     protected void ShowFloatingText()
     {
         GameObject text = PoolManager.instance.Spawn(rewardText, myObject.position, Vector3.one, Quaternion.identity, true, myObject.parent);
