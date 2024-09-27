@@ -16,22 +16,22 @@ public class PopupItem : FloatingText
         Sprite typeImage = null;
         typeImage = itemSprite[(int)type];
 
-        itemIcon.sprite = typeImage;
+        //itemIcon.sprite = typeImage;
         StartCoroutine(Text_Animation());
     }
 
     public override IEnumerator Text_Animation()
     {
-        Vector3 destination = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
-        Vector3 fromPos = new Vector3(destination.x, destination.y - 0.2f, destination.z);
+        Vector3 destination = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
+        Vector3 fromPos = new Vector3(destination.x, destination.y - 0.3f, destination.z);
 
         LeanTween.move(gameObject, destination, 1f).setEase(LeanTweenType.easeOutSine).setFrom(fromPos);
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1f);
 
-        LeanTween.value(itemIcon.gameObject, 1, 0, 0.2f).setOnUpdate(UpdateTextAlpha);
+        //LeanTween.value(itemIcon.gameObject, 1, 0, 0.2f).setOnUpdate(UpdateTextAlpha);
 
-        yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.2f);
 
         Recycle();
         Disappeer();
@@ -39,7 +39,7 @@ public class PopupItem : FloatingText
 
     protected override void Recycle()
     {
-        itemIcon.sprite = null;
+        //itemIcon.sprite = null;
     }
     private void UpdateTextAlpha(float alpha)
     {
