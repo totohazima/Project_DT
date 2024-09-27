@@ -276,7 +276,7 @@ public class EnemyCharacter : Character
 
         FieldActivity field = FieldManager.instance.fields[(int)myField];
         field.monsters.Remove(this);
-
+        field.bossPoint += Random.Range(1, 4);
         yield return new WaitForSeconds(0.1f);
 
         myCollider.enabled = true;

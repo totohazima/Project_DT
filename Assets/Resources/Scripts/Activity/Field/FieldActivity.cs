@@ -15,6 +15,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
     [Header("Monsters")]
     public List<EnemyCharacter> monsters = new List<EnemyCharacter>();
     [Header("Boss")]
+    [HideInInspector] public int maxBossPoint = 100;
     public int bossPoint = 0;
     void OnEnable()
     {
@@ -30,6 +31,11 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         if(!onScanning)
         {
             StartCoroutine(ScanCharacter());
+        }
+
+        if(bossPoint > maxBossPoint)
+        {
+            bossPoint = maxBossPoint;
         }
     }
 
