@@ -16,6 +16,7 @@ public class Character : FieldObject, ICustomUpdateMono
     public StateController stateController;
     public KDA_Controller kda_Controller;
     public UICharacterCostume characterCostume;
+    public Transform popupPos;
     public bool isInvincible; //true일 경우 무적
     public bool isUntargetted; //true일 경우 타겟으로 잡히지 않음
     public bool isStopScanning; //true일 경우 스캔 정지
@@ -43,7 +44,8 @@ public class Character : FieldObject, ICustomUpdateMono
     public Transform targetUnit;  //타겟으로 잡힌 유닛
     public Vector3 targetLocation;  //이동해야 할 좌표(위치)
     public Building.BuildingType targetBuilding; //내가 가야 할 건물
-    [SerializeField] protected bool onTargetFieldPos = false; //필드 내 랜덤위치를 구할 시 true로
+    protected bool onTargetFieldPos = false; //필드 내 랜덤위치를 구할 시 true로
+    protected bool onTargetBuildingPos = false; //건물 도착 랜덤위치 구할 시 true로
 
     public void OnEnable()
     {

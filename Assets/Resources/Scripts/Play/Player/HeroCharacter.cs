@@ -15,7 +15,7 @@ public class HeroCharacter : Character, IPointerClickHandler
     [Header("Field and Movement Info")]
     public bool isFieldEnter = false;
     public bool onRandomMove = false;
-    public bool isBuildingUsing = false;
+    public bool isWaitingBuilding = false;
     private float randomMoveRadius = 2f;
     private float randomMoveTime;
     private float randomMoveTime_Max = 10f;
@@ -299,7 +299,8 @@ public class HeroCharacter : Character, IPointerClickHandler
                 onTargetFieldPos = true;
 
                 Vector3 fieldPos = Vector3.zero;
-                Vector3 boxSize = FieldManager.instance.fields[(int)targetField].boxSize;
+                FieldActivity controlField = FieldManager.instance.fields[(int)targetField];
+                Vector3 boxSize = controlField.boxSize;
 
                 Vector3 randomPositionWithinBox = new Vector3(
                     Random.Range(-boxSize.x / 2, boxSize.x / 2),
@@ -307,17 +308,29 @@ public class HeroCharacter : Character, IPointerClickHandler
                     Random.Range(-boxSize.z / 2, boxSize.z / 2)
                 );
 
-                FieldActivity controlField = FieldManager.instance.fields[(int)targetField];
+               
                 fieldPos = controlField.getTransform.position + randomPositionWithinBox;
 
                 SetTargetPosition(fieldPos);
             }
         }
         else if(targetBuilding != Building.BuildingType.NONE)
-        {
-            Vector3 buildingPos = BuildingManager.Instance.buildings[(int)targetBuilding - 1].interactionCenter.position;
+        {   
+            if(!isMove)
+            {
+                onTargetBuildingPos = false;
+            }
 
-            SetTargetPosition(buildingPos);
+            if (!onTargetBuildingPos)
+            {
+                onTargetBuildingPos = true;
+
+                Building building = BuildingManager.Instance.buildings[(int)targetBuilding - 1];
+
+                Vector3 buildingPos = GetRandomPositionOutsideBox2();
+                buildingPos = building.myObject.position + buildingPos;
+                SetTargetPosition(buildingPos);
+            }
         }
         else if (targetLocation != Vector3.zero)
         {
@@ -332,8 +345,37 @@ public class HeroCharacter : Character, IPointerClickHandler
         {
             onTargetFieldPos = false;
         }
+        
     }
+    private Vector2 GetRandomPositionOutsideBox2()
+    {
+        Building building = BuildingManager.Instance.buildings[(int)targetBuilding - 1];
 
+        // 박스1 경계 계산
+        float leftBox1 = -building.interactionRange.x / 2;
+        float rightBox1 = building.interactionRange.x / 2;
+        float bottomBox1 = -building.interactionRange.y / 2;
+        float topBox1 = building.interactionRange.y / 2;
+
+        // 콜리더 경계 계산 (박스1 중심 기준)
+        float leftBox2 = -building.myCollider2D.bounds.size.x / 2;
+        float rightBox2 = building.myCollider2D.bounds.size.x / 2;
+        float bottomBox2 = -building.myCollider2D.bounds.size.y / 2;
+        float topBox2 = building.myCollider2D.bounds.size.y / 2;
+
+        while (true)
+        {
+            // 박스1 범위 내에서 랜덤 좌표 선택
+            float randomX = Random.Range(leftBox1, rightBox1);
+            float randomY = Random.Range(bottomBox1, topBox1);
+
+            // 선택된 좌표가 박스2 범위에 닿지 않는다면 반환
+            if (!(randomX > leftBox2 && randomX < rightBox2 && randomY > bottomBox2 && randomY < topBox2))
+            {
+                return new Vector2(randomX, randomY);
+            }
+        }
+    }
     private void UpdateAttackStatus()
     {
         if (isReadyToAttack)
@@ -353,13 +395,14 @@ public class HeroCharacter : Character, IPointerClickHandler
 
     private void UpdateLerpSpeed()
     {
-        aiLerp.canMove = isMove;
-        aiLerp.speed = stateController.moveSpeed;
-
-        if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath || isBuildingUsing)
+        if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath || isWaitingBuilding)
         {
             isMove = false;
         }
+
+        aiLerp.canMove = isMove;
+        aiLerp.speed = stateController.moveSpeed;
+
     }
     private void SetTargetPosition(Vector3 targetPosition)
     {
@@ -462,14 +505,24 @@ public class HeroCharacter : Character, IPointerClickHandler
     protected IEnumerator Building_Interaction(Building building)
     {
         Debug.Log(characterName + building.buildingName + " 상호작용 시작");
-        isBuildingUsing = true;
+        ItemPopup(GameManager.instance.GetRandomEnumValue<GameMoney.GameMoneyType>(0), Random.Range(1, 4));
+        building.RewardPopup();
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
 
         targetBuilding = Building.BuildingType.NONE;
-        isBuildingUsing = false;
+        isWaitingBuilding = false;
         building.isInteraction = false;
         building.customerList.Remove(this);
         Debug.Log(characterName + building.buildingName + " 상호작용 완료");
+    }
+
+    protected void ItemPopup(GameMoney.GameMoneyType type, int count)
+    {
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/PopupItem");
+        GameObject popup = PoolManager.instance.Spawn(prefab, popupPos.position, Vector3.one, Quaternion.identity, true, myObject.parent);
+
+        PopupItem popupItem = popup.GetComponent<PopupItem>();
+        popupItem.ItemSetting(type, count);
     }
 }

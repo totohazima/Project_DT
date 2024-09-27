@@ -8,5 +8,7 @@ public class GameMoney
     {
         GOLD = 0,
         RUBY = 1,
+        RUNE = 2,
+        JEWEL = 3,
     }
 }

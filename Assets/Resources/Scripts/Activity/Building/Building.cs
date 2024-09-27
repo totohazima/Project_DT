@@ -1,3 +1,4 @@
+using GameSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class Building : FieldObject
         INN = 5,
     }
 
+    public Collider2D myCollider2D;
     [Header("Status")]
     public BuildingType buildingType;
     public string buildingName;
@@ -25,10 +27,15 @@ public class Building : FieldObject
     public List<Collider> scanHero = new List<Collider>();
     public List<HeroCharacter> customerList = new List<HeroCharacter>();
     public Transform interactionCenter = null;
-    [SerializeField] private Vector3 interactionRange = new Vector3(1f, 1f, 1f);
+    public Vector3 interactionRange = new Vector3(1f, 1f, 1f);
     private void Update()
     {
         StartCoroutine(characterScan());
+
+        foreach(HeroCharacter waitingUnit in customerList)
+        {
+            waitingUnit.isWaitingBuilding = true;
+        }
 
         if(customerList.Count > 0 && !isInteraction)
         {
@@ -72,6 +79,18 @@ public class Building : FieldObject
 
         customer.Builng_Use(this);
     }
+
+    //리스트로 받은 아이템 정보를 텍스트로 출력 추후 작업
+    public void RewardPopup()
+    {
+        GameObject rewardText = Resources.Load<GameObject>("Prefabs/FieldObject/BuildingRewardTxt");
+
+        GameObject text = PoolManager.instance.Spawn(rewardText, interactionCenter.position, Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
+
+        BuildingRewardText floatText = text.GetComponent<BuildingRewardText>();
+        floatText.TextSetting(GameMoney.GameMoneyType.GOLD, 1);
+    }
+
 
 #if UNITY_EDITOR
     int segments = 100;
