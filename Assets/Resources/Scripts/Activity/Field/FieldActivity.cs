@@ -33,10 +33,21 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
             StartCoroutine(ScanCharacter());
         }
 
-        if(bossPoint > maxBossPoint)
+        if(bossPoint >= maxBossPoint)
         {
-            bossPoint = maxBossPoint;
+            //bossPoint = maxBossPoint;
+            BossSpawn();
         }
+    }
+
+    protected void BossSpawn()
+    {
+        Debug.Log("보스 소환");
+        bossPoint = 0;
+        
+        //보스 소환 애니메이션
+        //카메라 이동 애니메이션
+        //스캔된 캐릭터들의 타겟을 보스로 고정시켜야 함
     }
 
     protected IEnumerator ScanCharacter()
@@ -50,11 +61,13 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         // 겹친 콜라이더에 대해 처리
         foreach (Collider hitCollider in hitColliders)
         {
-            HeroCharacter hunter = hitCollider.transform.GetComponentInParent<HeroCharacter>();
-            if (hunter != null)
+            foreach(HeroCharacter hero in FieldManager.instance.heroList)
             {
-                inCharacters.Add(hunter);
-                CharacterFieldSetting(hunter);
+                if(hitCollider == hero.myCollider)
+                {
+                    inCharacters.Add(hero);
+                    CharacterFieldSetting(hero);
+                }
             }
         }
 

@@ -186,12 +186,22 @@ public class HeroCharacter : Character, IPointerClickHandler
             {
                 if (nearestTarget != targetUnit)
                 {
-                    EnemyCharacter target = nearestTarget.GetComponentInParent<EnemyCharacter>();
                     bool isTargeting = false;
-                    //기존 타겟이 아예 없는 경우->새로 잡은 타겟이 기존 타겟이 되며 어태커 리스트에 자신을 추가
+
+                    EnemyCharacter target = null;
+                   
+                    foreach(EnemyCharacter enemy in field.monsters)
+                    {
+                        if(enemy.myCollider.transform == nearestTarget)
+                        {
+                            target = enemy;
+                        }
+                    }
+
+                    //기존 타겟이 아예 없는 경우 -> 새로 잡은 타겟이 기존 타겟이 되며 어태커 리스트에 자신을 추가
                     //새로 잡은 타겟이 기존에 잡은 타겟과 같은 경우 -> 아무것도 할 필요 없음
                     //새로 잡은 타겟이 기존 타겟과 다른 경우->기존 타겟 어태커 리스트에서 자신을 지움 이후 새 타겟의 어태커 리스트에 자신을 추가
-                    if (soonTargetter == null)
+                    if (soonTargetter == null && target != null)
                     {
                         soonTargetter = target;
 
@@ -201,7 +211,7 @@ public class HeroCharacter : Character, IPointerClickHandler
                             isTargeting = true;
                         }
                     }
-                    else if(soonTargetter == target)
+                    else if(soonTargetter == target && target != null)
                     {
                         soonTargetter = target;
                         if (soonTargetter.soonAttacker.Count < soonTargetter.soonAttackerLimit)
@@ -209,7 +219,7 @@ public class HeroCharacter : Character, IPointerClickHandler
                             isTargeting = true;
                         }
                     }
-                    else if(soonTargetter != target)
+                    else if(soonTargetter != target && target != null)
                     {
                         soonTargetter.soonAttacker.Remove(this);
 
@@ -504,7 +514,7 @@ public class HeroCharacter : Character, IPointerClickHandler
     }
     protected IEnumerator Building_Interaction(Building building)
     {
-        Debug.Log(characterName + building.buildingName + " 상호작용 시작");
+        //Debug.Log(characterName + building.buildingName + " 상호작용 시작");
         ItemPopup(GameManager.instance.GetRandomEnumValue<GameMoney.GameMoneyType>(0), Random.Range(1, 4));
         building.RewardPopup();
 
@@ -514,7 +524,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         isWaitingBuilding = false;
         building.isInteraction = false;
         building.customerList.Remove(this);
-        Debug.Log(characterName + building.buildingName + " 상호작용 완료");
+        //Debug.Log(characterName + building.buildingName + " 상호작용 완료");
     }
 
     protected void ItemPopup(GameMoney.GameMoneyType type, int count)
