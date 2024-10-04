@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CameraDrag : MonoBehaviour, ICustomUpdateMono
+public class CameraUsable : MonoBehaviour, ICustomUpdateMono
 {
     public HeroCharacter trackingTarget;
-
     [Header("Bool_Variable")]
     public bool isDontMove; //UI가 떠 있을 때 움직이지 않게
     public bool isCrossLimitLine; //true일때 카메라가 맵 바깥으로 움직일 수 있음
-    [HideInInspector] public bool isCameraMove; // 현재 조작을 하고있는지 확인을 위한 변수
-    [HideInInspector] public bool isTrackingTarget; //true일때 클릭한 유닛을 따라감
-    [SerializeField] private bool onStopTracking = false;
+    public bool isCameraMove; // 현재 조작을 하고있는지 확인을 위한 변수
+    public bool isTrackingTarget; //true일때 클릭한 유닛을 따라감
+    private bool onStopTracking = false;
 
     private new Camera camera;
     private Transform cameraTransform;
@@ -29,7 +29,7 @@ public class CameraDrag : MonoBehaviour, ICustomUpdateMono
 
     void Awake()
     {
-        camera = Camera.main;
+        camera = GetComponent<Camera>();
         cameraTransform = camera.transform;
     }
     private void OnEnable()
@@ -105,7 +105,7 @@ public class CameraDrag : MonoBehaviour, ICustomUpdateMono
             cameraTransform.position = new Vector3(pos.x, pos.y, cameraTransform.position.z);
 
             // 모바일 터치 또는 PC 클릭
-            if (IsTouchOrClick())
+            if (IsTouchOrClick() && !IsPointerOverUI())
             {
                 Vector3 clickPosition = GetTouchOrMouseWorldPosition();
                 StartCoroutine(StopTracking(clickPosition));
@@ -115,11 +115,11 @@ public class CameraDrag : MonoBehaviour, ICustomUpdateMono
         {
             Vector3 mouseWorldPosition = GetTouchOrMouseWorldPosition();
 
-            if (IsTouchOrClick())
+            if (IsTouchOrClick() && !IsPointerOverUI())
             {
                 CameraPositionMoveStart(mouseWorldPosition);
             }
-            else if (IsTouchHeld())
+            else if (IsTouchHeld() && !IsPointerOverUI())
             {
                 CameraPositionMoveProgress(mouseWorldPosition);
             }
@@ -260,6 +260,12 @@ public class CameraDrag : MonoBehaviour, ICustomUpdateMono
     private bool IsTouchHeld()
     {
         return Input.GetMouseButton(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved);
+    }
+
+    // 터치 또는 마우스 드래그가 UI위에서 작동했는지 감지 함수
+    bool IsPointerOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
     }
 
     // 터치 또는 마우스 입력 위치 반환 함수

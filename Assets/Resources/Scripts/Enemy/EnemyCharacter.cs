@@ -9,14 +9,13 @@ using UnityEngine.Events;
 
 public class EnemyCharacter : Character
 {
-    [Header("RandomMove_Info")]
+    [Header("Field and Movement Info")]
     private bool onRandomMove = false;
-    //private float randomMoveRadius = 2f; //이 만큼의 거리내로 랜덤 이동
     private float randomMoveTime; //이 시간 동안 타겟이 잡히지 않으면 일정 거리 내 위치로 랜덤 이동
     private float randomMoveTime_Max = 5f;
     private float randomMoveTime_Min = 1f;
     [Header("Scan_Info")]
-    public List<HeroCharacter> soonAttacker = new List<HeroCharacter>();
+    public List<HeroCharacter> soonAttacker = new List<HeroCharacter>(); //이 몬스터를 타겟으로 잡은 유닛
     [HideInInspector] public int soonAttackerLimit = 2;
     private float scanDelay = 0.1f; //스캔이 재작동하는 시간
     private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
