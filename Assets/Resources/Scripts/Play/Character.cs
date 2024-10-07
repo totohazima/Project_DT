@@ -16,6 +16,7 @@ public class Character : FieldObject, ICustomUpdateMono
     public StateController stateController;
     public KDA_Controller kda_Controller;
     public UICharacterCostume characterCostume;
+    public SpriteGroup spriteGroup;
     public Transform popupPos;
     public bool isInvincible; //true일 경우 무적
     public bool isUntargetted; //true일 경우 타겟으로 잡히지 않음

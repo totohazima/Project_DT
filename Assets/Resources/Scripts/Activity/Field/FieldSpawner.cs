@@ -79,6 +79,8 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 
     public IEnumerator BossSpawn()
     {
+        FieldManager.instance.isAlreadyBossSpawn = true;
+
         GameObject monster = PoolManager.instance.Spawn(boss.gameObject, fieldActivity.getTransform.position, Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
 
         EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
@@ -88,9 +90,11 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         fieldActivity.bosses.Add(monsterCharacter);
 
         monsterCharacter.enabled = false;
-        yield return new WaitForSeconds(5f);
+        StartCoroutine(BossSpawnAnimation(monsterCharacter, 3f));
+        yield return new WaitForSeconds(3.5f);
         monsterCharacter.enabled = true;
         fieldActivity.isBossSpawned = true;
+        FieldManager.instance.isAlreadyBossSpawn = false;
     }
 
     protected List<Vector3> SpawnPointSet(int count)
@@ -112,5 +116,39 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         }
         return pos;
     }
+
+    protected IEnumerator BossSpawnAnimation(EnemyCharacter boss, float fadeDuration)
+    {
+        foreach (SpriteRenderer sprite in boss.spriteGroup.spriteRenderers)
+        {
+            StartCoroutine(FadeSprite(sprite, fadeDuration, 0f, 1f)); // 페이드 인: 알파 0에서 1로
+        }
+
+        yield return new WaitForSeconds(fadeDuration); // 모든 페이드가 끝날 때까지 대기
+    }
+
+    private IEnumerator FadeSprite(SpriteRenderer spriteRenderer, float duration, float startAlpha, float endAlpha)
+    {
+        // 초기 색상을 가져옴
+        Color color = spriteRenderer.color;
+        float elapsed = 0f;
+
+        // duration 동안 페이드 효과
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+
+            // 알파값을 점진적으로 변화
+            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
+            spriteRenderer.color = color;
+
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // 최종 알파값 적용 (마지막 프레임에서 정확히 맞추기 위해)
+        color.a = endAlpha;
+        spriteRenderer.color = color;
+    }
+
 
 }

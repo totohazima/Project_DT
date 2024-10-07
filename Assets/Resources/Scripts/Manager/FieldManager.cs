@@ -11,7 +11,7 @@ public class FieldManager : MonoBehaviour
     public AstarPath astarPath;
     public CameraUsable cameraUsable;
     public Transform spawnPool;
-
+    public bool isAlreadyBossSpawn = false;
     public List<Transform> fieldList = new List<Transform>();
     [HideInInspector] public List<FieldActivity> fields = new List<FieldActivity>();
     [HideInInspector] public List<FieldSpawner> fieldSpawners = new List<FieldSpawner>();

@@ -54,7 +54,7 @@ public class SubCameraUsable : MonoBehaviour
         cameraUsable.isDontMove = false;
     }
 
-    public IEnumerator BossSpawnTrackingCamera(Vector3 startPos, Vector3 endPos, float moveSpeed, FieldActivity field)
+    public IEnumerator BossSpawnAnimation(Vector3 startPos, Vector3 endPos, float moveSpeed, FieldActivity field)
     {
         subCamera.orthographicSize = cameraUsable.viewSize_Default;
 

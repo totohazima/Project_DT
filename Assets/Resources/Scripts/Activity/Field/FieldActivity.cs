@@ -43,7 +43,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
             StartCoroutine(ScanCharacter());
         }
 
-        if(bossPoint >= maxBossPoint)
+        if(bossPoint >= maxBossPoint && !FieldManager.instance.isAlreadyBossSpawn)
         {
             BossSpawn();
         }
@@ -58,7 +58,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 
         //카메라 이동 애니메이션
         CameraUsable camera = FieldManager.instance.cameraUsable;
-        camera.subCameraUsable.AddCoroutine(camera.subCameraUsable.BossSpawnTrackingCamera(camera.transform.position, getTransform.position, 15f, this));
+        camera.subCameraUsable.AddCoroutine(camera.subCameraUsable.BossSpawnAnimation(camera.transform.position, getTransform.position, 20f, this));
 
         //보스 소환 애니메이션
         StartCoroutine(mySpawner.BossSpawn());
