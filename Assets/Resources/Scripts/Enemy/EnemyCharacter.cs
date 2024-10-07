@@ -35,6 +35,7 @@ public class EnemyCharacter : Character
         soonAttacker.Clear();
         playStatus_Desire.Reset();
         playStatus_KDA.Reset();
+        eventCallAnimation.callPrefab = attackPrefab;
     }
     public override void CustomUpdate()
     {
@@ -50,12 +51,12 @@ public class EnemyCharacter : Character
         StatusUpdate();
         AnimationUpdate();
 
-        if (attackEvent != null)
-        {
-            eventListener = new UnityEvent();
-            attackEvent.RegisterListener(gameObject, eventListener);
-            eventCallAnimation.callPrefab = attackPrefab;
-        }
+        //if (attackEvent != null)
+        //{
+        //    eventListener = new UnityEvent();
+        //    attackEvent.RegisterListener(gameObject, eventListener);
+        //    eventCallAnimation.callPrefab = attackPrefab;
+        //}
     }
 
 

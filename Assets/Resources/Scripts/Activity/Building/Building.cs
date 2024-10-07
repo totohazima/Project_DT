@@ -20,6 +20,7 @@ public class Building : FieldObject
     public BuildingType buildingType;
     public string buildingName;
     public int builngLevel = 1;
+    public float buildingDelay;
     [Header("Bool")]
     public bool isInteraction = false; //true일시 상호작용 불가
     private bool onScanning = false;
@@ -28,6 +29,12 @@ public class Building : FieldObject
     public List<HeroCharacter> customerList = new List<HeroCharacter>();
     public Transform interactionCenter = null;
     public Vector3 interactionRange = new Vector3(1f, 1f, 1f);
+    private GameObject rewardText;
+    private void Awake()
+    {
+        rewardText = Resources.Load<GameObject>("Prefabs/FieldObject/BuildingRewardTxt");
+
+    }
     private void Update()
     {
         StartCoroutine(characterScan());
@@ -77,14 +84,12 @@ public class Building : FieldObject
     {
         isInteraction = true;
 
-        customer.Builng_Use(this);
+        customer.Builng_Use(this, buildingDelay);
     }
 
     //리스트로 받은 아이템 정보를 텍스트로 출력 추후 작업
     public void RewardPopup()
     {
-        GameObject rewardText = Resources.Load<GameObject>("Prefabs/FieldObject/BuildingRewardTxt");
-
         GameObject text = PoolManager.instance.Spawn(rewardText, interactionCenter.position, Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
 
         BuildingRewardText floatText = text.GetComponent<BuildingRewardText>();

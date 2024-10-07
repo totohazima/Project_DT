@@ -21888,6 +21888,7 @@ MonoBehaviour:
   astarPath: {fileID: 1092632524}
   cameraUsable: {fileID: 777052604}
   spawnPool: {fileID: 288547690}
+  isAlreadyBossSpawn: 0
   fieldList:
   - {fileID: 2108869295}
   - {fileID: 1084253517}
@@ -77778,10 +77779,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1658083012}
     m_Modifications:
-    - target: {fileID: 619441461156114680, guid: f66818381bd55db4f9537d42c53781de, type: 3}
-      propertyPath: interactionRange.x
-      value: 2.18
-      objectReference: {fileID: 0}
     - target: {fileID: 2537565272225233227, guid: f66818381bd55db4f9537d42c53781de, type: 3}
       propertyPath: m_Name
       value: Trade_House
@@ -77825,22 +77822,6 @@ PrefabInstance:
     - target: {fileID: 2649442005248017346, guid: f66818381bd55db4f9537d42c53781de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4461268160627985866, guid: f66818381bd55db4f9537d42c53781de, type: 3}
-      propertyPath: m_Size.x
-      value: 1.0359311
-      objectReference: {fileID: 0}
-    - target: {fileID: 4461268160627985866, guid: f66818381bd55db4f9537d42c53781de, type: 3}
-      propertyPath: m_Size.y
-      value: 0.7625636
-      objectReference: {fileID: 0}
-    - target: {fileID: 4461268160627985866, guid: f66818381bd55db4f9537d42c53781de, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.016845226
-      objectReference: {fileID: 0}
-    - target: {fileID: 4461268160627985866, guid: f66818381bd55db4f9537d42c53781de, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.4950722
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -77950,14 +77931,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1658083012}
     m_Modifications:
-    - target: {fileID: 889226829662159070, guid: b9d7c8425ed580f498074452740c24fa, type: 3}
-      propertyPath: m_Size.y
-      value: 0.7481359
-      objectReference: {fileID: 0}
-    - target: {fileID: 889226829662159070, guid: b9d7c8425ed580f498074452740c24fa, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.315844
-      objectReference: {fileID: 0}
     - target: {fileID: 896485970085754542, guid: b9d7c8425ed580f498074452740c24fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.58
@@ -78497,22 +78470,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1658083012}
     m_Modifications:
-    - target: {fileID: 686186396199258412, guid: 22f03492b897cc242927974059e3061b, type: 3}
-      propertyPath: m_Size.x
-      value: 0.7820399
-      objectReference: {fileID: 0}
-    - target: {fileID: 686186396199258412, guid: 22f03492b897cc242927974059e3061b, type: 3}
-      propertyPath: m_Size.y
-      value: 0.92571807
-      objectReference: {fileID: 0}
-    - target: {fileID: 686186396199258412, guid: 22f03492b897cc242927974059e3061b, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.027984738
-      objectReference: {fileID: 0}
-    - target: {fileID: 686186396199258412, guid: 22f03492b897cc242927974059e3061b, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.45167232
-      objectReference: {fileID: 0}
     - target: {fileID: 1392094757906328067, guid: 22f03492b897cc242927974059e3061b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.95
@@ -78552,10 +78509,6 @@ PrefabInstance:
     - target: {fileID: 1392094757906328067, guid: 22f03492b897cc242927974059e3061b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5476285826417092415, guid: 22f03492b897cc242927974059e3061b, type: 3}
-      propertyPath: interactionRange.y
-      value: 1.76
       objectReference: {fileID: 0}
     - target: {fileID: 7140405338738505702, guid: 22f03492b897cc242927974059e3061b, type: 3}
       propertyPath: m_Name
@@ -78699,14 +78652,6 @@ PrefabInstance:
     - target: {fileID: 1713879022496721849, guid: 879fe43d26d6a854fa2818133c30dd1d, type: 3}
       propertyPath: m_Name
       value: Restaurant_House
-      objectReference: {fileID: 0}
-    - target: {fileID: 3778547844668544614, guid: 879fe43d26d6a854fa2818133c30dd1d, type: 3}
-      propertyPath: m_Size.y
-      value: 0.7420533
-      objectReference: {fileID: 0}
-    - target: {fileID: 3778547844668544614, guid: 879fe43d26d6a854fa2818133c30dd1d, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.363294
       objectReference: {fileID: 0}
     - target: {fileID: 5549808588511638775, guid: 879fe43d26d6a854fa2818133c30dd1d, type: 3}
       propertyPath: m_LocalPosition.x

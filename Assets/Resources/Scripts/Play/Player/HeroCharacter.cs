@@ -43,6 +43,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         isEliteCombat = false;
         soonTargetter = null;
         characterCostume.CostumeEquip_Process();
+        eventCallAnimation.callPrefab = attackPrefab;
     }
 
     public override void CustomUpdate()
@@ -62,12 +63,12 @@ public class HeroCharacter : Character, IPointerClickHandler
         StatusUpdate();
         AnimationUpdate();
         
-        if(attackEvent != null)
-        {
-            eventListener = new UnityEvent();
-            attackEvent.RegisterListener(gameObject, eventListener);
-            eventCallAnimation.callPrefab = attackPrefab;
-        }
+        //if(attackEvent != null)
+        //{
+        //    eventListener = new UnityEvent();
+        //    attackEvent.RegisterListener(gameObject, eventListener);
+        //    eventCallAnimation.callPrefab = attackPrefab;
+        //}
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -510,17 +511,17 @@ public class HeroCharacter : Character, IPointerClickHandler
     /// <summary>
     /// 건물 상호작용 애니메이션
     /// </summary>
-    public void Builng_Use(Building building)
+    public void Builng_Use(Building building, float useDelay)
     {
-        StartCoroutine(Building_Interaction(building));    
+        StartCoroutine(Building_Interaction(building, useDelay));    
     }
-    protected IEnumerator Building_Interaction(Building building)
+    protected IEnumerator Building_Interaction(Building building, float useDelay)
     {
         //Debug.Log(characterName + building.buildingName + " 상호작용 시작");
         ItemPopup(GameManager.instance.GetRandomEnumValue<GameMoney.GameMoneyType>(0), Random.Range(1, 4));
         building.RewardPopup();
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(useDelay);
 
         targetBuilding = Building.BuildingType.NONE;
         isWaitingBuilding = false;

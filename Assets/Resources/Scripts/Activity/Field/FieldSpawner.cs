@@ -77,6 +77,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         }
     }
 
+    //보스를 스폰 시키고 보스 등장 연출
     public IEnumerator BossSpawn()
     {
         FieldManager.instance.isAlreadyBossSpawn = true;
@@ -88,10 +89,11 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         monsterCharacter.targetField = fieldActivity.controlField;
         monsterCharacter.soonAttackerLimit = -1;
         fieldActivity.bosses.Add(monsterCharacter);
-
         monsterCharacter.enabled = false;
+
         StartCoroutine(BossSpawnAnimation(monsterCharacter, 3f));
         yield return new WaitForSeconds(3.5f);
+
         monsterCharacter.enabled = true;
         fieldActivity.isBossSpawned = true;
         FieldManager.instance.isAlreadyBossSpawn = false;

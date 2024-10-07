@@ -56,11 +56,11 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         Debug.Log("보스 소환");
         bossPoint = 0;
 
-        //카메라 이동 애니메이션
+        //카메라 이동 연출
         CameraUsable camera = FieldManager.instance.cameraUsable;
-        camera.subCameraUsable.AddCoroutine(camera.subCameraUsable.BossSpawnAnimation(camera.transform.position, getTransform.position, 20f, this));
+        camera.subCameraUsable.AddCoroutine(camera.subCameraUsable.CameraBossTracking(camera.transform.position, getTransform.position, 20f, this));
 
-        //보스 소환 애니메이션
+        //보스 소환 연출
         StartCoroutine(mySpawner.BossSpawn());
 
         //스캔된 캐릭터들의 타겟을 보스로 고정시켜야 함

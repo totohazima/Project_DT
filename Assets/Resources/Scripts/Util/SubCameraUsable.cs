@@ -54,7 +54,8 @@ public class SubCameraUsable : MonoBehaviour
         cameraUsable.isDontMove = false;
     }
 
-    public IEnumerator BossSpawnAnimation(Vector3 startPos, Vector3 endPos, float moveSpeed, FieldActivity field)
+    //카메라가 보스 스폰 위치로 움직이게 함
+    public IEnumerator CameraBossTracking(Vector3 startPos, Vector3 endPos, float moveSpeed, FieldActivity field)
     {
         subCamera.orthographicSize = cameraUsable.viewSize_Default;
 

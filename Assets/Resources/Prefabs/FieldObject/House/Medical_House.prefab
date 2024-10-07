@@ -146,11 +146,12 @@ MonoBehaviour:
   buildingType: 2
   buildingName: "\uC758\uB8CC\uC18C"
   builngLevel: 1
+  buildingDelay: 5
   isInteraction: 0
   scanHero: []
   customerList: []
   interactionCenter: {fileID: 3560095809138565038}
-  interactionRange: {x: 1.83, y: 1.8, z: 1}
+  interactionRange: {x: 1.83, y: 1.76, z: 1}
 --- !u!1 &7911744333169607900
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +216,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.020261645, y: 0.4516722}
+  m_Offset: {x: -0.027984738, y: 0.45167232}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -226,7 +227,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8592694, y: 1.0801768}
+  m_Size: {x: 0.7820399, y: 0.92571807}
   m_EdgeRadius: 0
 --- !u!1 &8072296786516763310
 GameObject:
