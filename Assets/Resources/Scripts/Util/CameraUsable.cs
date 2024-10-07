@@ -7,13 +7,7 @@ using UnityEngine.EventSystems;
 public class CameraUsable : MonoBehaviour, ICustomUpdateMono
 {
     public HeroCharacter trackingTarget;
-    [Header("Bool_Variable")]
-    public bool isDontMove; //UI가 떠 있을 때 움직이지 않게
-    public bool isCrossLimitLine; //true일때 카메라가 맵 바깥으로 움직일 수 있음
-    public bool isCameraMove; // 현재 조작을 하고있는지 확인을 위한 변수
-    public bool isTrackingTarget; //true일때 클릭한 유닛을 따라감
-    private bool onStopTracking = false;
-
+    public SubCameraUsable subCameraUsable;
     private new Camera camera;
     private Transform cameraTransform;
     private const float DirectionForceReduceRate = 0.935f; // 감속비율
@@ -21,16 +15,25 @@ public class CameraUsable : MonoBehaviour, ICustomUpdateMono
     private Vector3 startPosition;  // 입력 시작 위치를 기억
     private Vector3 directionForce; // 조작을 멈췄을때 서서히 감속하면서 이동 시키기
 
+    [Header("Bool_Variable")]
+    public bool isDontMove; //UI가 떠 있을 때 움직이지 않게
+    public bool isCrossLimitLine; //true일때 카메라가 맵 바깥으로 움직일 수 있음
+    public bool isCameraMove; // 현재 조작을 하고있는지 확인을 위한 변수
+    public bool isTrackingTarget; //true일때 클릭한 유닛을 따라감
+    private bool onStopTracking = false;
+
     [Header("CameraViewBox")]
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);
+    public float viewSize_Default = 0f;
+    public float viewSize_Tracking = 0f;
     private float xMin, xMax, yMin, yMax; //카메라 이동을 제한하는 4방향 좌표
-    [SerializeField] private float viewSize_Default = 0f;
-    [SerializeField] private float viewSize_Tracking = 0f;
 
     void Awake()
     {
         camera = GetComponent<Camera>();
         cameraTransform = camera.transform;
+
+        subCameraUsable = GetComponentInChildren<SubCameraUsable>();
     }
     private void OnEnable()
     {

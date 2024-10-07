@@ -28,6 +28,6 @@ public class CharacterListSlot_UI : MonoBehaviour
     }
     public void AutoTrack()
     {
-        FieldManager.instance.cameraDrag.trackingTarget = character;
+        FieldManager.instance.cameraUsable.trackingTarget = character;
     }
 }

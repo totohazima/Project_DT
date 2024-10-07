@@ -16,7 +16,7 @@ public class EnemyCharacter : Character
     private float randomMoveTime_Min = 1f;
     [Header("Scan_Info")]
     public List<HeroCharacter> soonAttacker = new List<HeroCharacter>(); //이 몬스터를 타겟으로 잡은 유닛
-    [HideInInspector] public int soonAttackerLimit = 2;
+    [HideInInspector] public int soonAttackerLimit = 2; //-1이면 타겟 제한 없음
     private float scanDelay = 0.1f; //스캔이 재작동하는 시간
     private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
     [Header("ItemDrop_Info")]
@@ -189,9 +189,40 @@ public class EnemyCharacter : Character
             isMove = false;
         }
 
-        if(soonAttacker.Count > soonAttackerLimit)
+        List<HeroCharacter> soonRemoveAttacker = new List<HeroCharacter>();
+        foreach(HeroCharacter attacker in soonAttacker)
         {
-            isUntargetted = true;
+            if(attacker.myField != myField)
+            {
+                if(attacker.transform == targetUnit)
+                {
+                    targetUnit = null;
+                    soonRemoveAttacker.Add(attacker);
+                }
+                else
+                {
+                    soonRemoveAttacker.Add(attacker);
+                }
+            }
+        }
+        foreach(HeroCharacter RemoveAttacker in soonRemoveAttacker)
+        {
+            if (soonAttacker.Contains(RemoveAttacker))
+            {
+                soonAttacker.Remove(RemoveAttacker);
+            }
+        }
+
+        if (soonAttackerLimit != -1)
+        {
+            if (soonAttacker.Count > soonAttackerLimit)
+            {
+                isUntargetted = true;
+            }
+            else
+            {
+                isUntargetted = false;
+            }
         }
         else
         {
@@ -274,8 +305,18 @@ public class EnemyCharacter : Character
         myCollider.enabled = false;
 
         FieldActivity field = FieldManager.instance.fields[(int)myField];
-        field.monsters.Remove(this);
-        field.bossPoint += Random.Range(1, 4);
+        if(field.monsters.Contains(this))
+        {
+            field.monsters.Remove(this);
+            field.bossPoint += Random.Range(1, 4);
+        }
+        else if(field.bosses.Contains(this))
+        {
+            field.bosses.Remove(this);
+            field.isBossSpawned = false;
+            field.HeroEliteCombatCalc(false);
+        }
+        
         yield return new WaitForSeconds(0.1f);
 
         myCollider.enabled = true;

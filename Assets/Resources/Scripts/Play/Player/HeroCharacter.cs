@@ -16,6 +16,7 @@ public class HeroCharacter : Character, IPointerClickHandler
     public bool isFieldEnter = false;
     public bool onRandomMove = false;
     public bool isWaitingBuilding = false;
+    public bool isEliteCombat = false;
     private float randomMoveRadius = 2f;
     private float randomMoveTime;
     private float randomMoveTime_Max = 10f;
@@ -39,6 +40,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         onRandomMove = false;
         isFieldEnter = false;
         isScanning = false;
+        isEliteCombat = false;
         soonTargetter = null;
         characterCostume.CostumeEquip_Process();
     }
@@ -51,7 +53,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         }
 
         //StartCoroutine(RandomMoveLocation(myField));
-        if (!isStopScanning)
+        if (!isStopScanning && !isEliteCombat)
         {
             StartCoroutine(ObjectScan(scanDelay));
         }
@@ -140,7 +142,7 @@ public class HeroCharacter : Character, IPointerClickHandler
             List<Collider> detectedList = new List<Collider>(); //타겟으로 잡을 수 있는 상태의 몬스터들을 담음
             float shortestDistance = Mathf.Infinity;
             Transform nearestTarget = null;
-
+            
             foreach (EnemyCharacter enemy in field.monsters)
             {
                 detectedColls.Add(enemy.myCollider);
@@ -498,7 +500,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         {
             if (hit.collider == myCollider)
             {
-                FieldManager.instance.cameraDrag.trackingTarget = this;
+                FieldManager.instance.cameraUsable.trackingTarget = this;
             }
         }
 

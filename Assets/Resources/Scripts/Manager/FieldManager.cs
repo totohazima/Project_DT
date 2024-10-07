@@ -9,7 +9,7 @@ public class FieldManager : MonoBehaviour
 {
     public static FieldManager instance;
     public AstarPath astarPath;
-    public CameraUsable cameraDrag;
+    public CameraUsable cameraUsable;
     public Transform spawnPool;
 
     public List<Transform> fieldList = new List<Transform>();

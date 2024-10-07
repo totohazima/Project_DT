@@ -32,7 +32,6 @@ public class Character : FieldObject, ICustomUpdateMono
     public string code;
     public string characterName;
     public string jobClass;
-    public string thumbnailCode;
     public PlayStatus playStatus;
     public Desire_PlayStatus playStatus_Desire;
     public KDA_PlayStatus playStatus_KDA;

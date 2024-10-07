@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FieldHelper;
 using StatusHelper;
+using Unity.VisualScripting;
 public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 {
     public Transform getTransform;
@@ -12,11 +13,20 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
     public LayerMask scanLayer;
     private bool onScanning = false;
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);
+    [HideInInspector] public FieldSpawner mySpawner;
     [Header("Monsters")]
     public List<EnemyCharacter> monsters = new List<EnemyCharacter>();
     [Header("Boss")]
+    public bool isBossSpawned = false;
+    public List<EnemyCharacter> bosses = new List<EnemyCharacter>();
     [HideInInspector] public int maxBossPoint = 100;
-    public int bossPoint = 0;
+    [Range(0, 100)]public int bossPoint = 0;
+
+    void Awake()
+    {
+        getTransform = GetComponent<Transform>();
+        mySpawner = GetComponentInChildren<FieldSpawner>();
+    }
     void OnEnable()
     {
        CustomUpdateManager.customUpdateMonos.Add(this);
@@ -35,19 +45,26 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 
         if(bossPoint >= maxBossPoint)
         {
-            //bossPoint = maxBossPoint;
             BossSpawn();
         }
+
+        AlwaysEliteTargetting();
     }
 
     protected void BossSpawn()
     {
         Debug.Log("보스 소환");
         bossPoint = 0;
-        
-        //보스 소환 애니메이션
+
         //카메라 이동 애니메이션
+        CameraUsable camera = FieldManager.instance.cameraUsable;
+        camera.subCameraUsable.AddCoroutine(camera.subCameraUsable.BossSpawnTrackingCamera(camera.transform.position, getTransform.position, 15f, this));
+
+        //보스 소환 애니메이션
+        StartCoroutine(mySpawner.BossSpawn());
+
         //스캔된 캐릭터들의 타겟을 보스로 고정시켜야 함
+        HeroEliteCombatCalc(true);
     }
 
     protected IEnumerator ScanCharacter()
@@ -66,7 +83,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
                 if(hitCollider == hero.myCollider)
                 {
                     inCharacters.Add(hero);
-                    CharacterFieldSetting(hero);
+                    CharacterFieldCalc(hero);
                 }
             }
         }
@@ -74,15 +91,38 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         yield return new WaitForSeconds(0.5f);
         onScanning = false;
     }
-    protected void CharacterFieldSetting(HeroCharacter character)
+    protected void CharacterFieldCalc(HeroCharacter character)
     {
         if(character.myField != controlField)
         {
             character.myField = controlField;
             character.isFieldEnter = true;
+
         }
     }
 
+    public void HeroEliteCombatCalc(bool isCombat)
+    {
+        foreach (HeroCharacter character in inCharacters)
+        {
+            character.isEliteCombat = isCombat;
+        }
+    }
+
+    //보스가 스폰된 상태에서 필드 내 유닛들에게 보스 타겟팅
+    public void AlwaysEliteTargetting()
+    {
+        if (isBossSpawned)
+        {
+            foreach (HeroCharacter character in inCharacters)
+            {
+                if (character.targetUnit == null)
+                {
+                    character.targetUnit = bosses[0].myObject;
+                }
+            }
+        }
+    }
    
 
 #if UNITY_EDITOR

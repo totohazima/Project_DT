@@ -2,6 +2,7 @@ using GameSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities.UniversalDelegates;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,6 +17,9 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     private GameObject unitPrefab;
     private EnemyCharacter monster;
 
+    private GameObject boosPrefab;
+    private EnemyCharacter boss;
+
     void Awake()
     {
         for(int i = 0; i < spawnPointGroup.childCount; i++)
@@ -25,6 +29,9 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 
         unitPrefab = Resources.Load<GameObject>("Prefabs/Enemys/mn_000");
         monster = unitPrefab.GetComponent<EnemyCharacter>();
+
+        boosPrefab = Resources.Load<GameObject>("Prefabs/Enemys/mn_000_Boss");
+        boss = boosPrefab.GetComponent<EnemyCharacter>();
     }
     private void OnEnable()
     {
@@ -60,15 +67,30 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     {
         for (int i = 0; i < count; i++)
         {
-            prefab[i].myField = fieldActivity.controlField;
             GameObject monster = PoolManager.instance.Spawn(prefab[i].gameObject, spawnPos[i], Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
-            monster.transform.position = spawnPos[i];
 
             EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
             monsterCharacter.myField = fieldActivity.controlField;
             monsterCharacter.targetField = fieldActivity.controlField;
+            monsterCharacter.soonAttackerLimit = 2;
             fieldActivity.monsters.Add(monsterCharacter);
         }
+    }
+
+    public IEnumerator BossSpawn()
+    {
+        GameObject monster = PoolManager.instance.Spawn(boss.gameObject, fieldActivity.getTransform.position, Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
+
+        EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
+        monsterCharacter.myField = fieldActivity.controlField;
+        monsterCharacter.targetField = fieldActivity.controlField;
+        monsterCharacter.soonAttackerLimit = -1;
+        fieldActivity.bosses.Add(monsterCharacter);
+
+        monsterCharacter.enabled = false;
+        yield return new WaitForSeconds(5f);
+        monsterCharacter.enabled = true;
+        fieldActivity.isBossSpawned = true;
     }
 
     protected List<Vector3> SpawnPointSet(int count)

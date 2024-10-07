@@ -70,7 +70,7 @@ public class CharacterList_UI : MonoBehaviour
         {
             isAnimPlaying = true;
             isUse = false;
-            FieldManager.instance.cameraDrag.trackingTarget = null;
+            FieldManager.instance.cameraUsable.trackingTarget = null;
 
             LeanTween.moveY(myRect, startPos.y, animDelay).setEase(LeanTweenType.easeInOutQuart);
             yield return new WaitForSeconds(animDelay);

@@ -18331,6 +18331,113 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &527401183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 527401184}
+  - component: {fileID: 527401187}
+  - component: {fileID: 527401186}
+  - component: {fileID: 527401185}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &527401184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527401183}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 777052603}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &527401185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527401183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e821fadf1bc423843acd05cfec286a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraUsable: {fileID: 0}
+  subCameraTransform: {fileID: 0}
+--- !u!81 &527401186
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527401183}
+  m_Enabled: 1
+--- !u!20 &527401187
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527401183}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 3.3
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &553441146
 GameObject:
   m_ObjectHideFlags: 0
@@ -19262,7 +19369,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 527401184}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &777052604
@@ -19278,6 +19386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trackingTarget: {fileID: 0}
+  subCameraUsable: {fileID: 0}
   isDontMove: 0
   isCrossLimitLine: 0
   isCameraMove: 0
@@ -20493,7 +20602,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   boxSize: {x: 14, y: 10, z: 1}
+  mySpawner: {fileID: 0}
   monsters: []
+  isBossSpawned: 0
+  bosses: []
   maxBossPoint: 100
   bossPoint: 0
 --- !u!1 &1084253515
@@ -20532,7 +20644,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   boxSize: {x: 14, y: 10, z: 1}
+  mySpawner: {fileID: 0}
   monsters: []
+  isBossSpawned: 0
+  bosses: []
   maxBossPoint: 100
   bossPoint: 0
 --- !u!4 &1084253517
@@ -21771,7 +21886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   astarPath: {fileID: 1092632524}
-  cameraDrag: {fileID: 777052604}
+  cameraUsable: {fileID: 777052604}
   spawnPool: {fileID: 288547690}
   fieldList:
   - {fileID: 2108869295}
@@ -77182,7 +77297,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   boxSize: {x: 11, y: 6, z: 1}
+  mySpawner: {fileID: 1223933418}
   monsters: []
+  isBossSpawned: 0
+  bosses: []
   maxBossPoint: 100
   bossPoint: 0
 --- !u!1 &2109505442
@@ -77944,7 +78062,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.0025024414, y: -300}
+  m_AnchoredPosition: {x: 0.0024414062, y: -300}
   m_SizeDelta: {x: 0.0050049, y: 300}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &4488769465200495362
