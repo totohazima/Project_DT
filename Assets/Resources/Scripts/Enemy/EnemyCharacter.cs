@@ -35,7 +35,13 @@ public class EnemyCharacter : Character
         soonAttacker.Clear();
         playStatus_Desire.Reset();
         playStatus_KDA.Reset();
-        eventCallAnimation.callPrefab = attackPrefab;
+
+        if (attackEvent != null)
+        {
+            eventListener = new UnityEvent();
+            attackEvent.RegisterListener(gameObject, eventListener);
+            eventCallAnimation.callPrefab = attackPrefab;
+        }
     }
     public override void CustomUpdate()
     {
@@ -49,14 +55,7 @@ public class EnemyCharacter : Character
         AttackRangeScan();
         StatCalculate();
         StatusUpdate();
-        AnimationUpdate();
-
-        //if (attackEvent != null)
-        //{
-        //    eventListener = new UnityEvent();
-        //    attackEvent.RegisterListener(gameObject, eventListener);
-        //    eventCallAnimation.callPrefab = attackPrefab;
-        //}
+        AnimationUpdate(); 
     }
 
 
@@ -170,7 +169,6 @@ public class EnemyCharacter : Character
         else if (targetField != myField)
         {
             Vector3 fieldPos = Vector3.zero;
-
 
             SetTargetPosition(fieldPos);
         }

@@ -79796,6 +79796,7 @@ MonoBehaviour:
   stateController: {fileID: 2260746178445977647}
   kda_Controller: {fileID: 0}
   characterCostume: {fileID: 8717389949831578577}
+  spriteGroup: {fileID: 0}
   popupPos: {fileID: 1283672111306124331}
   isInvincible: 1
   isUntargetted: 0
@@ -79836,6 +79837,7 @@ MonoBehaviour:
   onRandomMove: 0
   isWaitingBuilding: 0
   isEliteCombat: 0
+  soonTargetter: {fileID: 0}
   eventCallAnimation: {fileID: 1203327867357678589}
   attackPrefab: {fileID: 1916831241361388, guid: 11063ed69985f27448f832ee1123eaad, type: 3}
   attackEvent: {fileID: 11400000, guid: 58680498672b6a44c826a3d8b999b500, type: 2}
@@ -79853,7 +79855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 0}
   combatField: 1
-  combatTime: 30
+  combatTime: 5
   combatTimer: 0
 --- !u!1 &3180633415963608375
 GameObject:

@@ -20604,8 +20604,6 @@ MonoBehaviour:
   mySpawner: {fileID: 0}
   maxBossPoint: 100
   bossPoint: 0
-  isHeroScanning: 0
-  isEnemyScanning: 0
   isBossSpawned: 0
   inCharacters: []
   monsters: []
@@ -20648,8 +20646,6 @@ MonoBehaviour:
   mySpawner: {fileID: 0}
   maxBossPoint: 100
   bossPoint: 0
-  isHeroScanning: 0
-  isEnemyScanning: 0
   isBossSpawned: 0
   inCharacters: []
   monsters: []
@@ -20723,10 +20719,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1073741824
   data:
-    dataString: UEsDBBQAAAgIAABIIezReGNkugIAAPcFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VFtP4kAU/itknhdTEFH3bRcQ90El4saHxYehc0onDDPNXAQ0/HfPmba0sDExYfzO7fvOpZ9MaldA6o2dWikejAD2s8PozX50GuM97PjK6Ln8gNrnVQqfkxOPPs/cS4N4j8Kc2YC3Mv2lV4qcEwSDlpmxm4lYwcg47xDOuHKAJms8RWuEPjtshz/dWwrZ46t/Ta8PfN0mnQM+U9AebONaO9ZupVfQqeKbAgRRbpyv+heDOvHNxTC6ahRUeSUXfapglJKu4sP8voh650UOFkiwkBzlRQ6kNge5yj1lbMc+ZZkDX/GyfD+WFrtUJmW/Tdm6DXfrktw7V4HKXPcjpzLnw3/mbi+aM2s293XZXkIlfC7T9TPfp9z5Vmvb8PiUd9BbrtZ8qeA1B/1optYELdDobaDQ4KA/bv49KhvlkK4bvKR6Bobi+wGRhkMUv5t7KI46kjiaCv3rwM2Via2vcpKlQuJ2gMXB/UE9cXdcVQFRIonxL3zVXrLKcCet82iqmlCh5DvDAYEAnULV9y45aKK3NMFSLjaJXKkbwY+M1WDbJQrQXPn9DFP68xU4s30fdcfp4Cp6la2+o7OQCDf+SXJmmpntcdo2KHBxoevXvzeagsvN9gFc/hS8krpdhCyP2OKR0bpcXXdmpbh5sBlPW2PysPPBwph7HsshH1wx0Q7FbsYIHZSibY4KIiVUQH9v1OGcY10VYfZodDy9k9/IfxWkOL0RxtOU93tJb7gUg+HVYNCFtAfLyxtxyW+vs5tsyOIRSY395mpWNqwaE+6XbrRoPJj6e9iZWl7EqxWWb6fyY2Nc4yl1ZuapBdBPZYajWLBYBD8vYiIkypyD91LHzWSfC6ZMugaxOCZaxMZOdt7yRZNlwQr5bjwhCzaKH8AFI/h4lLi87xK2VPwkGSgcHYgXqWDDCzIlB3b4AlBLAwQUAAAICAAASCHsbS+SnmsAAAB3AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDVM9Qz1FFQSi9KLMgoBgqAOaWZKSB2tFJicnKikaGBoVlSiomZqYmJbmqyYWqSsUWKcaKleZpFmplSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAEgh7NF4Y2S6AgAA9wUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAEgh7G0vkp5rAAAAdwAAAAkAJAAAAAAAAAAAAAAABwMAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAAC9AwAAAAA=
+    dataString: UEsDBBQAAAgIAABIIezIPg0pvAIAAPkFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VFtP4kAU/itknhdSEFH3bRcQ90El4saHxYehc0onDDPNXAQ0/HfPmba0sjExYfzO7fvOpR9MaldA6o2dWSnujQD2s8PozX50GuMd7Pna6IV8h9rnRQqfkxOPPk/cS4N4n8Kc2YK3Mv2l14qcEwSDlpmx26lYw9g47xDOuHKAJms8RWuEPjpsjz/dGwo54GtwRa93fN0knSM+U9AebONaO9ZupVfQqeLbAgRRbpwvB71hnfi6N4quGgVVXklvQBWMUtJVfJg/FFHvosjBAgkWkqO8yKHfI705yHXuKWc7+jHLHPiKmeWHibTYpzIt+23K5m2525T03rgKVOhqEFmVOe//M3f70ZxZs72ry/YTKuFzmW6e+CHlzrea24YnLeaxSTuuNnyl4CUH/WBm1gQt0OhtoNDgYDBp/j0pG+eQbhq8pHoGhuL7EZGGYxS/X3goTjqSOJwK/evALZSJza9ykqVC4n6AxdH9QT1xe1xVAVEiifHPfN1es8pwK63zaKqaUKHkO8cBgQCdQtX3LjloorcywVIuNo1cqRvBj43VYNslCtBc+cMcU/rzFTizfR91y+nkKnqVrb6ks5AIN/5Jcmaam91p2jYocHGl69e/V5qCy83uHlz+GLySul2ELA/Y4rHRulxdd2aluEWwGU9bY/Kw98HChHseyyEfXDHRDsVuxggdlKJtjgoiJVRAf6/U4ZxjXRVh9mB0PL4vv5H/Okjx9UYYT1M+6Cf90UoMR5fDYRfSPqwursUFv7nKrrMRi0ckNfabq3nZsGpMuF+60aLxYOovYmdmeRGvVli+m8n3rXGNp9SZWaQWQD+WGU5iwWIR/MCIqZAocwHeSx03k30smTLpBsTylGgZGzvde8uXTZYlK+Sb8YQs2Th+ApeM4NNR4vK+SdhR8S/JQOHoQDxLBVtekCk5suMnUEsDBBQAAAgIAABIIextL5KeawAAAHcAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNUz1DPUUVBKL0osyCgGCoA5pZkpIHa0UmJycqKRoYGhWVKKiZmpiYluarJhapKxRYpxoqV5mkWamVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAASCHsyD4NKbwCAAD5BQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAASCHsbS+SnmsAAAB3AAAACQAkAAAAAAAAAAAAAAAJAwAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAL8DAAAAAA==
     file_cachedStartup: {fileID: 0}
     cacheStartup: 0
-  showNavGraphs: 0
+  showNavGraphs: 1
   showUnwalkableNodes: 1
   debugMode: 0
   debugFloor: 0
@@ -21768,7 +21764,7 @@ Transform:
   m_GameObject: {fileID: 1260117854}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9964565, y: -3.2223215, z: 1.4846908}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -77304,8 +77300,6 @@ MonoBehaviour:
   mySpawner: {fileID: 1223933418}
   maxBossPoint: 100
   bossPoint: 0
-  isHeroScanning: 0
-  isEnemyScanning: 0
   isBossSpawned: 0
   inCharacters: []
   monsters: []
@@ -77785,6 +77779,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1658083012}
     m_Modifications:
+    - target: {fileID: 619441461156114680, guid: f66818381bd55db4f9537d42c53781de, type: 3}
+      propertyPath: interactionRange.x
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 619441461156114680, guid: f66818381bd55db4f9537d42c53781de, type: 3}
+      propertyPath: interactionRange.y
+      value: 1.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2537565272225233227, guid: f66818381bd55db4f9537d42c53781de, type: 3}
       propertyPath: m_Name
       value: Trade_House
@@ -77937,6 +77939,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1658083012}
     m_Modifications:
+    - target: {fileID: 701708487574691833, guid: b9d7c8425ed580f498074452740c24fa, type: 3}
+      propertyPath: interactionRange.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 701708487574691833, guid: b9d7c8425ed580f498074452740c24fa, type: 3}
+      propertyPath: interactionRange.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 896485970085754542, guid: b9d7c8425ed580f498074452740c24fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.58
@@ -78201,6 +78211,14 @@ PrefabInstance:
     - target: {fileID: 5507594859081821332, guid: 84bab461b58903642b125cf0a90266ff, type: 3}
       propertyPath: m_Name
       value: Inn_House
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630531627846882864, guid: 84bab461b58903642b125cf0a90266ff, type: 3}
+      propertyPath: interactionRange.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6630531627846882864, guid: 84bab461b58903642b125cf0a90266ff, type: 3}
+      propertyPath: interactionRange.y
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 7820727739740176197, guid: 84bab461b58903642b125cf0a90266ff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -78516,6 +78534,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5476285826417092415, guid: 22f03492b897cc242927974059e3061b, type: 3}
+      propertyPath: interactionRange.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476285826417092415, guid: 22f03492b897cc242927974059e3061b, type: 3}
+      propertyPath: interactionRange.y
+      value: 1.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7140405338738505702, guid: 22f03492b897cc242927974059e3061b, type: 3}
       propertyPath: m_Name
       value: Medical_House
@@ -78698,6 +78724,14 @@ PrefabInstance:
     - target: {fileID: 5549808588511638775, guid: 879fe43d26d6a854fa2818133c30dd1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876682530755870506, guid: 879fe43d26d6a854fa2818133c30dd1d, type: 3}
+      propertyPath: interactionRange.x
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5876682530755870506, guid: 879fe43d26d6a854fa2818133c30dd1d, type: 3}
+      propertyPath: interactionRange.y
+      value: 1.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

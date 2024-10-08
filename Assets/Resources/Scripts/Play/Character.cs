@@ -28,7 +28,6 @@ public class Character : FieldObject, ICustomUpdateMono
     public bool isDead;
 
     [Header("StatusInfo")]
-    //public StatusInfo statusInfo;
     public FieldMap.Field myField;
     public string code;
     public string characterName;

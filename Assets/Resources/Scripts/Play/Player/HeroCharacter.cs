@@ -43,7 +43,13 @@ public class HeroCharacter : Character, IPointerClickHandler
         isEliteCombat = false;
         soonTargetter = null;
         characterCostume.CostumeEquip_Process();
-        eventCallAnimation.callPrefab = attackPrefab;
+
+        if (attackEvent != null)
+        {
+            eventListener = new UnityEvent();
+            attackEvent.RegisterListener(gameObject, eventListener);
+            eventCallAnimation.callPrefab = attackPrefab;
+        }
     }
 
     public override void CustomUpdate()
@@ -54,21 +60,11 @@ public class HeroCharacter : Character, IPointerClickHandler
         }
 
         //StartCoroutine(RandomMoveLocation(myField));
-        if (!isStopScanning && !isEliteCombat)
-        {
-            //StartCoroutine(ObjectScan(scanDelay));
-        }
+        //StartCoroutine(ObjectScan(scanDelay));
         AttackRangeScan();
         StatCalculate();
         StatusUpdate();
         AnimationUpdate();
-        
-        //if(attackEvent != null)
-        //{
-        //    eventListener = new UnityEvent();
-        //    attackEvent.RegisterListener(gameObject, eventListener);
-        //    eventCallAnimation.callPrefab = attackPrefab;
-        //}
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -108,148 +104,124 @@ public class HeroCharacter : Character, IPointerClickHandler
 
     public override IEnumerator ObjectScan(float scanDelay)
     {
-        if (!isScanning)
+        if (isStopScanning || isEliteCombat || isScanning)
         {
-            isScanning = true;
-
-            //Collider[] detectedColls = Physics.OverlapSphere(myObject.position, (float)playStatus.viewRange, 1 << 7);
-            //List<Collider> detectedList = new List<Collider>(); //타겟으로 잡을 수 있는 상태의 몬스터들을 담음
-            //float shortestDistance = Mathf.Infinity;
-            //Transform nearestTarget = null;
-
-            //FieldActivity field = FieldManager.instance.fields[(int)myField];
-
-            //foreach(Collider col in detectedColls)
-            //{
-            //    if (col == null || col == myCollider)
-            //    {
-            //        continue;
-            //    }
-
-            //    for (int i = 0; i < field.monsters.Count; i++)
-            //    {
-            //        if (col == field.monsters[i].myCollider)
-            //        {
-            //            if (field.monsters[i].isUntargetted == false)
-            //            {
-            //                detectedList.Add(field.monsters[i].myCollider);        
-            //            }
-            //        }
-            //    }
-            //}
-
-            ///주변 적 탐지가 아닌 필드 내 몬스터의 정보를 가져오는 방식
-            FieldActivity field = FieldManager.instance.fields[(int)myField];
-            List<Collider> detectedColls = new List<Collider>();
-            List<Collider> detectedList = new List<Collider>(); //타겟으로 잡을 수 있는 상태의 몬스터들을 담음
-            float shortestDistance = Mathf.Infinity;
-            Transform nearestTarget = null;
-            
-            foreach (EnemyCharacter enemy in field.monsters)
-            {
-                detectedColls.Add(enemy.myCollider);
-            }
-
-            foreach (Collider col in detectedColls)
-            {
-                if (col == null || col == myCollider)
-                {
-                    continue;
-                }
-
-                for (int i = 0; i < field.monsters.Count; i++)
-                {
-                    if (col == field.monsters[i].myCollider)
-                    {
-                        if (field.monsters[i].isUntargetted == false)
-                        {
-                            detectedList.Add(field.monsters[i].myCollider);
-                        }
-                    }
-                }
-            }
-
-            foreach (Collider col in detectedList)
-            {
-                if (col == null || col == myCollider)
-                {
-                    continue;
-                }
-
-                Transform target = col.transform;
-                float dis = Vector3.Distance(myObject.position, target.position);
-
-                if (dis < shortestDistance)
-                {
-                    shortestDistance = dis;
-                    nearestTarget = target;
-                }
-            }
-
-            if (nearestTarget != null)
-            {
-                if (nearestTarget != targetUnit)
-                {
-                    bool isTargeting = false;
-
-                    EnemyCharacter target = null;
-                   
-                    foreach(EnemyCharacter enemy in field.monsters)
-                    {
-                        if(enemy.myCollider.transform == nearestTarget)
-                        {
-                            target = enemy;
-                        }
-                    }
-
-                    //기존 타겟이 아예 없는 경우 -> 새로 잡은 타겟이 기존 타겟이 되며 어태커 리스트에 자신을 추가
-                    //새로 잡은 타겟이 기존에 잡은 타겟과 같은 경우 -> 아무것도 할 필요 없음
-                    //새로 잡은 타겟이 기존 타겟과 다른 경우->기존 타겟 어태커 리스트에서 자신을 지움 이후 새 타겟의 어태커 리스트에 자신을 추가
-                    if (soonTargetter == null && target != null)
-                    {
-                        soonTargetter = target;
-
-                        if (soonTargetter.soonAttacker.Count < soonTargetter.soonAttackerLimit)
-                        {
-                            soonTargetter.soonAttacker.Add(this);
-                            isTargeting = true;
-                        }
-                    }
-                    else if(soonTargetter == target && target != null)
-                    {
-                        soonTargetter = target;
-                        if (soonTargetter.soonAttacker.Count < soonTargetter.soonAttackerLimit)
-                        {
-                            isTargeting = true;
-                        }
-                    }
-                    else if(soonTargetter != target && target != null)
-                    {
-                        soonTargetter.soonAttacker.Remove(this);
-
-                        soonTargetter = target;
-
-                        if (soonTargetter.soonAttacker.Count < soonTargetter.soonAttackerLimit)
-                        {
-                            soonTargetter.soonAttacker.Add(this);
-                            isTargeting = true;
-                        }
-                    }
-
-                    if (isTargeting)
-                        targetUnit = soonTargetter.myObject;
-                    
-                }
-            }
-            else
-            {
-                targetUnit = null;
-            }
-
-
-            yield return new WaitForSeconds(scanDelay);
-            isScanning = false;
+            yield break;
         }
+
+        isScanning = true;
+
+        ///주변 적 탐지가 아닌 필드 내 몬스터의 정보를 가져오는 방식
+        FieldActivity field = FieldManager.instance.fields[(int)myField];
+        List<Collider> detectedColls = new List<Collider>();
+        List<Collider> detectedList = new List<Collider>(); //타겟으로 잡을 수 있는 상태의 몬스터들을 담음
+        float shortestDistance = Mathf.Infinity;
+        Transform nearestTarget = null;
+
+        foreach (EnemyCharacter enemy in field.monsters)
+        {
+            detectedColls.Add(enemy.myCollider);
+        }
+
+        foreach (Collider col in detectedColls)
+        {
+            if (col == null || col == myCollider)
+            {
+                continue;
+            }
+
+            for (int i = 0; i < field.monsters.Count; i++)
+            {
+                if (col == field.monsters[i].myCollider)
+                {
+                    if (field.monsters[i].isUntargetted == false)
+                    {
+                        detectedList.Add(field.monsters[i].myCollider);
+                    }
+                }
+            }
+        }
+
+        foreach (Collider col in detectedList)
+        {
+            if (col == null || col == myCollider)
+            {
+                continue;
+            }
+
+            Transform target = col.transform;
+            float dis = Vector3.Distance(myObject.position, target.position);
+
+            if (dis < shortestDistance)
+            {
+                shortestDistance = dis;
+                nearestTarget = target;
+            }
+        }
+
+        if (nearestTarget != null)
+        {
+            if (nearestTarget != targetUnit)
+            {
+                bool isTargeting = false;
+
+                EnemyCharacter target = null;
+
+                foreach (EnemyCharacter enemy in field.monsters)
+                {
+                    if (enemy.myCollider.transform == nearestTarget)
+                    {
+                        target = enemy;
+                    }
+                }
+
+                //기존 타겟이 아예 없는 경우 -> 새로 잡은 타겟이 기존 타겟이 되며 어태커 리스트에 자신을 추가
+                //새로 잡은 타겟이 기존에 잡은 타겟과 같은 경우 -> 아무것도 할 필요 없음
+                //새로 잡은 타겟이 기존 타겟과 다른 경우->기존 타겟 어태커 리스트에서 자신을 지움 이후 새 타겟의 어태커 리스트에 자신을 추가
+                if (soonTargetter == null && target != null)
+                {
+                    soonTargetter = target;
+
+                    if (soonTargetter.soonAttacker.Count < soonTargetter.soonAttackerLimit)
+                    {
+                        soonTargetter.soonAttacker.Add(this);
+                        isTargeting = true;
+                    }
+                }
+                else if (soonTargetter == target && target != null)
+                {
+                    soonTargetter = target;
+                    if (soonTargetter.soonAttacker.Count < soonTargetter.soonAttackerLimit)
+                    {
+                        isTargeting = true;
+                    }
+                }
+                else if (soonTargetter != target && target != null)
+                {
+                    soonTargetter.soonAttacker.Remove(this);
+
+                    soonTargetter = target;
+
+                    if (soonTargetter.soonAttacker.Count < soonTargetter.soonAttackerLimit)
+                    {
+                        soonTargetter.soonAttacker.Add(this);
+                        isTargeting = true;
+                    }
+                }
+
+                if (isTargeting)
+                    targetUnit = soonTargetter.myObject;
+
+            }
+        }
+        else
+        {
+            targetUnit = null;
+        }
+
+
+        yield return new WaitForSeconds(scanDelay);
+        isScanning = false;
     }
 
     private void AttackRangeScan()

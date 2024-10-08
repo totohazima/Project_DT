@@ -57,7 +57,7 @@ public class Building : FieldObject
             onScanning = true;
 
             scanHero.Clear();
-            Collider[] colliders = Physics.OverlapBox(myObject.position, interactionRange / 2, Quaternion.identity, 1 << 8);
+            Collider[] colliders = Physics.OverlapBox(myObject.position, interactionRange / 3, Quaternion.identity, 1 << 8);
             // 겹친 콜라이더에 대해 처리
             foreach (Collider hitCollider in colliders)
             {

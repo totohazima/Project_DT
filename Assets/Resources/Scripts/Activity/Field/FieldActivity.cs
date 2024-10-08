@@ -151,7 +151,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 
     protected void BossSpawn()
     {
-        if (bossPoint < maxBossPoint || FieldManager.instance.isAlreadyBossSpawn)
+        if (bossPoint < maxBossPoint || FieldManager.instance.isAlreadyBossSpawn || isBossSpawned)
         {
             return;      
         }
