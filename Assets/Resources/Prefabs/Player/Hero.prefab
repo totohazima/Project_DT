@@ -79644,7 +79644,7 @@ GameObject:
   - component: {fileID: 1991811962535137311}
   - component: {fileID: 2329373645779255952}
   - component: {fileID: 4209376665973604264}
-  - component: {fileID: 2493848966955312624}
+  - component: {fileID: -799394160762163487}
   m_Layer: 8
   m_Name: Hero
   m_TagString: Player
@@ -79841,7 +79841,7 @@ MonoBehaviour:
   eventCallAnimation: {fileID: 1203327867357678589}
   attackPrefab: {fileID: 1916831241361388, guid: 11063ed69985f27448f832ee1123eaad, type: 3}
   attackEvent: {fileID: 11400000, guid: 58680498672b6a44c826a3d8b999b500, type: 2}
---- !u!114 &2493848966955312624
+--- !u!114 &-799394160762163487
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79850,12 +79850,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3180573088566432487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 965fc7228711c6643b60ca04f4d7d71a, type: 3}
+  m_Script: {fileID: 11500000, guid: a455837186ac47d47bc10df1d54aecf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 0}
-  combatField: 1
-  combatTime: 5
+  targetField: 0
+  combatTime: 30
   combatTimer: 0
 --- !u!1 &3180633415963608375
 GameObject:

@@ -59,14 +59,14 @@ public class FieldManager : MonoBehaviour
             character.characterCostume.dressCostume_Code = data.characterCostumeCode;
 
             GameObject hero = PoolManager.instance.Spawn(character.gameObject, pos[i], Vector3.one, Quaternion.identity, true, spawnPool);
-            TestCharacterAlgorithm_Step3 algorithm = hero.GetComponent<TestCharacterAlgorithm_Step3>();
+            TestAlgorithm algorithm = hero.GetComponent<TestAlgorithm>();
             if (i <= 4)
             {
-                algorithm.combatField = FieldMap.Field.DESERT;
+                algorithm.targetField = FieldMap.Field.DESERT;
             }
             else
             {
-                algorithm.combatField = FieldMap.Field.SNOW;
+                algorithm.targetField = FieldMap.Field.SNOW;
             }
 
             HeroCharacter heroCharacter = hero.GetComponent<HeroCharacter>();
