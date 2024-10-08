@@ -16,10 +16,10 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
     [Range(0, 100)]public int bossPoint = 0;
     
     [Header("Bool")]
-    public bool isHeroScanning = false;
-    public bool isEnemyScanning = false;
     public bool isBossSpawned = false;
-
+    private bool isHeroScanning = false;
+    private bool isEnemyScanning = false;
+    
     [Header("List")]
     public List<HeroCharacter> inCharacters = new List<HeroCharacter>();
     public List<EnemyCharacter> monsters = new List<EnemyCharacter>();
@@ -41,19 +41,9 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-        if(!isHeroScanning)
-        {
-            StartCoroutine(ScanCharacter());
-        }
-
-
+        StartCoroutine(ScanCharacter(0.5f));
         StartCoroutine(ScanEnemy(0.1f));
-
-        if(bossPoint >= maxBossPoint && !FieldManager.instance.isAlreadyBossSpawn)
-        {
-            BossSpawn();
-        }
-
+        BossSpawn();
         AlwaysEliteTargetting();
     }
 
@@ -129,8 +119,13 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         isEnemyScanning = false;
     }
 
-    protected IEnumerator ScanCharacter()
+    protected IEnumerator ScanCharacter(float scanDelay)
     {
+        if(isHeroScanning)
+        {
+            yield break;
+        }
+
         isHeroScanning = true;
 
         inCharacters.Clear();
@@ -150,12 +145,17 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
             }
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(scanDelay);
         isHeroScanning = false;
     }
 
     protected void BossSpawn()
     {
+        if (bossPoint < maxBossPoint || FieldManager.instance.isAlreadyBossSpawn)
+        {
+            return;      
+        }
+
         Debug.Log("보스 소환");
         bossPoint = 0;
 
