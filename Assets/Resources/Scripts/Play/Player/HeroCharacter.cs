@@ -24,7 +24,7 @@ public class HeroCharacter : Character, IPointerClickHandler
     [Header("Scanning Info")]
     private float scanDelay = 0.1f;
     private bool isScanning = false;
-    private EnemyCharacter soonTargetter = null;
+    public EnemyCharacter soonTargetter = null;
     [Header("Click Process Info")]
     protected bool onClickProcess;
 
@@ -56,7 +56,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         //StartCoroutine(RandomMoveLocation(myField));
         if (!isStopScanning && !isEliteCombat)
         {
-            StartCoroutine(ObjectScan(scanDelay));
+            //StartCoroutine(ObjectScan(scanDelay));
         }
         AttackRangeScan();
         StatCalculate();
@@ -105,6 +105,7 @@ public class HeroCharacter : Character, IPointerClickHandler
 
         onRandomMove = false;  // 이동 종료
     }
+
     public override IEnumerator ObjectScan(float scanDelay)
     {
         if (!isScanning)
@@ -236,7 +237,7 @@ public class HeroCharacter : Character, IPointerClickHandler
                     }
 
                     if (isTargeting)
-                        targetUnit = soonTargetter.transform;
+                        targetUnit = soonTargetter.myObject;
                     
                 }
             }
@@ -250,6 +251,7 @@ public class HeroCharacter : Character, IPointerClickHandler
             isScanning = false;
         }
     }
+
     private void AttackRangeScan()
     {
         if(targetUnit == null)

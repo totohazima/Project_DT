@@ -72,7 +72,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
             EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
             monsterCharacter.myField = fieldActivity.controlField;
             monsterCharacter.targetField = fieldActivity.controlField;
-            monsterCharacter.soonAttackerLimit = 2;
+            //monsterCharacter.soonAttackerLimit = 2;
             fieldActivity.monsters.Add(monsterCharacter);
         }
     }
@@ -87,7 +87,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
         monsterCharacter.myField = fieldActivity.controlField;
         monsterCharacter.targetField = fieldActivity.controlField;
-        monsterCharacter.soonAttackerLimit = -1;
+        //monsterCharacter.soonAttackerLimit = -1;
         fieldActivity.bosses.Add(monsterCharacter);
         monsterCharacter.enabled = false;
 

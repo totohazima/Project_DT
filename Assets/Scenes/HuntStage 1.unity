@@ -20597,17 +20597,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getTransform: {fileID: 1079546950}
   controlField: 2
-  inCharacters: []
   scanLayer:
     serializedVersion: 2
     m_Bits: 256
   boxSize: {x: 14, y: 10, z: 1}
   mySpawner: {fileID: 0}
-  monsters: []
-  isBossSpawned: 0
-  bosses: []
   maxBossPoint: 100
   bossPoint: 0
+  isHeroScanning: 0
+  isEnemyScanning: 0
+  isBossSpawned: 0
+  inCharacters: []
+  monsters: []
+  bosses: []
 --- !u!1 &1084253515
 GameObject:
   m_ObjectHideFlags: 0
@@ -20639,17 +20641,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getTransform: {fileID: 1084253517}
   controlField: 1
-  inCharacters: []
   scanLayer:
     serializedVersion: 2
     m_Bits: 256
   boxSize: {x: 14, y: 10, z: 1}
   mySpawner: {fileID: 0}
-  monsters: []
-  isBossSpawned: 0
-  bosses: []
   maxBossPoint: 100
   bossPoint: 0
+  isHeroScanning: 0
+  isEnemyScanning: 0
+  isBossSpawned: 0
+  inCharacters: []
+  monsters: []
+  bosses: []
 --- !u!4 &1084253517
 Transform:
   m_ObjectHideFlags: 0
@@ -77293,17 +77297,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getTransform: {fileID: 2108869295}
   controlField: 0
-  inCharacters: []
   scanLayer:
     serializedVersion: 2
     m_Bits: 256
   boxSize: {x: 11, y: 6, z: 1}
   mySpawner: {fileID: 1223933418}
-  monsters: []
-  isBossSpawned: 0
-  bosses: []
   maxBossPoint: 100
   bossPoint: 0
+  isHeroScanning: 0
+  isEnemyScanning: 0
+  isBossSpawned: 0
+  inCharacters: []
+  monsters: []
+  bosses: []
 --- !u!1 &2109505442
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ public class EnemyCharacter : Character
     private float randomMoveTime_Min = 1f;
     [Header("Scan_Info")]
     public List<HeroCharacter> soonAttacker = new List<HeroCharacter>(); //이 몬스터를 타겟으로 잡은 유닛
-    [HideInInspector] public int soonAttackerLimit = 2; //-1이면 타겟 제한 없음
+    public int soonAttackerLimit; //-1이면 타겟 제한 없음
     private float scanDelay = 0.1f; //스캔이 재작동하는 시간
     private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
     [Header("ItemDrop_Info")]
