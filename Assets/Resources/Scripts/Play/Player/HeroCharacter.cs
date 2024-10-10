@@ -452,10 +452,6 @@ public class HeroCharacter : Character, IPointerClickHandler
         myCollider.enabled = false;
         isReadyToMove = false;
         
-        if(kda_Controller != null)
-        {
-            //kda_Controller.KDA_Calculator()
-        }
         yield return new WaitForSeconds(0.1f);
 
         myCollider.enabled = true;
@@ -482,34 +478,5 @@ public class HeroCharacter : Character, IPointerClickHandler
         yield return 0;
     }
 
-    /// <summary>
-    /// 건물 상호작용 애니메이션
-    /// </summary>
-    public void Builng_Use(Building building, float useDelay)
-    {
-        StartCoroutine(Building_Interaction(building, useDelay));    
-    }
-    protected IEnumerator Building_Interaction(Building building, float useDelay)
-    {
-        //Debug.Log(characterName + building.buildingName + " 상호작용 시작");
-        ItemPopup(GameManager.instance.GetRandomEnumValue<GameMoney.GameMoneyType>(0), Random.Range(1, 4));
-        building.RewardPopup();
-
-        yield return new WaitForSeconds(useDelay);
-
-        targetBuilding = Building.BuildingType.NONE;
-        isWaitingBuilding = false;
-        building.isInteraction = false;
-        building.customerList.Remove(this);
-        //Debug.Log(characterName + building.buildingName + " 상호작용 완료");
-    }
-
-    protected void ItemPopup(GameMoney.GameMoneyType type, int count)
-    {
-        GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/PopupItem");
-        GameObject popup = PoolManager.instance.Spawn(prefab, popupPos.position, Vector3.one, Quaternion.identity, true, myObject.parent);
-
-        PopupItem popupItem = popup.GetComponent<PopupItem>();
-        popupItem.ItemSetting(type, count);
-    }
+    
 }

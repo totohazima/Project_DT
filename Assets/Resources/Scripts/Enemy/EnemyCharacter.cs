@@ -188,30 +188,6 @@ public class EnemyCharacter : Character
             isMove = false;
         }
 
-        List<HeroCharacter> soonRemoveAttacker = new List<HeroCharacter>();
-        foreach(HeroCharacter attacker in soonAttacker)
-        {
-            if(attacker.myField != myField)
-            {
-                if(attacker.transform == targetUnit)
-                {
-                    targetUnit = null;
-                    soonRemoveAttacker.Add(attacker);
-                }
-                else
-                {
-                    soonRemoveAttacker.Add(attacker);
-                }
-            }
-        }
-        foreach(HeroCharacter RemoveAttacker in soonRemoveAttacker)
-        {
-            if (soonAttacker.Contains(RemoveAttacker))
-            {
-                soonAttacker.Remove(RemoveAttacker);
-            }
-        }
-
         if (soonAttackerLimit != -1)
         {
             if (soonAttacker.Count > soonAttackerLimit)

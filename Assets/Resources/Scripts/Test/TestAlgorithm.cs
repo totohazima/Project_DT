@@ -1,4 +1,5 @@
 using FieldHelper;
+using Mono.Cecil;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,10 +54,24 @@ public class TestAlgorithm : MonoBehaviour
             return;
         }
 
-        character.targetField = FieldMap.Field.VILLAGE;
-        character.isStopScanning = true;
+        FieldActivity field = FieldManager.instance.fields[(int)character.myField];
+        bool isReturn = false;
 
-        StartCoroutine(StartBuilding());
+        foreach (EnemyCharacter enemy in field.monsters)
+        {
+            if(enemy.targetUnit == character.myObject)
+            {
+                isReturn = true;
+            }
+        }
+
+        if (!isReturn)
+        {
+            character.targetField = FieldMap.Field.VILLAGE;
+            character.isStopScanning = true;
+
+            StartCoroutine(StartBuilding());
+        }
     }
 
     private IEnumerator StartBuilding()

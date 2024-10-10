@@ -14,7 +14,7 @@ public class Character : FieldObject, ICustomUpdateMono
 {
     public WhiteFlash whiteFlash;
     public StateController stateController;
-    public KDA_Controller kda_Controller;
+    public PopupController popupController;
     public UICharacterCostume characterCostume;
     public SpriteGroup spriteGroup;
     public Transform popupPos;
@@ -96,10 +96,6 @@ public class Character : FieldObject, ICustomUpdateMono
     /// </summary>
     public virtual void OnHit(double damage, Character attacker)
     {
-        if (kda_Controller != null)
-        {
-            kda_Controller.OnAttacked(attacker);
-        }
         DamageCalc(damage);
     }
 
