@@ -19,8 +19,7 @@ public class PopupController : MonoBehaviour
     protected IEnumerator Building_Interaction(Building building, float useDelay)
     {
         //Debug.Log(characterName + building.buildingName + " 상호작용 시작");
-        ItemPopup(GameManager.instance.GetRandomEnumValue<GameMoney.GameMoneyType>(0), Random.Range(1, 4));
-        building.RewardPopup();
+        ItemPopup(GameManager.instance.GetRandomEnumValue<GameMoney.GameMoneyType>(0), Random.Range(1, 4), building);
 
         yield return new WaitForSeconds(useDelay);
 
@@ -31,12 +30,13 @@ public class PopupController : MonoBehaviour
         //Debug.Log(characterName + building.buildingName + " 상호작용 완료");
     }
 
-    protected void ItemPopup(GameMoney.GameMoneyType type, int count)
+    protected void ItemPopup(GameMoney.GameMoneyType type, int count, Building building)
     {
         GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/PopupItem");
         GameObject popup = PoolManager.instance.Spawn(prefab, hero.popupPos.position, Vector3.one, Quaternion.identity, true, hero.myObject.parent);
 
         PopupItem popupItem = popup.GetComponent<PopupItem>();
+        popupItem.target = building;
         popupItem.ItemSetting(type, count);
     }
 }

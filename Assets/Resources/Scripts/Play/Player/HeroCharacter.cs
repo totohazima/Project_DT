@@ -1,6 +1,7 @@
 using FieldHelper;
 using GameEvent;
 using GameSystem;
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -382,19 +383,19 @@ public class HeroCharacter : Character, IPointerClickHandler
 
     private void UpdateLerpSpeed()
     {
-        if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath || isWaitingBuilding)
+        if (aiPath.reachedDestination || aiPath.reachedEndOfPath || isWaitingBuilding)
         {
             isMove = false;
         }
 
-        aiLerp.canMove = isMove;
-        aiLerp.speed = stateController.moveSpeed;
+        aiPath.canMove = isMove;
+        aiPath.maxSpeed = stateController.moveSpeed;
 
     }
     private void SetTargetPosition(Vector3 targetPosition)
     {
         isMove = true;
-        aiLerp.destination = targetPosition;
+        aiPath.destination = new Vector3(targetPosition.x, targetPosition.y, 0);
     }
 
     private void UpdateMovementAnimation()
@@ -414,7 +415,7 @@ public class HeroCharacter : Character, IPointerClickHandler
     {
         if (isMove)
         {
-            if (aiLerp.steeringTarget.x < myObject.position.x)
+            if (aiPath.steeringTarget.x < myObject.position.x)
             {
                 viewObject.rotation = Quaternion.Euler(0, 180, 0); // Left
             }

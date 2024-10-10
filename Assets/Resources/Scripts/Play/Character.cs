@@ -36,7 +36,7 @@ public class Character : FieldObject, ICustomUpdateMono
     public Desire_PlayStatus playStatus_Desire;
     public KDA_PlayStatus playStatus_KDA;
     public Animator anim;
-    public AILerp aiLerp;
+    public AIPath aiPath;
     public Vector3 dropRange = new Vector3(1f, 1f, 1f);
 
     [Header("TargetInfo")]

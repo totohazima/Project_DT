@@ -206,10 +206,10 @@ public class EnemyCharacter : Character
     }
     private void UpdateLerpSpeed()
     {
-        aiLerp.canMove = isMove;
-        aiLerp.speed = stateController.moveSpeed;
+        aiPath.canMove = isMove;
+        aiPath.maxSpeed = stateController.moveSpeed;
 
-        if (aiLerp.reachedDestination || aiLerp.reachedEndOfPath)
+        if (aiPath.reachedDestination || aiPath.reachedEndOfPath)
         {
             isMove = false;
         }
@@ -217,7 +217,7 @@ public class EnemyCharacter : Character
     private void SetTargetPosition(Vector3 targetPosition)
     {
         isMove = true;
-        aiLerp.destination = targetPosition;
+        aiPath.destination = new Vector3(targetPosition.x, targetPosition.y, 0);
     }
 
     private void UpdateMovementAnimation()
@@ -236,7 +236,7 @@ public class EnemyCharacter : Character
     {
         if (isMove)
         {
-            if (aiLerp.steeringTarget.x < myObject.position.x)
+            if (aiPath.steeringTarget.x < myObject.position.x)
             {
                 viewObject.rotation = Quaternion.Euler(0, 180, 0); // Left
             }

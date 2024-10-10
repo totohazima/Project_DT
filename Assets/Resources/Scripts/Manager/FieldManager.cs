@@ -41,6 +41,7 @@ public class FieldManager : MonoBehaviour
         HeroSpawn();
         AllFieldSpawn();
     }
+
     private void HeroSpawn()
     {
         List<Vector3> pos = new List<Vector3>();
