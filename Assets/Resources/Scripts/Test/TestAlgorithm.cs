@@ -39,7 +39,7 @@ public class TestAlgorithm : MonoBehaviour
 
     private void StartCombatField()
     {
-        if (combatTimer <= 0f || character.myField == targetField)
+        if (combatTimer <= 0f || character.currentField == targetField)
         {
             return;    
         }
@@ -54,7 +54,7 @@ public class TestAlgorithm : MonoBehaviour
             return;
         }
 
-        FieldActivity field = FieldManager.instance.fields[(int)character.myField];
+        FieldActivity field = FieldManager.instance.fields[(int)character.currentField];
         bool isReturn = false;
 
         foreach (EnemyCharacter enemy in field.monsters)
@@ -70,17 +70,15 @@ public class TestAlgorithm : MonoBehaviour
             character.targetField = FieldMap.Field.VILLAGE;
             character.isStopScanning = true;
 
-            StartCoroutine(StartBuilding());
+            if (character.currentField == FieldMap.Field.VILLAGE)
+            {
+                StartCoroutine(StartBuilding());
+            }
         }
     }
 
     private IEnumerator StartBuilding()
     {
-        if(combatTimer > 0f || character.myField != FieldMap.Field.VILLAGE)
-        {
-            yield break;
-        }
-
         if (character.targetBuilding == Building.BuildingType.NONE && !afterBuildingUse)
         {
             afterBuildingUse = true;
@@ -94,6 +92,7 @@ public class TestAlgorithm : MonoBehaviour
 
         Recycle();
     }
+
     private void Recycle()
     {
         combatTimer = combatTime;

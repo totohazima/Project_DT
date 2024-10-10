@@ -24,7 +24,7 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
 
         while (true)
         {
-            if (character.myField == combatField)
+            if (character.currentField == combatField)
             {
                 StartCoroutine(CombatField());
                 yield break;
@@ -60,7 +60,7 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
         {
             character.isStopScanning = true;
 
-            if(character.myField == FieldMap.Field.VILLAGE)
+            if(character.currentField == FieldMap.Field.VILLAGE)
             {
                 character.targetBuilding = GameManager.instance.GetRandomEnumValue<Building.BuildingType>(1);
                 StartCoroutine(GoBuilding());

@@ -28,7 +28,7 @@ public class Character : FieldObject, ICustomUpdateMono
     public bool isDead;
 
     [Header("StatusInfo")]
-    public FieldMap.Field myField;
+    public FieldMap.Field currentField;
     public string code;
     public string characterName;
     public string jobClass;
@@ -66,6 +66,7 @@ public class Character : FieldObject, ICustomUpdateMono
         isMove = false;
         isDead = false;
 
+        aiPath.destination = myObject.position;
         targetUnit = null;
         targetLocation = Vector3.zero;
         targetBuilding = Building.BuildingType.NONE;

@@ -113,7 +113,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         isScanning = true;
 
         ///주변 적 탐지가 아닌 필드 내 몬스터의 정보를 가져오는 방식
-        FieldActivity field = FieldManager.instance.fields[(int)myField];
+        FieldActivity field = FieldManager.instance.fields[(int)currentField];
         List<Collider> detectedColls = new List<Collider>();
         List<Collider> detectedList = new List<Collider>(); //타겟으로 잡을 수 있는 상태의 몬스터들을 담음
         float shortestDistance = Mathf.Infinity;
@@ -267,7 +267,7 @@ public class HeroCharacter : Character, IPointerClickHandler
             if(isFieldEnter) //필드 진입 시 더 이상 필드 중앙으로 이동할 필요 X
             {
                 isFieldEnter = false;
-                targetField = myField;
+                targetField = currentField;
             }
 
             if(!targetUnit.gameObject.activeSelf)
@@ -275,7 +275,7 @@ public class HeroCharacter : Character, IPointerClickHandler
                 targetUnit = null;
             }
         }                                                      
-        else if (targetField != myField)
+        else if (targetField != currentField)
         { 
             if(!isMove) //UpdateLerpSpeed가 이 메서드보다 늦게 실행되어 onTargetFieldPos가 true가 되어 움직이지 못하는 현상 방지
             {
@@ -329,7 +329,7 @@ public class HeroCharacter : Character, IPointerClickHandler
             //isMove = false;
         }
 
-        if(targetField == myField)
+        if(targetField == currentField)
         {
             onTargetFieldPos = false;
         }
@@ -371,7 +371,7 @@ public class HeroCharacter : Character, IPointerClickHandler
             isMove = false;
         }
 
-        if(myField == FieldMap.Field.VILLAGE)
+        if(currentField == FieldMap.Field.VILLAGE)
         {
             isStopScanning = true;
         }
@@ -390,9 +390,8 @@ public class HeroCharacter : Character, IPointerClickHandler
 
         aiPath.canMove = isMove;
         aiPath.maxSpeed = stateController.moveSpeed;
-
     }
-    private void SetTargetPosition(Vector3 targetPosition)
+    private void SetTargetPosition(Vector3 targetPosition)                       
     {
         isMove = true;
         aiPath.destination = new Vector3(targetPosition.x, targetPosition.y, 0);

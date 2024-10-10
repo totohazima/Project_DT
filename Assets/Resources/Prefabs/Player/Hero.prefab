@@ -79710,7 +79710,7 @@ MonoBehaviour:
   height: 1
   canMove: 1
   maxSpeed: 1
-  gravity: {x: NaN, y: NaN, z: NaN}
+  gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -79734,7 +79734,7 @@ MonoBehaviour:
     maximumPeriod: 2
     visualizeSensitivity: 0
   targetCompatibility: {fileID: 0}
-  maxAcceleration: -2.5
+  maxAcceleration: 1000
   rotationSpeed: 360
   slowdownDistance: 0
   pickNextWaypointDist: 2
@@ -79821,7 +79821,7 @@ MonoBehaviour:
   isMove: 0
   isAttacking: 0
   isDead: 0
-  myField: 0
+  currentField: 0
   code: Hunter9
   characterName: "\uD5CC\uD130 9"
   jobClass: "\uC804\uC0AC"

@@ -172,9 +172,9 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 
     protected void CharacterFieldCalc(HeroCharacter character)
     {
-        if(character.myField != controlField)
+        if(character.currentField != controlField)
         {
-            character.myField = controlField;
+            character.currentField = controlField;
             character.isFieldEnter = true;
 
         }

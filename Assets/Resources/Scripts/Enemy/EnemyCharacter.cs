@@ -50,7 +50,7 @@ public class EnemyCharacter : Character
             return;
         }
 
-        StartCoroutine(RandomMoveLocation(myField));
+        StartCoroutine(RandomMoveLocation(currentField));
         //StartCoroutine(ObjectScan(scanDelay));
         AttackRangeScan();
         StatCalculate();
@@ -166,7 +166,7 @@ public class EnemyCharacter : Character
         {
             SetTargetPosition(targetUnit.position);
         }
-        else if (targetField != myField)
+        else if (targetField != currentField)
         {
             Vector3 fieldPos = Vector3.zero;
 
@@ -279,7 +279,7 @@ public class EnemyCharacter : Character
 
         myCollider.enabled = false;
 
-        FieldActivity field = FieldManager.instance.fields[(int)myField];
+        FieldActivity field = FieldManager.instance.fields[(int)currentField];
         if(field.monsters.Contains(this))
         {
             field.monsters.Remove(this);
