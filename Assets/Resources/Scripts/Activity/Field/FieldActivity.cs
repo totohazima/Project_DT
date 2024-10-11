@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using FieldHelper;
 using StatusHelper;
-using Unity.VisualScripting;
+using Util;
+
 public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 {
     public Transform getTransform;

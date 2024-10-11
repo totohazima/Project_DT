@@ -57,7 +57,7 @@ public class Building : FieldObject
             onScanning = true;
 
             scanHero.Clear();
-            Collider[] colliders = Physics.OverlapBox(myObject.position, interactionRange / 2.5f, Quaternion.identity, 1 << 8);
+            Collider[] colliders = Physics.OverlapBox(myObject.position, interactionRange, Quaternion.identity, 1 << 8);
             // 겹친 콜라이더에 대해 처리
             foreach (Collider hitCollider in colliders)
             {
@@ -108,10 +108,6 @@ public class Building : FieldObject
             //탐지 시야
             Gizmos.color = Color.red;
             Gizmos.DrawWireCube(interactionCenter.position, interactionRange);
-
-            //실제 탐지 시야
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireCube(interactionCenter.position, interactionRange / 2.5f);
         }
     }
 #endif

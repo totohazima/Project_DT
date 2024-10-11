@@ -268,7 +268,15 @@ public class CameraUsable : MonoBehaviour, ICustomUpdateMono
     // 터치 또는 마우스 드래그가 UI위에서 작동했는지 감지 함수
     bool IsPointerOverUI()
     {
-        return EventSystem.current.IsPointerOverGameObject();
+        if (Input.touchCount > 0)  //모바일
+        {
+            Touch touch = Input.GetTouch(0);
+            return EventSystem.current.IsPointerOverGameObject(touch.fingerId); // 터치의 fingerId를 사용하여 UI 검사
+        }
+        else //PC 마우스
+        {
+            return EventSystem.current.IsPointerOverGameObject();
+        }
     }
 
     // 터치 또는 마우스 입력 위치 반환 함수

@@ -55,7 +55,7 @@ public class CharacterList_UI : MonoBehaviour
             listUI.gameObject.SetActive(true);
             ListReSetting();
 
-            LeanTween.moveY(myRect, startPos.y + 250f, animDelay).setEase(LeanTweenType.easeInOutQuart);
+            LeanTween.moveY(myRect, startPos.y + 200f, animDelay).setEase(LeanTweenType.easeInOutQuart);
             yield return new WaitForSeconds(animDelay);
 
 
