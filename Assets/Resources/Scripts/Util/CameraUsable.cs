@@ -8,7 +8,7 @@ public class CameraUsable : MonoBehaviour, ICustomUpdateMono
 {
     public HeroCharacter trackingTarget;
     public SubCameraUsable subCameraUsable;
-    private new Camera camera;
+    private Camera camera;
     private Transform cameraTransform;
     private const float DirectionForceReduceRate = 0.935f; // 감속비율
     private const float DirectionForceMin = 0.001f; // 설정치 이하일 경우 움직임을 멈춤
@@ -30,7 +30,7 @@ public class CameraUsable : MonoBehaviour, ICustomUpdateMono
 
     void Awake()
     {
-        camera = GetComponent<Camera>();
+        camera = GetComponent<UnityEngine.Camera>();
         cameraTransform = camera.transform;
 
         subCameraUsable = GetComponentInChildren<SubCameraUsable>();

@@ -64,7 +64,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
     public void OnDrag(PointerEventData eventData)
     {
         //Canvas가 ScreenSpace-Camera 모드일 경우 좌표 변환을 해야 함
-        Vector3 dragPosition = Camera.main.ScreenToWorldPoint(eventData.position);
+        Vector3 dragPosition = UnityEngine.Camera.main.ScreenToWorldPoint(eventData.position);
         dragPosition = new Vector3(dragPosition.x, dragPosition.y, stickTrans.position.z);
         
 

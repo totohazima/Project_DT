@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-    public Camera mainCamera;
+    public UnityEngine.Camera mainCamera;
     public Transform player;
     [HideInInspector] public float xMin, xMax, yMin, yMax;
     private void Update()

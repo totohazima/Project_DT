@@ -1281,7 +1281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2749526652682604476}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.2974, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1289,7 +1289,7 @@ Transform:
   - {fileID: 8869600919622261260}
   - {fileID: 8799613611950789319}
   - {fileID: 1071130865259078598}
-  m_Father: {fileID: 5769107067978104286}
+  m_Father: {fileID: 5768949269878608820}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2464874343225250615
 MonoBehaviour:
@@ -1872,6 +1872,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8053686308710825132}
   - {fileID: 5769107067978104286}
   - {fileID: 5768716084931307044}
   - {fileID: 185537554}
@@ -2060,7 +2061,7 @@ MonoBehaviour:
   isMove: 0
   isAttacking: 0
   isDead: 0
-  myField: 2
+  currentField: 0
   code: 
   characterName: 
   jobClass: 
@@ -2125,7 +2126,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8053686308710825132}
   - {fileID: 7863400278134774583}
   - {fileID: 5769412301408100432}
   m_Father: {fileID: 5768949269878608820}

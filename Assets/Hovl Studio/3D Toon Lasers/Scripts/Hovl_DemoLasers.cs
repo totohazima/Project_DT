@@ -7,7 +7,7 @@ using UnityEngine;
 public class Hovl_DemoLasers : MonoBehaviour
 {
     public GameObject FirePoint;
-    public Camera Cam;
+    public UnityEngine.Camera Cam;
     public float MaxLength;
     public GameObject[] Prefabs;
 

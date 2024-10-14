@@ -460,7 +460,7 @@ public class HeroCharacter : Character, IPointerClickHandler
     /// </summary>
     public IEnumerator ProcessClick(Vector3 clickPosition)
     {
-        Ray ray = Camera.main.ScreenPointToRay(clickPosition);
+        Ray ray = UnityEngine.Camera.main.ScreenPointToRay(clickPosition);
         RaycastHit hit;
 
 
@@ -468,7 +468,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         {
             if (hit.collider == myCollider)
             {
-                FieldManager.instance.cameraUsable.trackingTarget = this;
+                FieldManager.instance.cameraController.trackingTarget = this;
             }
         }
 

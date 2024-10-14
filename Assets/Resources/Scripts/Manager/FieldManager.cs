@@ -9,7 +9,7 @@ public class FieldManager : MonoBehaviour
 {
     public static FieldManager instance;
     public AstarPath astarPath;
-    public CameraUsable cameraUsable;
+    public CameraController_InGame cameraController;
     public Transform spawnPool;
     public bool isAlreadyBossSpawn = false;
     public List<Transform> fieldList = new List<Transform>();

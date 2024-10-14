@@ -20,7 +20,7 @@ public class TileCellClicker : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) // 왼쪽 마우스 버튼 클릭
         {
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mouseWorldPosition = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseWorldPosition.z = 0; // 2D 타일맵에 맞추기
 
             Vector3Int tilePosition = tilemap.WorldToCell(mouseWorldPosition);

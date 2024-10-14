@@ -161,7 +161,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         bossPoint = 0;
 
         //카메라 이동 연출
-        CameraUsable camera = FieldManager.instance.cameraUsable;
+        CameraController_InGame camera = FieldManager.instance.cameraController;
         camera.subCameraUsable.AddCoroutine(camera.subCameraUsable.CameraBossTracking(camera.transform.position, getTransform.position, 20f, this));
 
         //보스 소환 연출

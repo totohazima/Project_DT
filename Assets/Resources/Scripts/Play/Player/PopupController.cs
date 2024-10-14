@@ -7,8 +7,6 @@ public class PopupController : MonoBehaviour
 {
     public HeroCharacter hero;
 
-
-
     /// <summary>
     /// 건물 상호작용 애니메이션
     /// </summary>

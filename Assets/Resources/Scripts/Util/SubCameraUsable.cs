@@ -5,7 +5,7 @@ using UnityEngine;
 public class SubCameraUsable : MonoBehaviour
 {
     private Camera subCamera;
-    public CameraUsable cameraUsable;
+    public CameraController_InGame mainCamera;
     public Transform subCameraTransform;
 
     [Header("CameraAnimationList")]
@@ -16,8 +16,8 @@ public class SubCameraUsable : MonoBehaviour
         subCamera = GetComponent<Camera>();
         subCameraTransform = subCamera.transform;
         
-        cameraUsable = GetComponentInParent<CameraUsable>();
-        subCamera.orthographicSize = cameraUsable.viewSize_Default;
+        mainCamera = GetComponentInParent<CameraController_InGame>();
+        subCamera.orthographicSize = mainCamera.viewSize_Default;
 
         subCamera.enabled = false;
     }
@@ -40,7 +40,7 @@ public class SubCameraUsable : MonoBehaviour
         while (cameraAnimList.Count > 0)
         {
             subCamera.enabled = true;
-            cameraUsable.isDontMove = true;
+            mainCamera.isDontMove = true;
             // 리스트에서 첫 번째 코루틴을 가져와 실행
             IEnumerator currentCoroutine = cameraAnimList[0];
             yield return StartCoroutine(currentCoroutine);
@@ -51,13 +51,13 @@ public class SubCameraUsable : MonoBehaviour
 
         isRunningCoroutine = false;
         subCamera.enabled = false;
-        cameraUsable.isDontMove = false;
+        mainCamera.isDontMove = false;
     }
 
     //카메라가 보스 스폰 위치로 움직이게 함
     public IEnumerator CameraBossTracking(Vector3 startPos, Vector3 endPos, float moveSpeed, FieldActivity field)
     {
-        subCamera.orthographicSize = cameraUsable.viewSize_Default;
+        subCamera.orthographicSize = mainCamera.viewSize_Default;
 
         float elapsedTime = 0f;
         float totalDistance = Vector3.Distance(startPos, endPos);
