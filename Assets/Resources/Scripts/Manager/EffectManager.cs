@@ -40,10 +40,10 @@ public class EffectManager : MonoBehaviour
 
         IEnumerator FloatingAndDestroy_Anim(GameObject target)
         {
-            Vector3 destination = new Vector3(target.transform.position.x, target.transform.position.y + 0.1f, transform.position.z);
-            Vector3 fromPos = new Vector3(destination.x, destination.y - 0.1f, destination.z);
+            Vector3 destination = new Vector3(target.transform.position.x, target.transform.position.y + 0.15f, transform.position.z);
+            Vector3 fromPos = new Vector3(destination.x, destination.y - 0.15f, destination.z);
 
-            LeanTween.move(target, destination, 0.7f).setEase(LeanTweenType.easeOutSine).setFrom(fromPos);
+            LeanTween.move(target, destination, 0.7f).setEase(LeanTweenType.easeOutBack).setFrom(fromPos);
 
             yield return new WaitForSeconds(0.7f);
 
