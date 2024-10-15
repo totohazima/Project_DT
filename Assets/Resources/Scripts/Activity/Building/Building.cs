@@ -57,7 +57,7 @@ public class Building : FieldObject
             onScanning = true;
 
             scanHero.Clear();
-            Collider[] colliders = Physics.OverlapBox(myObject.position, interactionRange / 2, Quaternion.identity, 1 << 8);
+            Collider[] colliders = Physics.OverlapBox(interactionCenter.position, interactionRange / 2, Quaternion.identity, 1 << 8);
             // 겹친 콜라이더에 대해 처리
             foreach (Collider hitCollider in colliders)
             {
@@ -84,7 +84,7 @@ public class Building : FieldObject
     {
         isInteraction = true;
 
-        customer.popupController.Builng_Use(this, buildingDelay);
+        StartCoroutine(customer.popupController.Building_Interaction(this, buildingDelay));
     }
 
     //리스트로 받은 아이템 정보를 텍스트로 출력 추후 작업

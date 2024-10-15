@@ -312,9 +312,16 @@ public class HeroCharacter : Character, IPointerClickHandler
 
                 Building building = BuildingManager.Instance.buildings[(int)targetBuilding - 1];
 
-                Vector3 buildingPos = GetRandomPositionOutsideBox2();
-                buildingPos = building.myObject.position + buildingPos;
-                SetTargetPosition(buildingPos);
+                Vector3 endPos = Vector3.zero;                                          
+                Vector3 interactionCenter = building.interactionCenter.position;
+                Vector3 randomPositionWithinBox = new Vector3(
+                    Random.Range(-building.interactionRange.x / 2, building.interactionRange.x / 2),
+                    Random.Range(-building.interactionRange.y / 2, building.interactionRange.y / 2),
+                    0
+                );
+                
+                endPos = interactionCenter + randomPositionWithinBox;
+                SetTargetPosition(endPos);
             }
         }
         else if (targetLocation != Vector3.zero)
@@ -332,35 +339,7 @@ public class HeroCharacter : Character, IPointerClickHandler
         }
         
     }
-    private Vector2 GetRandomPositionOutsideBox2()
-    {
-        Building building = BuildingManager.Instance.buildings[(int)targetBuilding - 1];
 
-        // 박스1 경계 계산
-        float leftBox1 = -building.interactionRange.x / 2;
-        float rightBox1 = building.interactionRange.x / 2;
-        float bottomBox1 = -building.interactionRange.y / 2;
-        float topBox1 = building.interactionRange.y / 2;
-
-        // 콜리더 경계 계산 (박스1 중심 기준)
-        float leftBox2 = -building.myCollider2D.bounds.size.x / 2;
-        float rightBox2 = building.myCollider2D.bounds.size.x / 2;
-        float bottomBox2 = -building.myCollider2D.bounds.size.y / 2;
-        float topBox2 = building.myCollider2D.bounds.size.y / 2;
-
-        while (true)
-        {
-            // 박스1 범위 내에서 랜덤 좌표 선택
-            float randomX = Random.Range(leftBox1, rightBox1);
-            float randomY = Random.Range(bottomBox1, topBox1);
-
-            // 선택된 좌표가 박스2 범위에 닿지 않는다면 반환
-            if (!(randomX > leftBox2 && randomX < rightBox2 && randomY > bottomBox2 && randomY < topBox2))
-            {
-                return new Vector2(randomX, randomY);
-            }
-        }
-    }
     private void UpdateAttackStatus()
     {
         if (isReadyToAttack)

@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 896485970085754542}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -1098100429
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 315587486490615664, guid: e78e4c586209d3f43b5525108e774ccf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4426c8116e082974bb01e40d2ac77187, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!1 &3173247999450524412
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   scanHero: []
   customerList: []
   interactionCenter: {fileID: 3112715683704088484}
-  interactionRange: {x: 3.09, y: 1.98, z: 1}
+  interactionRange: {x: 0.85, y: 0.45, z: 1}
 --- !u!1 &8050059743878191417
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 8050059743878191417}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.43, z: 0}
+  m_LocalPosition: {x: 0, y: -0.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -300,7 +300,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05929005, y: 0.315844}
+  m_Offset: {x: -0.018573403, y: 0.22626707}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -311,5 +311,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0496414, y: 0.7481359}
+  m_Size: {x: 1.2190197, y: 0.66670245}
   m_EdgeRadius: 0

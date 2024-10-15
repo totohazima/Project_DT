@@ -21,7 +21,7 @@ public class DropItem : FieldObject, IPointerClickHandler
         StartCoroutine(Animation(startPos, endPos));
     }
 
-    // 코루틴을 실행할 때 Public으로 다른 스크립트에서 실행하게 하면 안된다. 반드시 해당 스크립트내에서 자체적으로 실행하게 해야 함.
+    // 코루틴으로 반복 작업시 Public으로 다른 스크립트에서 실행하게 하면 안된다. 반드시 해당 스크립트내에서 자체적으로 실행하게 해야 함.
     private IEnumerator Animation(Vector3 startPos, Vector3 endPos)
     {
         float delay = 0.1f;

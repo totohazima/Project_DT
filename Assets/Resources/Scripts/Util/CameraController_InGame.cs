@@ -120,7 +120,7 @@ public class CameraController_InGame : MonoBehaviour, ICustomUpdateMono
             {
                 zoomDelta = -scrollValue; // 휠의 방향에 따라 줌 적용
             }
-            betaZoomSpeed = zoomSpeed * 100;
+            betaZoomSpeed = zoomSpeed * 200;
         }
 
         currentZoom += zoomDelta * betaZoomSpeed;
@@ -129,7 +129,15 @@ public class CameraController_InGame : MonoBehaviour, ICustomUpdateMono
 
     protected void HandleMovement()
     {
-        if(isDragDisable)
+#if UNITY_EDITOR
+        //에디터에서 Scene으로 볼 경우 에러메시지 대응용
+        if (EditorWindow.focusedWindow == null || EditorWindow.focusedWindow.titleContent.text != "Game" && EditorWindow.focusedWindow.titleContent.text != "Simulator")
+        {
+            return;
+        }
+#endif
+
+        if (isDragDisable)
         {
             return;
         }

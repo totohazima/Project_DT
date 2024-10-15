@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public GameDataBase gameDataBase;
+
+    [Header("Manager")]
+    public EffectManager effectManager;
+
     private void Awake()
     {
         instance = this;

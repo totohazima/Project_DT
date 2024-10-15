@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using UnityEngine;
 using StatusHelper;
 using FieldHelper;
 using GameSystem;
 using Pathfinding;
 using System;
 using Util;
-using static UnityEngine.GraphicsBuffer;
+using Unity.Mathematics;
+using UnityEngine;
 
 public class Character : FieldObject, ICustomUpdateMono
 {
@@ -97,13 +97,13 @@ public class Character : FieldObject, ICustomUpdateMono
     /// </summary>
     public virtual void OnHit(double damage, Character attacker)
     {
-        DamageCalc(damage);
+        DamageCalc(damage, attacker);
     }
 
     /// <summary>
     /// 공격이 들어온 경우 어느정도의 대미지가 들어오는지 계산하는 함수
     /// </summary>
-    public virtual void DamageCalc(double damage)
+    public virtual void DamageCalc(double damage, Character attacker)
     {
         if (isInvincible)
         {
@@ -115,6 +115,17 @@ public class Character : FieldObject, ICustomUpdateMono
 
         if (playStatus.CurHealth <= 0)
         {
+            if (attacker.gameObject.layer == LayerMask.NameToLayer(Layers.Player))
+            {
+                List<GameMoney.GameMoneyType> types = new List<GameMoney.GameMoneyType>();
+                List<int> counts = new List<int>();
+
+                types.Add(GameMoney.GameMoneyType.GOLD);
+                int point = UnityEngine.Random.Range(1, 4);
+                counts.Add(point);
+                attacker.popupController.ItemPopup(types, counts);
+            }
+
             isDead = true;
             StartCoroutine(Death());
         }
