@@ -9,15 +9,17 @@ public class GiveBuildingItem : FloatingText
     public GameMoney.GameMoneyType itemType;
     public int itemCount = 0;
     [SerializeField] private List<Sprite> itemSprite = new List<Sprite>();
-
-    public Building target;
+    [HideInInspector]public Building target;
 
     public void ItemSetting(GameMoney.GameMoneyType type, int count)
     {
         Sprite typeImage = null;
         typeImage = itemSprite[(int)type];
 
-        //itemIcon.sprite = typeImage;
+        itemType = type;
+        itemCount = count;
+        itemIcon.sprite = typeImage;
+
         StartCoroutine(Text_Animation());
     }
 
@@ -49,7 +51,7 @@ public class GiveBuildingItem : FloatingText
             yield return null;
         }
         transform.position = endPos;
-        target.RewardPopup();
+        target.RewardPopup(itemType, itemCount);
 
         Recycle();
         Disappeer();

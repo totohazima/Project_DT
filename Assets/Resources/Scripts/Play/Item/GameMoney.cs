@@ -10,5 +10,6 @@ public class GameMoney
         RUBY = 1,
         RUNE = 2,
         JEWEL = 3,
+        UPGRADE_TOKEN = 4,
     }
 }

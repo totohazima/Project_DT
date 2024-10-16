@@ -7,6 +7,9 @@ public class TextParams
     [Header("GameMoney")]
     public const string GOLD = "°ñµå";
     public const string RUBY = "·çºñ";
+    public const string RUNE = "·é";
+    public const string JEWEL = "Áê¾ó";
+    public const string UPGRADE_TOKEN = "°­È­±Ç";
 
     [Header("FieldName")]
     public const string VILLAGE = "¸¶À»";

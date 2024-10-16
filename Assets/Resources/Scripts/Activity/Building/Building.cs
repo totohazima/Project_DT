@@ -88,12 +88,12 @@ public class Building : FieldObject
     }
 
     //리스트로 받은 아이템 정보를 텍스트로 출력 추후 작업
-    public void RewardPopup()
+    public void RewardPopup(GameMoney.GameMoneyType type, int count)
     {
         GameObject text = PoolManager.instance.Spawn(rewardText, interactionCenter.position, Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
 
         BuildingRewardText floatText = text.GetComponent<BuildingRewardText>();
-        floatText.TextSetting(GameMoney.GameMoneyType.GOLD, 1);
+        floatText.TextSetting(type, count);
     }
 
 

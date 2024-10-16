@@ -30,7 +30,13 @@ public class PopupController : MonoBehaviour
     /// </summary>
     public IEnumerator Building_Interaction(Building building, float useDelay)
     {
-        GiveBuildingItem(GameManager.instance.GetRandomEnumValue<GameMoney.GameMoneyType>(0), Random.Range(1, 4), building);
+        float giveDelay = 0.2f;
+        int count = 5;
+        for (int i = 0; i < count; i++)
+        {
+            GiveBuildingItem(GameManager.instance.GetRandomEnumValue<GameMoney.GameMoneyType>(0), Random.Range(1, 4), building);
+            yield return new WaitForSeconds(giveDelay);
+        }
 
         yield return new WaitForSeconds(useDelay);
 

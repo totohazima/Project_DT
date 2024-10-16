@@ -24,9 +24,9 @@ public class DropItem : FieldObject, IPointerClickHandler
     // 코루틴으로 반복 작업시 Public으로 다른 스크립트에서 실행하게 하면 안된다. 반드시 해당 스크립트내에서 자체적으로 실행하게 해야 함.
     private IEnumerator Animation(Vector3 startPos, Vector3 endPos)
     {
-        float delay = 0.1f;
+        float delay = 0.3f;
         float elapsedTime = 0f;
-        Vector3 middlePos = CalculateControlPoint(startPos, endPos, 0.3f);
+        Vector3 middlePos = CalculateControlPoint(startPos, endPos, 0.5f);
 
         while (elapsedTime < delay)
         {

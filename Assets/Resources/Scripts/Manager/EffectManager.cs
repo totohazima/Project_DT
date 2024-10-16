@@ -50,4 +50,5 @@ public class EffectManager : MonoBehaviour
             PoolManager.instance.Release(target);
         }
     }
+
 }

@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class BuildingRewardText : FloatingText
 {
+    public GameObjectEffect effect;
     public void TextSetting(GameMoney.GameMoneyType type, int count)
     {
         string typeTxt = "";
-        switch (type)
+        typeTxt = type.ToString();
+
+        var field = typeof(TextParams).GetField(typeTxt);
+        if(field != null)
         {
-            case GameMoney.GameMoneyType.GOLD:
-                typeTxt = TextParams.GOLD;
-                break;
-            case GameMoney.GameMoneyType.RUBY:
-                typeTxt = TextParams.RUBY;
-                break;
+            typeTxt = field.GetValue(null) as string;
         }
 
         string applyText = typeTxt + " +" + count;
         text.text = applyText;
 
-        StartCoroutine(Text_Animation());
+        effect.target = gameObject;
+        effect.text = text;
+        effect.Effect();
+        //StartCoroutine(Text_Animation());
     }
 
     public override IEnumerator Text_Animation()
