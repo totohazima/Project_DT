@@ -1,4 +1,5 @@
 using FieldHelper;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,7 +63,7 @@ public class TestCharacterAlgorithm_Step3 : MonoBehaviour
 
             if(character.currentField == FieldMap.Field.VILLAGE)
             {
-                character.targetBuilding = GameManager.instance.GetRandomEnumValue<Building.BuildingType>(1);
+                character.targetBuilding = GameManager.instance.GetRandomEnumValue<Building.BuildingType>(1, Enum.GetValues(typeof(Building.BuildingType)).Length);
                 StartCoroutine(GoBuilding());
                 yield break;
             }

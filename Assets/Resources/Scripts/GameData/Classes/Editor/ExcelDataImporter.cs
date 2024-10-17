@@ -503,6 +503,8 @@ namespace GDBA
                     return true;
                 case "CharacterInfoTable":
                     return true;
+                case "GameMoneyInfoTable":
+                    return true;
             }
             return true;
         }
@@ -519,6 +521,8 @@ namespace GDBA
                     return new HelmetInfoImporter(filePath);
                 case "CharacterInfoTable":
                     return new CharacterInfoImporter(filePath);
+                case "GameMoneyInfoTable":
+                    return new GameMoneyInfoImporter(filePath);
             }
 
             return null;

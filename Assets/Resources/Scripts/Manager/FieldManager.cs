@@ -24,7 +24,7 @@ public class FieldManager : MonoBehaviour
     {
         instance = this;
 
-        for(int i = 0; i < fieldList.Count; i++)
+        for (int i = 0; i < fieldList.Count; i++)
         {
             if (fieldList[i].GetComponent<FieldActivity>() != null)
             {
@@ -106,7 +106,6 @@ public class FieldManager : MonoBehaviour
             field.isSpawn = true;
         }
     }
-
 
 
 }

@@ -26,7 +26,7 @@ public class DropItem : FieldObject, IPointerClickHandler
     {
         float delay = 0.3f;
         float elapsedTime = 0f;
-        Vector3 middlePos = CalculateControlPoint(startPos, endPos, 0.5f);
+        Vector3 middlePos = CalculateControlPoint(startPos, endPos, 2f);
 
         while (elapsedTime < delay)
         {

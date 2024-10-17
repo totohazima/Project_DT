@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 5390224316437276069}
   - {fileID: 5776650531456867679}
+  - {fileID: 401008002321683690}
   m_Father: {fileID: 2649442005248017346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2537565272225233227
@@ -116,11 +117,44 @@ MonoBehaviour:
   buildingName: "\uAC70\uB798\uC18C"
   builngLevel: 1
   buildingDelay: 5
+  giveItenType: 8
   isInteraction: 0
   scanHero: []
   customerList: []
   interactionCenter: {fileID: 5776650531456867679}
   interactionRange: {x: 1.05, y: 0.37, z: 1}
+  popupTransform: {fileID: 401008002321683690}
+--- !u!1 &5895157367966304173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 401008002321683690}
+  m_Layer: 6
+  m_Name: PopupCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &401008002321683690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5895157367966304173}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4183288438072300860}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6448461357753604503
 GameObject:
   m_ObjectHideFlags: 0

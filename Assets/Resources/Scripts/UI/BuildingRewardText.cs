@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BuildingRewardText : FloatingText
 {
+    private Vector3 startPosition;
     public GameObjectEffect effect;
-    public void TextSetting(GameMoney.GameMoneyType type, int count)
+    public void TextSetting(GameMoney.GameMoneyType type, int count, Vector3 startPos)
     {
         string typeTxt = "";
         typeTxt = type.ToString();
@@ -19,6 +20,8 @@ public class BuildingRewardText : FloatingText
         string applyText = typeTxt + " +" + count;
         text.text = applyText;
 
+        startPosition = startPos;
+
         effect.target = gameObject;
         effect.text = text;
         effect.Effect();
@@ -28,7 +31,7 @@ public class BuildingRewardText : FloatingText
     public override IEnumerator Text_Animation()
     {
 
-        Vector3 destination = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
+        Vector3 destination = new Vector3(startPosition.x, startPosition.y + 0.2f, startPosition.z);
         Vector3 fromPos = new Vector3(destination.x, destination.y - 0.2f, destination.z);
 
         LeanTween.value(text.gameObject, 1, 0, 1f).setOnUpdate(UpdateTextAlpha);

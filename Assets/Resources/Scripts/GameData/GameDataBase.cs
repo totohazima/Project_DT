@@ -17,6 +17,9 @@ namespace GDBA
         [Header("Character")]
         public CharacterInfoTable characterInfoTable;
 
+        [Header("Item")]
+        public GameMoneyInfoTable gameMoneyInfoTable;
+
         [Header("Equipment")]
         public EquipmentInfoTable weaponInfoTable;
         public EquipmentInfoTable helmetInfoTable;
@@ -24,6 +27,7 @@ namespace GDBA
         [Header("SpriteAtlas")]
         public SpriteAtlas weaponSpriteAtlas;
         public SpriteAtlas helmetSpriteAtlas;
+        public SpriteAtlas gameMoneyAtlas;
     }
 
 

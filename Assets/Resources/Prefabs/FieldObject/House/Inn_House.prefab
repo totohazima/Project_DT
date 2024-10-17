@@ -191,11 +191,13 @@ MonoBehaviour:
   buildingName: "\uC5EC\uAD00"
   builngLevel: 1
   buildingDelay: 5
+  giveItenType: 9
   isInteraction: 0
   scanHero: []
   customerList: []
   interactionCenter: {fileID: 4014455967235755685}
   interactionRange: {x: 1.2, y: 0.39, z: 1}
+  popupTransform: {fileID: 5925874223372962635}
 --- !u!1 &6903855947846163492
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +282,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!1 &7529820985581467640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5925874223372962635}
+  m_Layer: 6
+  m_Name: PopupCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5925874223372962635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7529820985581467640}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2249825101489599820}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9220547618760287177
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,5 +344,6 @@ Transform:
   m_Children:
   - {fileID: 2313510603984768505}
   - {fileID: 4014455967235755685}
+  - {fileID: 5925874223372962635}
   m_Father: {fileID: 7820727739740176197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -21,6 +21,7 @@ public class Building : FieldObject
     public string buildingName;
     public int builngLevel = 1;
     public float buildingDelay;
+    public GameMoney.GameMoneyType giveItenType;
     [Header("Bool")]
     public bool isInteraction = false; //true일시 상호작용 불가
     private bool onScanning = false;
@@ -29,6 +30,7 @@ public class Building : FieldObject
     public List<HeroCharacter> customerList = new List<HeroCharacter>();
     public Transform interactionCenter = null;
     public Vector3 interactionRange = new Vector3(1f, 1f, 1f);
+    public Transform popupTransform = null;
     private GameObject rewardText;
     private void Awake()
     {
@@ -87,15 +89,39 @@ public class Building : FieldObject
         StartCoroutine(customer.popupController.Building_Interaction(this, buildingDelay));
     }
 
-    //리스트로 받은 아이템 정보를 텍스트로 출력 추후 작업
+    //리스트로 받은 아이템 정보를 텍스트로 출력
     public void RewardPopup(GameMoney.GameMoneyType type, int count)
     {
-        GameObject text = PoolManager.instance.Spawn(rewardText, interactionCenter.position, Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
+        GameObject text = PoolManager.instance.Spawn(rewardText, interactionCenter.position, Vector3.one, Quaternion.identity, true, PoolManager.instance.spawnRoot);
+        text.transform.position = popupTransform.position;
 
         BuildingRewardText floatText = text.GetComponent<BuildingRewardText>();
-        floatText.TextSetting(type, count);
+        floatText.TextSetting(type, count, popupTransform.position);
     }
 
+    /// <summary>
+    /// 건물 상호작용 애니메이션
+    /// </summary>
+    public IEnumerator Building_Interaction(HeroCharacter hero, float useDelay)
+    {
+        float giveDelay = 0.2f;
+        int count = 1;
+        for (int i = 0; i < count; i++)
+        {
+            AddGiveBuildingItem(giveItenType, Random.Range(1, 1), hero);
+            yield return new WaitForSeconds(giveDelay);
+        }
+
+    }
+    protected void AddGiveBuildingItem(GameMoney.GameMoneyType type, int count, HeroCharacter hero)
+    {
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/GiveItem");
+        GameObject popup = PoolManager.instance.Spawn(prefab, hero.popupCenter.position, new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, true, PoolManager.instance.spawnRoot);
+
+        GiveItem popupItem = popup.GetComponent<GiveItem>();
+        popupItem.character = hero;
+        popupItem.ItemSetting(type, count, popupTransform.position);
+    }
 
 #if UNITY_EDITOR
     int segments = 100;

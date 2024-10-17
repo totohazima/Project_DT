@@ -278,7 +278,8 @@ MonoBehaviour:
   popupController: {fileID: 0}
   characterCostume: {fileID: 0}
   spriteGroup: {fileID: 2028476595118916097}
-  popupPos: {fileID: 0}
+  popupCenter: {fileID: 0}
+  dropCenter: {fileID: 2690560997465344729}
   isInvincible: 0
   isUntargetted: 0
   isStopScanning: 0
@@ -316,7 +317,8 @@ MonoBehaviour:
   targetBuilding: 0
   soonAttacker: []
   soonAttackerLimit: -1
-  dropItemCount: 10
+  minDropCount: 10
+  maxDropCount: 10
   eventCallAnimation: {fileID: 2629156456989565169}
   attackPrefab: {fileID: 1916831241361388, guid: cb7928c1d8694d74588ebb28f5c7e60f, type: 3}
   attackEvent: {fileID: 11400000, guid: 58680498672b6a44c826a3d8b999b500, type: 2}
@@ -11094,6 +11096,7 @@ Transform:
   - {fileID: 7455634530634206466}
   - {fileID: 7679883466914369011}
   - {fileID: 5748087837438142022}
+  - {fileID: 2690560997465344729}
   - {fileID: 380929085038005829}
   m_Father: {fileID: 6777606198223913101}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12102,6 +12105,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7229733087808482779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2690560997465344729}
+  m_Layer: 0
+  m_Name: DropCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2690560997465344729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7229733087808482779}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1746480256205103218}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7357827088667223058
 GameObject:
   m_ObjectHideFlags: 0

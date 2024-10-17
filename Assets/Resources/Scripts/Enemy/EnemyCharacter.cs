@@ -20,7 +20,8 @@ public class EnemyCharacter : Character
     private float scanDelay = 0.1f; //스캔이 재작동하는 시간
     private bool isScanning = false; //스캔 코루틴이 실행중인지 체크하는 변수
     [Header("ItemDrop_Info")]
-    public int dropItemCount = 1; //아이템 총 드랍 개수
+    public int minDropCount;
+    public int maxDropCount; //아이템 총 드랍 개수
     [Header("GameEvent")]
     public EventCallAnimation eventCallAnimation = null;
     public GameObject attackPrefab;
@@ -303,7 +304,9 @@ public class EnemyCharacter : Character
 
     protected void ItemDrop()
     {
-        for (int i = 0; i < dropItemCount; i++)
+        int count = Random.Range(minDropCount, maxDropCount + 1);
+
+        for (int i = 0; i < count; i++)
         {
             GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/DropItem");
            
@@ -314,7 +317,7 @@ public class EnemyCharacter : Character
             dropItem.moneyType = GameMoney.GameMoneyType.RUBY;
             dropItem.dropCount = 1;
 
-            Vector3 dropPos = GetRandomPositionInBox(myObject.position, dropRange);
+            Vector3 dropPos = GetRandomPositionInBox(dropCenter.position, dropRange);
 
             dropItem.Drop_Animation(myObject.position, dropPos);
         }

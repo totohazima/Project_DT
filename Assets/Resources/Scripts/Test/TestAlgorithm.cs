@@ -1,4 +1,5 @@
 using FieldHelper;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -81,7 +82,7 @@ public class TestAlgorithm : MonoBehaviour
         if (character.targetBuilding == Building.BuildingType.NONE && !afterBuildingUse)
         {
             afterBuildingUse = true;
-            character.targetBuilding = GameManager.instance.GetRandomEnumValue<Building.BuildingType>(1);
+            character.targetBuilding = GameManager.instance.GetRandomEnumValue<Building.BuildingType>(1, Enum.GetValues(typeof(Building.BuildingType)).Length - 1);
         }
 
         while (character.targetBuilding != Building.BuildingType.NONE)

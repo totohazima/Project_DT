@@ -33,6 +33,7 @@ Transform:
   - {fileID: 1472991038}
   - {fileID: 7238400716185745001}
   - {fileID: 7768104052553875533}
+  - {fileID: 3608201287520480950}
   - {fileID: 1443793873707475919}
   m_Father: {fileID: 5768949269878608820}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2051,7 +2052,8 @@ MonoBehaviour:
   popupController: {fileID: 0}
   characterCostume: {fileID: 0}
   spriteGroup: {fileID: 1582930559131529224}
-  popupPos: {fileID: 0}
+  popupCenter: {fileID: 0}
+  dropCenter: {fileID: 3608201287520480950}
   isInvincible: 0
   isUntargetted: 0
   isStopScanning: 0
@@ -2082,14 +2084,15 @@ MonoBehaviour:
     assist_Score: 0
   anim: {fileID: 7880283088654874363}
   aiPath: {fileID: 2784481643048298356}
-  dropRange: {x: 1, y: 1, z: 1}
+  dropRange: {x: 1.35, y: 1, z: 1}
   targetField: 0
   targetUnit: {fileID: 0}
   targetLocation: {x: 0, y: 0, z: 0}
   targetBuilding: 0
   soonAttacker: []
   soonAttackerLimit: 2
-  dropItemCount: 3
+  minDropCount: 1
+  maxDropCount: 3
   eventCallAnimation: {fileID: 3744511214837868610}
   attackPrefab: {fileID: 1916831241361388, guid: cb7928c1d8694d74588ebb28f5c7e60f, type: 3}
   attackEvent: {fileID: 11400000, guid: 58680498672b6a44c826a3d8b999b500, type: 2}
@@ -17409,6 +17412,37 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &8688371970700455888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3608201287520480950}
+  m_Layer: 0
+  m_Name: DropCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3608201287520480950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8688371970700455888}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 185537554}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9173131209321706954
 GameObject:
   m_ObjectHideFlags: 0
