@@ -14,7 +14,6 @@ public class HeroCharacter : Character, IPointerClickHandler
     public bool isFieldEnter = false;
     public bool onRandomMove = false;
     public bool isWaitingBuilding = false;
-    public bool isEliteCombat = false;
     private float randomMoveRadius = 2f;
     private float randomMoveTime;
     private float randomMoveTime_Max = 10f;
@@ -38,7 +37,6 @@ public class HeroCharacter : Character, IPointerClickHandler
         onRandomMove = false;
         isFieldEnter = false;
         isScanning = false;
-        isEliteCombat = false;
         soonTargetter = null;
         characterCostume.CostumeEquip_Process();
 
@@ -102,7 +100,7 @@ public class HeroCharacter : Character, IPointerClickHandler
 
     public override IEnumerator ObjectScan(float scanDelay)
     {
-        if (isStopScanning || isEliteCombat || isScanning)
+        if (isStopScanning || isScanning)
         {
             yield break;
         }

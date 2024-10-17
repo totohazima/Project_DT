@@ -70,33 +70,27 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
             GameObject monster = PoolManager.instance.Spawn(prefab[i].gameObject, spawnPos[i], Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
 
             EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
-            monsterCharacter.currentField = fieldActivity.controlField;
-            monsterCharacter.targetField = fieldActivity.controlField;
+            monsterCharacter.currentField = fieldActivity.fieldName;
+            monsterCharacter.targetField = fieldActivity.fieldName;
             //monsterCharacter.soonAttackerLimit = 2;
             fieldActivity.monsters.Add(monsterCharacter);
         }
     }
 
     //보스를 스폰 시키고 보스 등장 연출
-    public IEnumerator BossSpawn()
+    public void BossSpawn()
     {
-        FieldManager.instance.isAlreadyBossSpawn = true;
+        fieldActivity.isBossSpawned = true;
 
         GameObject monster = PoolManager.instance.Spawn(boss.gameObject, fieldActivity.getTransform.position, Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
 
         EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
-        monsterCharacter.currentField = fieldActivity.controlField;
-        monsterCharacter.targetField = fieldActivity.controlField;
-        //monsterCharacter.soonAttackerLimit = -1;
+        monsterCharacter.currentField = fieldActivity.fieldName;
+        monsterCharacter.targetField = fieldActivity.fieldName;
         fieldActivity.bosses.Add(monsterCharacter);
         monsterCharacter.enabled = false;
 
-        StartCoroutine(BossSpawnAnimation(monsterCharacter, 3f));
-        yield return new WaitForSeconds(3.5f);
-
-        monsterCharacter.enabled = true;
-        fieldActivity.isBossSpawned = true;
-        FieldManager.instance.isAlreadyBossSpawn = false;
+        StartCoroutine(BossSpawnAnimation(monsterCharacter, 1.5f));
     }
 
     protected List<Vector3> SpawnPointSet(int count)
@@ -127,6 +121,8 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         }
 
         yield return new WaitForSeconds(fadeDuration); // 모든 페이드가 끝날 때까지 대기
+
+        boss.enabled = true;
     }
 
     private IEnumerator FadeSprite(SpriteRenderer spriteRenderer, float duration, float startAlpha, float endAlpha)

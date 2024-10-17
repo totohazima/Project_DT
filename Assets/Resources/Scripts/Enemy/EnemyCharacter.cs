@@ -290,7 +290,6 @@ public class EnemyCharacter : Character
         {
             field.bosses.Remove(this);
             field.isBossSpawned = false;
-            field.HeroEliteCombatCalc(false);
         }
         
         yield return new WaitForSeconds(0.1f);

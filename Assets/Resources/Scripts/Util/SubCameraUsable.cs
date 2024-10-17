@@ -75,10 +75,7 @@ public class SubCameraUsable : MonoBehaviour
 
         subCamera.transform.position = trueEndPos;
 
-        while (!field.isBossSpawned)
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(2f);
 
 
     }

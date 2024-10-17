@@ -9,7 +9,7 @@ using Util;
 public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 {
     public Transform getTransform;
-    public FieldMap.Field controlField;
+    public FieldMap.Field fieldName;
     public LayerMask scanLayer;
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);
     public FieldSpawner mySpawner;
@@ -45,12 +45,12 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         StartCoroutine(ScanCharacter(0.5f));
         StartCoroutine(ScanEnemy(0.1f));
         BossSpawn();
-        AlwaysEliteTargetting();
+        //AlwaysEliteTargetting();
     }
 
     protected IEnumerator ScanEnemy(float scanDelay)
     {
-        if (isEnemyScanning || isBossSpawned)
+        if (isEnemyScanning)
         {
             yield break;
         }
@@ -69,27 +69,53 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
                 continue;
             }
 
-
-            foreach (EnemyCharacter enemy in monsters)
+            if (!isBossSpawned)
             {
-                if (enemy.soonAttacker.Count >= enemy.soonAttackerLimit)
+                foreach (EnemyCharacter enemy in monsters)
                 {
-                    continue;
-                }
+                    if (enemy.soonAttacker.Count >= enemy.soonAttackerLimit && enemy.soonAttackerLimit != -1)
+                    {
+                        continue;
+                    }
 
-                //타겟으로 잡힌 몬스터는 변수에 거리를 넣어줌
-                if (hero.targetUnit != null)
-                {
-                    shortDistance = Vector3.Distance(hero.myObject.position, hero.targetUnit.position);        
-                }
+                    //타겟으로 잡힌 몬스터는 미리 거리정보를 넣어줌
+                    if (hero.targetUnit != null)
+                    {
+                        shortDistance = Vector3.Distance(hero.myObject.position, hero.targetUnit.position);
+                    }
 
-                float dis = Vector3.Distance(hero.myObject.position, enemy.myObject.position);
-                if (dis < shortDistance)
-                {
-                    shortDistance = dis;
-                    nearMonster = enemy;
+                    float dis = Vector3.Distance(hero.myObject.position, enemy.myObject.position);
+                    if (dis < shortDistance)
+                    {
+                        shortDistance = dis;
+                        nearMonster = enemy;
+                    }
                 }
             }
+            else if(isBossSpawned)
+            {
+                foreach (EnemyCharacter enemy in bosses)
+                {
+                    if (enemy.soonAttacker.Count >= enemy.soonAttackerLimit && enemy.soonAttackerLimit != -1)
+                    {
+                        continue;
+                    }
+
+                    //타겟으로 잡힌 몬스터는 미리 거리정보를 넣어줌
+                    if (hero.targetUnit != null)
+                    {
+                        shortDistance = Vector3.Distance(hero.myObject.position, hero.targetUnit.position);
+                    }
+
+                    float dis = Vector3.Distance(hero.myObject.position, enemy.myObject.position);
+                    if (dis < shortDistance)
+                    {
+                        shortDistance = dis;
+                        nearMonster = enemy;
+                    }
+                }
+            }
+
 
             if (nearMonster != null)
             {
@@ -152,7 +178,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 
     protected void BossSpawn()
     {
-        if (bossPoint < maxBossPoint || FieldManager.instance.isAlreadyBossSpawn || isBossSpawned)
+        if (bossPoint < maxBossPoint || isBossSpawned)
         {
             return;      
         }
@@ -162,32 +188,29 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 
         //카메라 이동 연출
         CameraController_InGame camera = FieldManager.instance.cameraController;
-        camera.subCameraUsable.AddCoroutine(camera.subCameraUsable.CameraBossTracking(camera.transform.position, getTransform.position, 20f, this));
+        camera.subCameraUsable.AddCoroutine(camera.subCameraUsable.CameraBossTracking(camera.transform.position, getTransform.position, 40f, this));
 
         //보스 소환 연출
-        StartCoroutine(mySpawner.BossSpawn());
+        mySpawner.BossSpawn();
 
-        //스캔된 캐릭터들의 타겟을 보스로 고정시켜야 함
-        HeroEliteCombatCalc(true);
+        //스캔된 캐릭터들의 타겟 지우기 and 재스캔
+        foreach(HeroCharacter hero in inCharacters)
+        {
+            hero.targetUnit = null;
+        }
+        isEnemyScanning = false;
     }
 
     protected void CharacterFieldCalc(HeroCharacter character)
     {
-        if(character.currentField != controlField)
+        if(character.currentField != fieldName)
         {
-            character.currentField = controlField;
+            character.currentField = fieldName;
             character.isFieldEnter = true;
 
         }
     }
 
-    public void HeroEliteCombatCalc(bool isCombat)
-    {
-        foreach (HeroCharacter character in inCharacters)
-        {
-            character.isEliteCombat = isCombat;
-        }
-    }
 
     //보스가 스폰된 상태에서 필드 내 유닛들에게 보스 타겟팅
     public void AlwaysEliteTargetting()
