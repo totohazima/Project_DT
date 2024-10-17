@@ -79,20 +79,20 @@ public class FieldManager : MonoBehaviour
         List<Vector3> pos = new List<Vector3>();
         FieldSpawner spawner = fieldSpawners[(int)FieldMap.Field.VILLAGE];
 
-        float[] chanceList = new float[spawner.spawnPoints.Count];
-
-        for (int i = 0; i < chanceList.Length; i++)
-        {
-            chanceList[i] = 1f / chanceList.Length; // 각 스폰 포인트의 확률을 동일하게 설정
-        }
-
         for (int i = 0; i < count; i++)
         {
-            int index = GameManager.instance.Judgment(chanceList);
+            Vector3 boxSize = spawner.fieldActivity.boxSize;
+            // 오버랩 박스 내에서 무작위 위치 생성
+            Vector3 randomPositionWithinBox = new Vector3(
+                Random.Range(-boxSize.x / 2, boxSize.x / 2),
+                Random.Range(-boxSize.y / 2, boxSize.y / 2),
+                0
+            );
 
-            Vector3 randPos = spawner.spawnPoints[index].position;
-            pos.Add(randPos);
+            Vector3 targetPos = spawner.fieldActivity.getTransform.position + randomPositionWithinBox;
+            pos.Add(targetPos);
         }
+
 
         return pos;
     }

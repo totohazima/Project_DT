@@ -1,5 +1,4 @@
 using GameSystem;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities.UniversalDelegates;
@@ -11,8 +10,6 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     public FieldActivity fieldActivity;
     public bool isSpawn = false; //true일 경우 리스폰
     public int spawnUnitCount; //유닛 수 제한
-    public Transform spawnPointGroup;
-    public List<Transform> spawnPoints = new List<Transform>();
 
     private GameObject unitPrefab;
     private EnemyCharacter monster;
@@ -22,11 +19,6 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 
     void Awake()
     {
-        for(int i = 0; i < spawnPointGroup.childCount; i++)
-        {
-            spawnPoints.Add(spawnPointGroup.GetChild(i).transform);
-        }
-
         unitPrefab = Resources.Load<GameObject>("Prefabs/Enemys/mn_000");
         monster = unitPrefab.GetComponent<EnemyCharacter>();
 
@@ -97,18 +89,18 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     {
         List<Vector3> pos = new List<Vector3>();
 
-        float[] chanceList = new float[spawnPoints.Count];
-
-        for (int i = 0; i < chanceList.Length; i++)
-        {
-            chanceList[i] = 1f / chanceList.Length; // 각 스폰 포인트의 확률을 동일하게 설정
-        }
-
         for (int i = 0; i < count; i++)
         {
-            int index = GameManager.instance.Judgment(chanceList);
-            Vector3 randPos = spawnPoints[index].position;
-            pos.Add(randPos);
+            Vector3 boxSize = fieldActivity.boxSize;
+            // 오버랩 박스 내에서 무작위 위치 생성
+            Vector3 randomPositionWithinBox = new Vector3(
+                Random.Range(-boxSize.x / 2, boxSize.x / 2),
+                Random.Range(-boxSize.y / 2, boxSize.y / 2),
+                0
+            );
+
+            Vector3 targetPos = fieldActivity.getTransform.position + randomPositionWithinBox;
+            pos.Add(targetPos);
         }
         return pos;
     }

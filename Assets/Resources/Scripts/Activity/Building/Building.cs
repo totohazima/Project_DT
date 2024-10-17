@@ -116,7 +116,7 @@ public class Building : FieldObject
     protected void AddGiveBuildingItem(GameMoney.GameMoneyType type, int count, HeroCharacter hero)
     {
         GameObject prefab = Resources.Load<GameObject>("Prefabs/FieldObject/GiveItem");
-        GameObject popup = PoolManager.instance.Spawn(prefab, hero.popupCenter.position, new Vector3(0.5f, 0.5f, 0.5f), Quaternion.identity, true, PoolManager.instance.spawnRoot);
+        GameObject popup = PoolManager.instance.Spawn(prefab, hero.popupCenter.position, new Vector3(0.5f, 0.5f, 0.5f)/*이 부분은 추후 이미지 사이즈가 통일될시 Vector3.One으로 대체해야함*/, Quaternion.identity, true, PoolManager.instance.spawnRoot);
 
         GiveItem popupItem = popup.GetComponent<GiveItem>();
         popupItem.character = hero;
