@@ -75,7 +75,7 @@ public class SubCameraUsable : MonoBehaviour
 
         subCamera.transform.position = trueEndPos;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
 
     }
