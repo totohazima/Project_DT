@@ -79706,7 +79706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1073741824
-  radius: 0.05
+  radius: 0.07
   height: 1
   canMove: 1
   maxSpeed: 1
@@ -79759,8 +79759,8 @@ MonoBehaviour:
   heightBackingField: 2
   centerBackingField: 1
   locked: 0
-  lockWhenNotMoving: 0
-  agentTimeHorizon: 2
+  lockWhenNotMoving: 1
+  agentTimeHorizon: 0.7
   obstacleTimeHorizon: 0.5
   maxNeighbours: 10
   layer: 1

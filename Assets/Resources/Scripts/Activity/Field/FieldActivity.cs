@@ -42,7 +42,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 
     public void CustomUpdate()
     {
-        StartCoroutine(ScanCharacter(0.5f));
+        StartCoroutine(ScanCharacter(0.1f));
         StartCoroutine(ScanEnemy(0.1f));
         BossSpawn();
         //AlwaysEliteTargetting();
