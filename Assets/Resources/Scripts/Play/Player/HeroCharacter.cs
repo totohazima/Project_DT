@@ -437,7 +437,7 @@ public class HeroCharacter : Character, IPointerClickHandler
     /// </summary>
     public IEnumerator ProcessClick(Vector3 clickPosition)
     {
-        Ray ray = UnityEngine.Camera.main.ScreenPointToRay(clickPosition);
+        Ray ray = FieldManager.instance.cameraController.mainCamera.ScreenPointToRay(clickPosition);
         RaycastHit hit;
 
 

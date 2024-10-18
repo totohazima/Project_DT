@@ -102,7 +102,7 @@ public class FieldManager : MonoBehaviour
     {
         foreach(FieldSpawner field in fieldSpawners)
         {
-            field.isSpawn = true;
+            field.isReadyFieldAllSpawn = true;
         }
     }
 
