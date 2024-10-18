@@ -236,9 +236,13 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
     {
         if (drawWhenSelected)
         {
-            //Å½Áö ½Ã¾ß
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(getTransform.position, boxSize);
+            for (float i = -0.02f; i <= 0.02f; i += 0.02f)
+            {
+                //Å½Áö ½Ã¾ß
+                Gizmos.color = Color.red;
+                Vector3 offset = new Vector3(i, i, i);
+                Gizmos.DrawWireCube(getTransform.position + offset, boxSize);
+            }
         }
     }
 
