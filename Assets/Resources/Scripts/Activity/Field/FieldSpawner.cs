@@ -10,10 +10,12 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     public FieldActivity fieldActivity;
     public bool isSpawn = false; //true일 경우 리스폰
     public int spawnUnitCount; //유닛 수 제한
+    public List<EnemyCharacter> reSpawnUnits; //리스폰 될 유닛들
+    [SerializeField] private float reSpawnReadyTime;
+    private float reSpawnReadyTimer;
 
     private GameObject unitPrefab;
     private EnemyCharacter monster;
-
     private GameObject boosPrefab;
     private EnemyCharacter boss;
 
@@ -31,18 +33,42 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     }
     public void CustomUpdate()
     {
-        if(isSpawn || fieldActivity.monsters.Count == 0)
+        if(isSpawn)
         {
-            SpawnSetting();
-            isSpawn = false;
+            AllSpawnSetting();
+            if (isSpawn)
+                isSpawn = false;
         }
+        else if(reSpawnUnits.Count != 0 && reSpawnReadyTimer >= reSpawnReadyTime)
+        {
+            EnemyCharacter enemy = reSpawnUnits[0];
+            SpawnSetting(enemy);
+            reSpawnReadyTimer = 0f;
+            reSpawnUnits.Remove(enemy);
+        }
+
+        reSpawnReadyTimer += Time.deltaTime;
     }
     private void OnDisable()
     {
         CustomUpdateManager.customUpdateMonos.Remove(this);
     }
+    protected void SpawnSetting(EnemyCharacter enemy)
+    {
+        List<EnemyCharacter> prefabs = new List<EnemyCharacter>();
+        List<Vector3> pos = new List<Vector3>();
 
-    protected void SpawnSetting()
+        for(int i = 0; i < 1; i++)
+        {
+            prefabs.Add(enemy);
+        }
+
+        pos = SpawnPointSet(1);
+        UnitSpawn(prefabs, 1, pos);
+
+    }
+
+    protected void AllSpawnSetting()
     {
         List<EnemyCharacter> prefabs = new List<EnemyCharacter>();
         List<Vector3> pos = new List<Vector3>();
@@ -55,6 +81,8 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         UnitSpawn(prefabs, spawnUnitCount, pos);
 
     }
+
+
     protected void UnitSpawn(List<EnemyCharacter> prefab, int count, List<Vector3> spawnPos)
     {
         for (int i = 0; i < count; i++)

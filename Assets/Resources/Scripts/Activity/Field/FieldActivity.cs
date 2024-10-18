@@ -45,7 +45,6 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
         StartCoroutine(ScanCharacter(0.1f));
         StartCoroutine(ScanEnemy(0.1f));
         BossSpawn();
-        //AlwaysEliteTargetting();
     }
 
     protected IEnumerator ScanEnemy(float scanDelay)
@@ -208,22 +207,6 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
             character.currentField = fieldName;
             character.isFieldEnter = true;
 
-        }
-    }
-
-
-    //보스가 스폰된 상태에서 필드 내 유닛들에게 보스 타겟팅
-    public void AlwaysEliteTargetting()
-    {
-        if (isBossSpawned)
-        {
-            foreach (HeroCharacter character in inCharacters)
-            {
-                if (character.targetUnit == null)
-                {
-                    character.targetUnit = bosses[0].myObject;
-                }
-            }
         }
     }
    

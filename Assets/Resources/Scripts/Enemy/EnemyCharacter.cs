@@ -285,6 +285,8 @@ public class EnemyCharacter : Character
         {
             field.monsters.Remove(this);
             field.bossPoint += Random.Range(1, 4);
+
+            field.mySpawner.reSpawnUnits.Add(this);
         }
         else if(field.bosses.Contains(this))
         {
