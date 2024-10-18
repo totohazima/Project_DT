@@ -10,21 +10,24 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     public FieldActivity fieldActivity;
     public bool isSpawn = false; //true일 경우 리스폰
     public int spawnUnitCount; //유닛 수 제한
-    public List<EnemyCharacter> reSpawnUnits; //리스폰 될 유닛들
     [SerializeField] private float reSpawnReadyTime;
     private float reSpawnReadyTimer;
 
-    private GameObject unitPrefab;
-    private EnemyCharacter monster;
-    private GameObject boosPrefab;
+    [SerializeField] private List<EnemyCharacter> monster = new List<EnemyCharacter>();
     private EnemyCharacter boss;
 
     void Awake()
     {
-        unitPrefab = Resources.Load<GameObject>("Prefabs/Enemys/mn_000");
-        monster = unitPrefab.GetComponent<EnemyCharacter>();
+        GameObject unitPrefab = Resources.Load<GameObject>("Prefabs/Enemys/mn_000");
+        EnemyCharacter mn = unitPrefab.GetComponent<EnemyCharacter>();
+        monster.Add(mn);
 
-        boosPrefab = Resources.Load<GameObject>("Prefabs/Enemys/mn_000_Boss");
+        unitPrefab = Resources.Load<GameObject>("Prefabs/Enemys/mn_002");
+        mn = unitPrefab.GetComponent<EnemyCharacter>();
+        monster.Add(mn);
+
+
+        GameObject boosPrefab = Resources.Load<GameObject>("Prefabs/Enemys/mn_000_Boss");
         boss = boosPrefab.GetComponent<EnemyCharacter>();
     }
     private void OnEnable()
@@ -35,16 +38,13 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     {
         if(isSpawn)
         {
-            AllSpawnSetting();
-            if (isSpawn)
-                isSpawn = false;
+            SpawnSetting(spawnUnitCount);
+            isSpawn = false;
         }
-        else if(reSpawnUnits.Count != 0 && reSpawnReadyTimer >= reSpawnReadyTime)
+        else if(fieldActivity.monsters.Count < spawnUnitCount && reSpawnReadyTimer >= reSpawnReadyTime)
         {
-            EnemyCharacter enemy = reSpawnUnits[0];
-            SpawnSetting(enemy);
+            SpawnSetting(1);
             reSpawnReadyTimer = 0f;
-            reSpawnUnits.Remove(enemy);
         }
 
         reSpawnReadyTimer += Time.deltaTime;
@@ -53,34 +53,36 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     {
         CustomUpdateManager.customUpdateMonos.Remove(this);
     }
-    protected void SpawnSetting(EnemyCharacter enemy)
+    protected void SpawnSetting(int count)
     {
         List<EnemyCharacter> prefabs = new List<EnemyCharacter>();
         List<Vector3> pos = new List<Vector3>();
 
-        for(int i = 0; i < 1; i++)
+        for(int i = 0; i < count; i++)
         {
-            prefabs.Add(enemy);
+            int num = Random.Range(0, monster.Count);
+            prefabs.Add(monster[num]);
         }
 
-        pos = SpawnPointSet(1);
-        UnitSpawn(prefabs, 1, pos);
+        pos = SpawnPointSet(count);
+        UnitSpawn(prefabs, count, pos);
 
     }
 
-    protected void AllSpawnSetting()
-    {
-        List<EnemyCharacter> prefabs = new List<EnemyCharacter>();
-        List<Vector3> pos = new List<Vector3>();
+    //protected void AllSpawnSetting()
+    //{
+    //    List<EnemyCharacter> prefabs = new List<EnemyCharacter>();
+    //    List<Vector3> pos = new List<Vector3>();
 
-        for (int i = 0; i < spawnUnitCount; i++)
-        {
-            prefabs.Add(monster);
-        }
-        pos = SpawnPointSet(spawnUnitCount);
-        UnitSpawn(prefabs, spawnUnitCount, pos);
+    //    for (int i = 0; i < spawnUnitCount; i++)
+    //    {
+    //        int num = Random.Range(0, monster.Count);
+    //        prefabs.Add(monster[num]);
+    //    }
+    //    pos = SpawnPointSet(spawnUnitCount);
+    //    UnitSpawn(prefabs, spawnUnitCount, pos);
 
-    }
+    //}
 
 
     protected void UnitSpawn(List<EnemyCharacter> prefab, int count, List<Vector3> spawnPos)
