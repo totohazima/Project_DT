@@ -9,20 +9,13 @@ using Util;
 public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 {
     public Transform getTransform;
-    public FieldSpawner mySpawner;
-
-    [Header("FieldInfo")]
-    [SerializeField] private FieldMap.Field fieldName;
-    public FieldMap.Field FieldName
-    {
-        get { return fieldName; }
-        private set { fieldName = value; }
-    }
+    public FieldMap.Field fieldName;
     public LayerMask scanLayer;
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);
+    public FieldSpawner mySpawner;
     [HideInInspector] public int maxBossPoint = 100;
-    [Range(0, 100)] public int bossPoint = 0;
-
+    [Range(0, 100)]public int bossPoint = 0;
+    
     [Header("Bool")]
     public bool isBossSpawned = false;
     private bool isHeroScanning = false;

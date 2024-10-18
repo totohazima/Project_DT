@@ -8,8 +8,8 @@ using UnityEngine;
 public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 {
     public FieldActivity fieldActivity;
-    public bool isReadyFieldAllSpawn = false; //true일 경우 리스폰
-    public int maxSpawnUnitCount; //유닛 수 제한
+    public bool isSpawn = false; //true일 경우 리스폰
+    public int spawnUnitCount; //유닛 수 제한
     [SerializeField] private float reSpawnReadyTime;
     private float reSpawnReadyTimer;
 
@@ -36,12 +36,12 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
     }
     public void CustomUpdate()
     {
-        if(isReadyFieldAllSpawn)
+        if(isSpawn)
         {
-            SpawnSetting(maxSpawnUnitCount);
-            isReadyFieldAllSpawn = false;
+            SpawnSetting(spawnUnitCount);
+            isSpawn = false;
         }
-        else if(fieldActivity.monsters.Count < maxSpawnUnitCount && reSpawnReadyTimer >= reSpawnReadyTime)
+        else if(fieldActivity.monsters.Count < spawnUnitCount && reSpawnReadyTimer >= reSpawnReadyTime)
         {
             SpawnSetting(1);
             reSpawnReadyTimer = 0f;
@@ -69,6 +69,22 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 
     }
 
+    //protected void AllSpawnSetting()
+    //{
+    //    List<EnemyCharacter> prefabs = new List<EnemyCharacter>();
+    //    List<Vector3> pos = new List<Vector3>();
+
+    //    for (int i = 0; i < spawnUnitCount; i++)
+    //    {
+    //        int num = Random.Range(0, monster.Count);
+    //        prefabs.Add(monster[num]);
+    //    }
+    //    pos = SpawnPointSet(spawnUnitCount);
+    //    UnitSpawn(prefabs, spawnUnitCount, pos);
+
+    //}
+
+
     protected void UnitSpawn(List<EnemyCharacter> prefab, int count, List<Vector3> spawnPos)
     {
         for (int i = 0; i < count; i++)
@@ -76,8 +92,9 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
             GameObject monster = PoolManager.instance.Spawn(prefab[i].gameObject, spawnPos[i], Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
 
             EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
-            monsterCharacter.currentField = fieldActivity.FieldName;
-            monsterCharacter.targetField = fieldActivity.FieldName;
+            monsterCharacter.currentField = fieldActivity.fieldName;
+            monsterCharacter.targetField = fieldActivity.fieldName;
+            //monsterCharacter.soonAttackerLimit = 2;
             fieldActivity.monsters.Add(monsterCharacter);
         }
     }
@@ -90,8 +107,8 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         GameObject monster = PoolManager.instance.Spawn(boss.gameObject, fieldActivity.getTransform.position, Vector3.one, Quaternion.identity, true, FieldManager.instance.spawnPool);
 
         EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
-        monsterCharacter.currentField = fieldActivity.FieldName;
-        monsterCharacter.targetField = fieldActivity.FieldName;
+        monsterCharacter.currentField = fieldActivity.fieldName;
+        monsterCharacter.targetField = fieldActivity.fieldName;
         fieldActivity.bosses.Add(monsterCharacter);
         monsterCharacter.enabled = false;
 
