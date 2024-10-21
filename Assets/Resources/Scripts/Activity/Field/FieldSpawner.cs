@@ -78,6 +78,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
             EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
             monsterCharacter.currentField = fieldActivity.FieldName;
             monsterCharacter.targetField = fieldActivity.FieldName;
+            monsterCharacter.soonAttackerLimit = 1;
             fieldActivity.monsters.Add(monsterCharacter);
         }
     }
@@ -92,6 +93,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
         EnemyCharacter monsterCharacter = monster.GetComponent<EnemyCharacter>();
         monsterCharacter.currentField = fieldActivity.FieldName;
         monsterCharacter.targetField = fieldActivity.FieldName;
+        monsterCharacter.soonAttackerLimit = -1;
         fieldActivity.bosses.Add(monsterCharacter);
         monsterCharacter.enabled = false;
 
@@ -100,6 +102,9 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 
     protected List<Vector3> SpawnPointSet(int count)
     {
+        //매번 새로운 시드로 설정
+        Random.InitState(System.DateTime.Now.Millisecond);
+
         List<Vector3> pos = new List<Vector3>();
 
         for (int i = 0; i < count; i++)

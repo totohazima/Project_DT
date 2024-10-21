@@ -111,6 +111,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
                     if (hero.targetUnit != null)
                     {
                         shortDistance = Vector3.Distance(hero.myObject.position, hero.targetUnit.position);
+                        nearMonster = enemy;
                     }
 
                     float dis = Vector3.Distance(hero.myObject.position, enemy.myObject.position);
@@ -136,6 +137,10 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
                     }
                     else
                     {
+                        if(!nearMonster.soonAttacker.Contains(hero))
+                        {
+                            nearMonster.soonAttacker.Add(hero);
+                        }
                         hero.targetUnit = hero.soonTargetter.myObject;
                     }
                 }

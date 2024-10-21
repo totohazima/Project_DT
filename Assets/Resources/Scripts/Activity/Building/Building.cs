@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Building : FieldObject
+public class Building : FieldObject, ICustomUpdateMono
 {
     public enum BuildingType
     {
@@ -21,7 +21,8 @@ public class Building : FieldObject
     public string buildingName;
     public int builngLevel = 1;
     public float buildingDelay;
-    public GameMoney.GameMoneyType giveItenType;
+    public GameMoney.GameMoneyType giveItemType;
+    private float scanDelay = 0.5f;
     [Header("Bool")]
     public bool isInteraction = false; //true일시 상호작용 불가
     private bool onScanning = false;
@@ -37,7 +38,12 @@ public class Building : FieldObject
         rewardText = Resources.Load<GameObject>("Prefabs/FieldObject/BuildingRewardTxt");
 
     }
-    private void Update()
+
+    public void OnEnable()
+    {
+        CustomUpdateManager.customUpdateMonos.Add(this);    
+    }
+    public void CustomUpdate()
     {
         StartCoroutine(characterScan());
 
@@ -51,6 +57,11 @@ public class Building : FieldObject
             Interaction(customerList[0]);
         }
     }
+    public void OnDisable()
+    {
+        CustomUpdateManager.customUpdateMonos.Remove(this);
+    }   
+
 
     private IEnumerator characterScan()
     {
@@ -77,7 +88,7 @@ public class Building : FieldObject
                 }
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(scanDelay);
             onScanning = false;
         }
     }
@@ -108,7 +119,7 @@ public class Building : FieldObject
         int count = 1;
         for (int i = 0; i < count; i++)
         {
-            AddGiveBuildingItem(giveItenType, Random.Range(1, 1), hero);
+            AddGiveBuildingItem(giveItemType, Random.Range(1, 1), hero);
             yield return new WaitForSeconds(giveDelay);
         }
 

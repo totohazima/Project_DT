@@ -268,7 +268,24 @@ public class EnemyCharacter : Character
         base.OnHit(damage, attacker);
 
         //ÇÇ°Ý µÆÀ»¶§ Å¸°Ù
-        targetUnit = attacker.transform;
+        float nearDis = Mathf.Infinity;
+        HeroCharacter target = null;
+        
+        foreach(HeroCharacter attackers in soonAttacker)
+        {
+            float dis = Vector3.Distance(myObject.position, attackers.myObject.position);
+            
+            if(dis < nearDis)
+            {
+                target = attackers;
+                nearDis = dis;
+            }
+        }
+
+        if (target != null)
+        {
+            targetUnit = target.myObject;
+        }
     }
 
     public override IEnumerator Death()
