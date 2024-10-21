@@ -5,6 +5,7 @@ using UnityEngine;
 using FieldHelper;
 using StatusHelper;
 using Util;
+using Unity.Entities.UniversalDelegates;
 
 public class FieldActivity : MonoBehaviour, ICustomUpdateMono
 {
@@ -20,6 +21,7 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
     }
     public LayerMask scanLayer;
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);
+    public Vector3 spawnSize = new Vector3(1f, 1f, 1f);
     [HideInInspector] public int maxBossPoint = 100;
     [Range(0, 100)] public int bossPoint = 0;
 
@@ -238,6 +240,10 @@ public class FieldActivity : MonoBehaviour, ICustomUpdateMono
                 Vector3 offset = new Vector3(i, i, i);
                 Gizmos.DrawWireCube(getTransform.position + offset, boxSize);
             }
+            //필드 내 스폰 범위
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(getTransform.position, spawnSize);
+
         }
     }
 

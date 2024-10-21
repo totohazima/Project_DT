@@ -109,7 +109,7 @@ public class FieldSpawner : MonoBehaviour, ICustomUpdateMono
 
         for (int i = 0; i < count; i++)
         {
-            Vector3 boxSize = fieldActivity.boxSize;
+            Vector3 boxSize = fieldActivity.spawnSize;
             // 오버랩 박스 내에서 무작위 위치 생성
             Vector3 randomPositionWithinBox = new Vector3(
                 Random.Range(-boxSize.x / 2, boxSize.x / 2),

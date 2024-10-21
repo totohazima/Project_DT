@@ -76,12 +76,15 @@ public class FieldManager : MonoBehaviour
     }
     protected List<Vector3> SpawnPointSet(int count)
     {
+        //매번 새로운 시드로 설정
+        Random.InitState(System.DateTime.Now.Millisecond);
+
+        FieldActivity fieldActivity = fields[(int)FieldMap.Field.VILLAGE];
         List<Vector3> pos = new List<Vector3>();
-        FieldSpawner spawner = fieldSpawners[(int)FieldMap.Field.VILLAGE];
 
         for (int i = 0; i < count; i++)
         {
-            Vector3 boxSize = spawner.fieldActivity.boxSize;
+            Vector3 boxSize = fieldActivity.spawnSize;
             // 오버랩 박스 내에서 무작위 위치 생성
             Vector3 randomPositionWithinBox = new Vector3(
                 Random.Range(-boxSize.x / 2, boxSize.x / 2),
@@ -89,11 +92,9 @@ public class FieldManager : MonoBehaviour
                 0
             );
 
-            Vector3 targetPos = spawner.fieldActivity.getTransform.position + randomPositionWithinBox;
+            Vector3 targetPos = fieldActivity.getTransform.position + randomPositionWithinBox;
             pos.Add(targetPos);
         }
-
-
         return pos;
     }
 
