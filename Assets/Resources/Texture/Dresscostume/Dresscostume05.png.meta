@@ -93,7 +93,7 @@ TextureImporter:
       213: 8071297999802039802
     second: Hood_Img03
   externalObjects: {}
-  serializedVersion: 13
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -222,6 +222,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -229,12 +242,12 @@ TextureImporter:
       name: Head_Img01
       rect:
         serializedVersion: 2
-        x: 1
-        y: 96
-        width: 36
-        height: 31
+        x: 6
+        y: 24
+        width: 35
+        height: 29
       alignment: 9
-      pivot: {x: 0.5693, y: 0}
+      pivot: {x: 0.586, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -250,12 +263,12 @@ TextureImporter:
       name: Head_Img02
       rect:
         serializedVersion: 2
-        x: 38
-        y: 96
-        width: 36
-        height: 31
+        x: 6
+        y: 24
+        width: 35
+        height: 29
       alignment: 9
-      pivot: {x: 0.5693, y: 0}
+      pivot: {x: 0.586, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -271,12 +284,12 @@ TextureImporter:
       name: Head_Img03
       rect:
         serializedVersion: 2
-        x: 75
-        y: 96
-        width: 36
-        height: 31
+        x: 6
+        y: 24
+        width: 35
+        height: 29
       alignment: 9
-      pivot: {x: 0.5693, y: 0}
+      pivot: {x: 0.586, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -292,9 +305,9 @@ TextureImporter:
       name: Body_Img
       rect:
         serializedVersion: 2
-        x: 1
-        y: 81
-        width: 9
+        x: 21
+        y: 63
+        width: 7
         height: 7
       alignment: 7
       pivot: {x: 0.5, y: 0}
@@ -313,8 +326,8 @@ TextureImporter:
       name: L_Arm_img
       rect:
         serializedVersion: 2
-        x: 26
-        y: 87
+        x: 11
+        y: 57
         width: 4
         height: 4
       alignment: 3
@@ -334,12 +347,12 @@ TextureImporter:
       name: L_Hand_img
       rect:
         serializedVersion: 2
-        x: 25
-        y: 81
+        x: 16
+        y: 57
         width: 5
-        height: 5
+        height: 4
       alignment: 9
-      pivot: {x: 0.8, y: 0.8}
+      pivot: {x: 0.6, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -355,8 +368,8 @@ TextureImporter:
       name: R_Arm_img
       rect:
         serializedVersion: 2
-        x: 31
-        y: 87
+        x: 22
+        y: 57
         width: 4
         height: 4
       alignment: 1
@@ -376,12 +389,12 @@ TextureImporter:
       name: R_Hand_img
       rect:
         serializedVersion: 2
-        x: 31
-        y: 81
+        x: 27
+        y: 57
         width: 5
-        height: 5
+        height: 4
       alignment: 9
-      pivot: {x: 0.2, y: 0.8}
+      pivot: {x: 0.4, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -397,8 +410,8 @@ TextureImporter:
       name: Pelvis_img
       rect:
         serializedVersion: 2
-        x: 1
-        y: 90
+        x: 29
+        y: 63
         width: 9
         height: 4
       alignment: 9
@@ -419,7 +432,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 11
-        y: 91
+        y: 63
         width: 4
         height: 4
       alignment: 3
@@ -439,9 +452,9 @@ TextureImporter:
       name: R_Leg_Img
       rect:
         serializedVersion: 2
-        x: 16
-        y: 91
-        width: 4
+        x: 17
+        y: 63
+        width: 3
         height: 4
       alignment: 2
       pivot: {x: 0.5, y: 1}
@@ -460,12 +473,12 @@ TextureImporter:
       name: Belt_Img
       rect:
         serializedVersion: 2
-        x: 92
-        y: 89
-        width: 9
-        height: 2
+        x: 39
+        y: 65
+        width: 10
+        height: 4
       alignment: 9
-      pivot: {x: 0.556, y: 0.5}
+      pivot: {x: 0.6, y: 0.75}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -481,8 +494,8 @@ TextureImporter:
       name: L_skirt_Img
       rect:
         serializedVersion: 2
-        x: 11
-        y: 81
+        x: 62
+        y: 10
         width: 5
         height: 3
       alignment: 3
@@ -502,8 +515,8 @@ TextureImporter:
       name: R_skirt_Img
       rect:
         serializedVersion: 2
-        x: 17
-        y: 81
+        x: 72
+        y: 12
         width: 3
         height: 3
       alignment: 1
@@ -544,8 +557,8 @@ TextureImporter:
       name: Eye_Img01
       rect:
         serializedVersion: 2
-        x: 37
-        y: 83
+        x: 86
+        y: 62
         width: 12
         height: 8
       alignment: 9
@@ -565,8 +578,8 @@ TextureImporter:
       name: Eye_Img02
       rect:
         serializedVersion: 2
-        x: 50
-        y: 83
+        x: 68
+        y: 56
         width: 12
         height: 8
       alignment: 9
@@ -586,8 +599,8 @@ TextureImporter:
       name: Eye_Img03
       rect:
         serializedVersion: 2
-        x: 63
-        y: 83
+        x: 104
+        y: 69
         width: 12
         height: 8
       alignment: 9
@@ -607,8 +620,8 @@ TextureImporter:
       name: Eye_Img04
       rect:
         serializedVersion: 2
-        x: 76
-        y: 83
+        x: 100
+        y: 61
         width: 12
         height: 8
       alignment: 9
@@ -628,8 +641,8 @@ TextureImporter:
       name: BackHair_Img01
       rect:
         serializedVersion: 2
-        x: 2
-        y: 33
+        x: 62
+        y: 19
         width: 6
         height: 6
       alignment: 0
@@ -649,7 +662,7 @@ TextureImporter:
       name: BackHair_Img02
       rect:
         serializedVersion: 2
-        x: 15
+        x: 57
         y: 31
         width: 6
         height: 5
@@ -670,7 +683,7 @@ TextureImporter:
       name: BackHair_Img03
       rect:
         serializedVersion: 2
-        x: 26
+        x: 74
         y: 27
         width: 5
         height: 9
@@ -796,12 +809,12 @@ TextureImporter:
       name: Hood_Img01
       rect:
         serializedVersion: 2
-        x: 32
-        y: 44
+        x: 59
+        y: 26
         width: 6
         height: 6
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -817,12 +830,12 @@ TextureImporter:
       name: Hood_Img02
       rect:
         serializedVersion: 2
-        x: 39
-        y: 44
+        x: 58
+        y: 21
         width: 6
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -838,12 +851,12 @@ TextureImporter:
       name: Hood_Img03
       rect:
         serializedVersion: 2
-        x: 47
-        y: 44
+        x: 61
+        y: 28
         width: 5
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -874,6 +887,7 @@ TextureImporter:
       Cape_Img01: 2242405103659542504
       Cape_Img02: -8988596988031991262
       Cape_Img03: -161244718670696152
+      Dresscostume05_0: -1276782644
       Eye_Img01: 2517667299977026945
       Eye_Img02: 4800550110346782077
       Eye_Img03: 3219736644462270610
